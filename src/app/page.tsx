@@ -3516,9 +3516,34 @@ function PendaftaranSection() {
       }
 
       // Berhasil diunggah ke server: susun pesan WA dengan link dokumen valid per santri
-      const text = `Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:%0A%0A📋 DATA SANTRI & WALI:%0A- No. Registrasi: ${resultData.registrationId}%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No. WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}%0A%0A📎 LINK DOKUMEN TERSIMPAN DI SERVER (SIAP DIVERIFIKASI):%0A1. Form Pendaftaran:%0A${resultData.filePendaftaran.url}%0A%0A2. Paket Formulir Kesantrian:%0A${resultData.fileKesantrian.url}%0A%0ABerkas pendaftaran santri di atas telah aman tersimpan di server RTQ dan siap diverifikasi oleh panitia. Mohon arahan tahapan selanjutnya. Terima kasih!`;
+      const textMessage = [
+        "Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,",
+        "",
+        "Saya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:",
+        "",
+        "*📋 DATA SANTRI DAN WALI:*",
+        `- No. Registrasi: ${resultData.registrationId}`,
+        `- Nama Santri: ${formData.namaSantri}`,
+        `- TTL: ${formData.ttl}`,
+        `- Gender: ${formData.gender}`,
+        `- Usia: ${formData.usia} Tahun`,
+        `- Nama Ayah: ${formData.namaAyah}`,
+        `- Nama Ibu: ${formData.namaIbu}`,
+        `- No. WA Ortu: ${formData.noWa}`,
+        `- Alamat: ${formData.alamat}`,
+        `- Program Pilihan: ${formData.program}`,
+        "",
+        "*📎 TAUTAN DOKUMEN TERSIMPAN DI SERVER (SIAP DIVERIFIKASI):*",
+        "1. Form Pendaftaran:",
+        resultData.filePendaftaran.url,
+        "",
+        "2. Paket Formulir Kesantrian:",
+        resultData.fileKesantrian.url,
+        "",
+        "Berkas dokumen pendaftaran santri di atas telah aman tersimpan di server RTQ dan siap diverifikasi oleh panitia. Mohon arahan tahapan selanjutnya. Terima kasih!",
+      ].join("\n");
 
-      const waUrl = `https://wa.me/6285212185139?text=${text}`;
+      const waUrl = `https://wa.me/6285212185139?text=${encodeURIComponent(textMessage)}`;
 
       setUploadedResult({
         registrationId: resultData.registrationId,
@@ -3540,9 +3565,31 @@ function PendaftaranSection() {
       
       alert(`Catatan Penyimpanan:\n${err.message || 'Gagal menyimpan ke server'}\n\nFormulir tetap dapat diteruskan ke WhatsApp Panitia.`);
       
-      const fallbackText = `Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:%0A%0A📋 DATA SANTRI & WALI:%0A- No. Registrasi: ${fallbackRegId}%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No. WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}%0A%0A📎 BERKAS FORMULIR TERLAMPIR (TELAH DIISI):%0A1. Form Pendaftaran: ${filePendaftaran.name} (${(filePendaftaran.size / 1024).toFixed(1)} KB)%0A2. Paket Formulir Kesantrian: ${fileKesantrian.name} (${(fileKesantrian.size / 1024).toFixed(1)} KB)%0A%0ABerkas dokumen tersebut telah siap diverifikasi. Mohon panduan tahapan selanjutnya. Terima kasih!`;
-      
-      const fallbackWaUrl = `https://wa.me/6285212185139?text=${fallbackText}`;
+      const fallbackMsg = [
+        "Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,",
+        "",
+        "Saya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:",
+        "",
+        "*📋 DATA SANTRI DAN WALI:*",
+        `- No. Registrasi: ${fallbackRegId}`,
+        `- Nama Santri: ${formData.namaSantri}`,
+        `- TTL: ${formData.ttl}`,
+        `- Gender: ${formData.gender}`,
+        `- Usia: ${formData.usia} Tahun`,
+        `- Nama Ayah: ${formData.namaAyah}`,
+        `- Nama Ibu: ${formData.namaIbu}`,
+        `- No. WA Ortu: ${formData.noWa}`,
+        `- Alamat: ${formData.alamat}`,
+        `- Program Pilihan: ${formData.program}`,
+        "",
+        "*📎 BERKAS FORMULIR TERLAMPIR (TELAH DIISI):*",
+        `1. Form Pendaftaran: ${filePendaftaran.name} (${(filePendaftaran.size / 1024).toFixed(1)} KB)`,
+        `2. Paket Formulir Kesantrian: ${fileKesantrian.name} (${(fileKesantrian.size / 1024).toFixed(1)} KB)`,
+        "",
+        "Berkas dokumen tersebut telah siap diverifikasi. Mohon panduan tahapan selanjutnya. Terima kasih!",
+      ].join("\n");
+
+      const fallbackWaUrl = `https://wa.me/6285212185139?text=${encodeURIComponent(fallbackMsg)}`;
 
       setUploadedResult({
         registrationId: fallbackRegId,
@@ -4319,8 +4366,16 @@ function ContactSection() {
 
   const handleMsgSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Halo Admin RTQ ABA,%0A%0ASaya ingin mengirim pesan:%0A- Nama: ${msgForm.nama}%0A- No WA: ${msgForm.noWa}%0A- Email: ${msgForm.email}%0A- Pesan: ${msgForm.pesan}`;
-    window.open(`https://wa.me/6285212185139?text=${text}`, "_blank");
+    const text = [
+      "Halo Admin RTQ ABA,",
+      "",
+      "Saya ingin mengirim pesan:",
+      `- Nama: ${msgForm.nama}`,
+      `- No WA: ${msgForm.noWa}`,
+      `- Email: ${msgForm.email}`,
+      `- Pesan: ${msgForm.pesan}`,
+    ].join("\n");
+    window.open(`https://wa.me/6285212185139?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   const socials = [
