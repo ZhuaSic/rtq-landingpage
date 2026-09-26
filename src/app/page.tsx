@@ -3435,16 +3435,41 @@ function PendaftaranSection() {
     program: "",
   });
 
+  const [filePendaftaran, setFilePendaftaran] = useState<File | null>(null);
+  const [fileKesantrian, setFileKesantrian] = useState<File | null>(null);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+
+  const isFilesUploaded = Boolean(filePendaftaran && fileKesantrian);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (
+    type: "pendaftaran" | "kesantrian",
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0] || null;
+    if (type === "pendaftaran") {
+      setFilePendaftaran(file);
+    } else {
+      setFileKesantrian(file);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Halo Admin RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mendaftarkan santri baru:%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}`;
+    if (!filePendaftaran || !fileKesantrian) {
+      alert("Mohon unggah kedua berkas formulir (Form Pendaftaran & Paket Formulir Kesantrian) terlebih dahulu!");
+      return;
+    }
+
+    const text = `Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:%0A%0A📋 DATA SANTRI:%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No. WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}%0A%0A📎 BERKAS FORMULIR TERLAMPIR (TELAH DIISI):%0A1. Form Pendaftaran: ${filePendaftaran.name} (${(filePendaftaran.size / 1024).toFixed(1)} KB)%0A2. Paket Formulir Kesantrian: ${fileKesantrian.name} (${(fileKesantrian.size / 1024).toFixed(1)} KB)%0A%0ABerkas dokumen tersebut telah siap untuk diverifikasi. Mohon panduan tahapan selanjutnya. Terima kasih!`;
+    
     window.open(`https://wa.me/6285212185139?text=${text}`, "_blank");
+    setShowSuccessModal(true);
   };
 
   const requirements = [
@@ -3603,6 +3628,84 @@ function PendaftaranSection() {
                     </p>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Box Unduh Template Formulir & Arahan Pendaftaran */}
+            <div className="mt-8 p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#0c3624] via-[#10432e] to-[#0c3624] text-white shadow-lg border border-[#DEAB3E]/40 relative overflow-hidden">
+              <div className="absolute right-0 top-0 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none -mr-16 -mt-16"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DEAB3E]/20 text-[#DEAB3E] text-[11px] font-bold uppercase tracking-wider mb-2.5 border border-[#DEAB3E]/30">
+                  <span>📥</span> Unduh Template Berkas Resmi
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold font-serif text-white mb-2">
+                  Berkas Formulir Pendaftaran (Wajib Diisi)
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed mb-4">
+                  Sebelum mengirim pendaftaran online, calon wali santri <strong>wajib mengunduh 2 berkas template</strong> di bawah ini, melengkapinya, lalu mengunggahnya kembali pada formulir online di samping.
+                </p>
+
+                {/* 2 Download Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                  {/* Download Form 1 */}
+                  <a
+                    href="/Form-Pendaftaran-RTQ-ABA.docx"
+                    download="Form pendaftaran.docx"
+                    className="p-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#DEAB3E] transition-all flex items-start gap-3 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#DEAB3E] text-[#0c3624] flex items-center justify-center text-lg font-black flex-shrink-0 group-hover:scale-105 transition-transform shadow">
+                      📄
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-xs sm:text-sm text-white group-hover:text-[#DEAB3E] transition-colors truncate">
+                        Form pendaftaran.docx
+                      </div>
+                      <div className="text-[10.5px] text-neutral-300">
+                        Identitas Calon Siswa &amp; Data Orang Tua
+                      </div>
+                      <div className="text-[9.5px] text-[#DEAB3E] font-semibold mt-1 flex items-center gap-1">
+                        <span>⬇️ Unduh Template (77 KB)</span>
+                      </div>
+                    </div>
+                  </a>
+
+                  {/* Download Form 2 */}
+                  <a
+                    href="/Paket-Formulir-Kesantrian-RTQ-ABA.docx"
+                    download="Paket Formulir Kesantrian.docx"
+                    className="p-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#DEAB3E] transition-all flex items-start gap-3 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#DEAB3E] text-[#0c3624] flex items-center justify-center text-lg font-black flex-shrink-0 group-hover:scale-105 transition-transform shadow">
+                      📑
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-xs sm:text-sm text-white group-hover:text-[#DEAB3E] transition-colors truncate">
+                        Paket Formulir Kesantrian.docx
+                      </div>
+                      <div className="text-[10.5px] text-neutral-300">
+                        Pernyataan Wali Santri &amp; Tata Tertib
+                      </div>
+                      <div className="text-[9.5px] text-[#DEAB3E] font-semibold mt-1 flex items-center gap-1">
+                        <span>⬇️ Unduh Template (93 KB)</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                {/* Petunjuk / Arahan Langkah Demi Langkah */}
+                <div className="p-3.5 rounded-2xl bg-black/25 border border-white/10 text-xs">
+                  <div className="font-bold text-[#DEAB3E] text-[11px] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <span>💡</span> Arahan &amp; Petunjuk Pengisian:
+                  </div>
+                  <ol className="space-y-1.5 text-neutral-200 text-[11.5px] list-decimal list-inside leading-relaxed">
+                    <li><strong>Unduh Template:</strong> Klik kedua tombol di atas untuk mengunduh file <em>Form pendaftaran.docx</em> dan <em>Paket Formulir Kesantrian.docx</em>.</li>
+                    <li><strong>Isi &amp; Lengkapi:</strong> Buka berkas di Microsoft Word (laptop/HP) atau cetak (print) lalu isi tulisan tangan secara lengkap.</li>
+                    <li><strong>Simpan Berkas:</strong> Simpan file yang telah diisi (format <em>.docx / .pdf</em>), atau foto/scan dokumen jika ditulis tangan.</li>
+                    <li><strong>Unggah pada Formulir:</strong> Isi biodata singkat di formulir online (sebelah kanan), lalu <strong>wajib unggah kedua berkas</strong> pada kolom upload.</li>
+                    <li><strong>Kirim Pendaftaran:</strong> Setelah kedua berkas terunggah, tombol <strong>Kirim Pendaftaran</strong> akan aktif untuk menyelesaikan pendaftaran.</li>
+                  </ol>
+                </div>
               </div>
             </div>
 
@@ -3781,12 +3884,183 @@ function PendaftaranSection() {
                   </p>
                 </div>
 
+                {/* ────────────────────────────────────────────────────────
+                    BAGIAN UPLOAD 2 BERKAS FORMULIR WAJIB
+                ──────────────────────────────────────────────────────── */}
+                <div className="pt-4 border-t border-neutral-200/90">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-bold text-[#0c3624] flex items-center gap-1.5">
+                      <span>📎</span>
+                      <span>Unggah 2 Berkas Formulir (Wajib)</span>
+                    </label>
+                    <span className="text-[10px] font-bold text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-full">
+                      * Wajib Diupload
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-neutral-500 mb-3">
+                    Unggah berkas yang telah Anda isi (.docx, .pdf, atau foto scan dokumen maks. 10MB per file).
+                  </p>
+
+                  <div className="space-y-3">
+                    {/* File 1: Form pendaftaran.docx */}
+                    <div className={`p-3 rounded-2xl border transition-all ${
+                      filePendaftaran
+                        ? "bg-emerald-50/80 border-emerald-300"
+                        : "bg-[#F8F9FA] border-dashed border-neutral-300 hover:border-[#0c3624]"
+                    }`}>
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <div className="text-[11px] font-bold text-[#0c3624] flex items-center gap-1">
+                          <span>1.</span>
+                          <span>Berkas Form Pendaftaran</span>
+                          <span className="text-red-500">*</span>
+                        </div>
+                        {filePendaftaran ? (
+                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md flex items-center gap-1">
+                            <span>✓</span> Terunggah
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-semibold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">
+                            Belum Ada File
+                          </span>
+                        )}
+                      </div>
+
+                      {filePendaftaran ? (
+                        <div className="flex items-center justify-between bg-white p-2 rounded-xl border border-emerald-200 text-xs">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className="text-lg">📄</span>
+                            <div className="truncate">
+                              <div className="font-bold text-[#0c3624] truncate">{filePendaftaran.name}</div>
+                              <div className="text-[10px] text-neutral-400">
+                                {(filePendaftaran.size / 1024).toFixed(1)} KB
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setFilePendaftaran(null)}
+                            className="p-1 px-2 text-[10px] font-bold text-red-600 hover:bg-red-50 rounded-lg transition"
+                          >
+                            ✕ Hapus
+                          </button>
+                        </div>
+                      ) : (
+                        <label className="flex flex-col items-center justify-center p-3 cursor-pointer bg-white rounded-xl border border-neutral-200 hover:bg-neutral-50 transition text-center group">
+                          <input
+                            type="file"
+                            accept=".docx,.doc,.pdf,.jpg,.jpeg,.png"
+                            onChange={(e) => handleFileChange("pendaftaran", e)}
+                            className="hidden"
+                          />
+                          <span className="text-xl mb-0.5 group-hover:scale-110 transition-transform">📄</span>
+                          <span className="text-xs font-bold text-[#0c3624] group-hover:underline">
+                            Pilih Berkas Form Pendaftaran
+                          </span>
+                          <span className="text-[10px] text-neutral-400 mt-0.5">
+                            Format: .docx, .pdf, atau foto scan
+                          </span>
+                        </label>
+                      )}
+                    </div>
+
+                    {/* File 2: Paket Formulir Kesantrian.docx */}
+                    <div className={`p-3 rounded-2xl border transition-all ${
+                      fileKesantrian
+                        ? "bg-emerald-50/80 border-emerald-300"
+                        : "bg-[#F8F9FA] border-dashed border-neutral-300 hover:border-[#0c3624]"
+                    }`}>
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <div className="text-[11px] font-bold text-[#0c3624] flex items-center gap-1">
+                          <span>2.</span>
+                          <span>Berkas Paket Formulir Kesantrian</span>
+                          <span className="text-red-500">*</span>
+                        </div>
+                        {fileKesantrian ? (
+                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md flex items-center gap-1">
+                            <span>✓</span> Terunggah
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-semibold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">
+                            Belum Ada File
+                          </span>
+                        )}
+                      </div>
+
+                      {fileKesantrian ? (
+                        <div className="flex items-center justify-between bg-white p-2 rounded-xl border border-emerald-200 text-xs">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className="text-lg">📑</span>
+                            <div className="truncate">
+                              <div className="font-bold text-[#0c3624] truncate">{fileKesantrian.name}</div>
+                              <div className="text-[10px] text-neutral-400">
+                                {(fileKesantrian.size / 1024).toFixed(1)} KB
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setFileKesantrian(null)}
+                            className="p-1 px-2 text-[10px] font-bold text-red-600 hover:bg-red-50 rounded-lg transition"
+                          >
+                            ✕ Hapus
+                          </button>
+                        </div>
+                      ) : (
+                        <label className="flex flex-col items-center justify-center p-3 cursor-pointer bg-white rounded-xl border border-neutral-200 hover:bg-neutral-50 transition text-center group">
+                          <input
+                            type="file"
+                            accept=".docx,.doc,.pdf,.jpg,.jpeg,.png"
+                            onChange={(e) => handleFileChange("kesantrian", e)}
+                            className="hidden"
+                          />
+                          <span className="text-xl mb-0.5 group-hover:scale-110 transition-transform">📑</span>
+                          <span className="text-xs font-bold text-[#0c3624] group-hover:underline">
+                            Pilih Berkas Formulir Kesantrian
+                          </span>
+                          <span className="text-[10px] text-neutral-400 mt-0.5">
+                            Format: .docx, .pdf, atau foto scan
+                          </span>
+                        </label>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status Notice & Validasi Upload */}
+                {!isFilesUploaded ? (
+                  <div className="p-3 bg-amber-50 border border-amber-300 rounded-2xl text-xs text-amber-900 flex items-start gap-2.5 shadow-2xs">
+                    <span className="text-lg mt-0.5">⚠️</span>
+                    <div>
+                      <div className="font-bold">Kedua Berkas Formulir Wajib Diunggah</div>
+                      <div className="text-[11px] text-amber-800 leading-snug">
+                        Tombol kirim pendaftaran dinonaktifkan sampai Anda mengunggah <strong>Form pendaftaran</strong> dan <strong>Paket Formulir Kesantrian</strong>.
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-2xl text-xs text-emerald-900 flex items-start gap-2.5 shadow-2xs">
+                    <span className="text-lg mt-0.5">✅</span>
+                    <div>
+                      <div className="font-bold">Kedua Berkas Lengkap &amp; Siap Dikirim!</div>
+                      <div className="text-[11px] text-emerald-800 leading-snug">
+                        Formulir telah dipilih. Klik tombol di bawah untuk mengirim data pendaftaran ke Panitia SPMB.
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#E8B54D] hover:bg-[#d9a338] text-[#0c3624] font-black text-sm rounded-xl uppercase tracking-wider shadow-md transition transform hover:-translate-y-0.5 mt-2 text-center"
+                  disabled={!isFilesUploaded}
+                  className={`w-full py-3.5 font-black text-xs sm:text-sm rounded-xl uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 mt-2 text-center ${
+                    isFilesUploaded
+                      ? "bg-[#E8B54D] hover:bg-[#d9a338] text-[#0c3624] transform hover:-translate-y-0.5 cursor-pointer shadow-gold"
+                      : "bg-neutral-200 text-neutral-400 border border-neutral-300 cursor-not-allowed"
+                  }`}
                 >
-                  KIRIM PENDAFTARAN
+                  <span>KIRIM PENDAFTARAN</span>
+                  <span>{isFilesUploaded ? "🚀" : "🔒 (Upload 2 Formulir Dahulu)"}</span>
                 </button>
               </form>
             </div>
@@ -3795,6 +4069,44 @@ function PendaftaranSection() {
 
         </div>
       </div>
+
+      {/* Modal Sukses Pendaftaran */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl border border-neutral-100">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+              🎉
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0c3624] font-serif mb-2">
+              Pendaftaran Online Terkirim!
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
+              Data santri dan informasi 2 berkas formulir telah berhasil diproses. Chat WhatsApp resmi Panitia SPMB RTQ Abdurrahman bin Auf telah terbuka otomatis.
+            </p>
+            <div className="bg-[#FAF8F4] p-3.5 rounded-2xl border border-neutral-200 text-left text-xs space-y-2 mb-5">
+              <div className="font-bold text-[#0c3624] flex items-center gap-1.5">
+                <span>📋</span>
+                <span>Langkah Selanjutnya:</span>
+              </div>
+              <div className="text-neutral-700 flex items-start gap-2">
+                <span className="font-bold text-[#0c3624]">1.</span>
+                <span>Kirimkan pesan WhatsApp yang telah disiapkan ke nomor Panitia (<strong>0852-1218-5139</strong>).</span>
+              </div>
+              <div className="text-neutral-700 flex items-start gap-2">
+                <span className="font-bold text-[#0c3624]">2.</span>
+                <span>Lampirkan kedua file dokumen yang telah Anda isi (<strong>{filePendaftaran?.name}</strong> &amp; <strong>{fileKesantrian?.name}</strong>) pada chat WhatsApp tersebut sebagai arsip resmi.</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowSuccessModal(false)}
+              className="w-full py-3 bg-[#0c3624] hover:bg-[#134932] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow"
+            >
+              Mengerti &amp; Tutup
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
