@@ -720,8 +720,425 @@ function AboutSection() {
 /* ────────────────────────────────────────────────────────
    STRUKTUR ORGANISASI RTQ ABDURRAHMAN BIN AUF
 ──────────────────────────────────────────────────────── */
+interface TupItem {
+  role: string;
+  title: string;
+  name?: string;
+  summary: string;
+  tugas: string[];
+  fungsi: string[];
+  note?: string;
+}
+
+const STRUKTUR_TUP: Record<string, TupItem> = {
+  "Pembina": {
+    "role": "Garis Yayasan · YASKUB",
+    "title": "Pembina",
+    "summary": "Organ tertinggi yayasan yang memegang kewenangan yang tidak diserahkan kepada Pengurus maupun Pengawas (sesuai UU Yayasan & AD/ART).",
+    "tugas": [
+      "Menetapkan dan mengubah Anggaran Dasar yayasan.",
+      "Mengangkat dan memberhentikan anggota Pengurus serta Pengawas berdasarkan mekanisme AD/ART.",
+      "Menetapkan kebijakan umum yayasan sebagai acuan Pengurus dalam menjalankan kepengurusan.",
+      "Mengesahkan program kerja dan rancangan anggaran pendapatan & belanja tahunan.",
+      "Mengesahkan laporan tahunan yayasan yang disusun oleh Pengurus.",
+      "Memutuskan penggabungan, perubahan bentuk, atau pembubaran yayasan sesuai ketentuan hukum.",
+      "Memberikan arahan strategis jangka panjang atas visi dan marwah dakwah lembaga.",
+      "Menjadi rujukan tertinggi dalam penyelesaian perselisihan internal antar organ yayasan."
+    ],
+    "fungsi": [
+      "Pemegang kewenangan tertinggi yayasan.",
+      "Penentu arah dan kebijakan umum kelembagaan.",
+      "Pengangkat & pemberhentian Pengurus/Pengawas.",
+      "Penjaga marwah visi-misi dan nilai dakwah yayasan.",
+      "Pemutus perkara strategis/legal yang tidak dilimpahkan ke Pengurus."
+    ]
+  },
+  "Ketua": {
+    "role": "Garis Yayasan · YASKUB",
+    "title": "Ketua",
+    "summary": "Pemegang kebijakan tertinggi yayasan dan penanggung jawab arah strategis seluruh unit (RTQ & SDIT).",
+    "tugas": [
+      "Menetapkan visi, misi, dan kebijakan strategis yayasan untuk seluruh unit.",
+      "Mengesahkan program kerja dan anggaran tahunan tiap unit (RTQ & SDIT).",
+      "Mengangkat serta memberhentikan pengurus, kepala unit, dan pejabat struktural lain.",
+      "Menjalin dan memelihara kerja sama strategis dengan mitra, pemerintah, dan donatur.",
+      "Mewakili yayasan dalam urusan hukum, kelembagaan, dan hubungan eksternal.",
+      "Mengawasi pencapaian target lembaga secara menyeluruh lintas unit.",
+      "Memimpin rapat koordinasi pengurus yayasan secara berkala.",
+      "Menyetujui pengeluaran dan kebijakan strategis di atas kewenangan kepala unit.",
+      "Menjaga arah pengembangan lembaga tetap selaras dengan visi dakwah pendidikan Qur'ani."
+    ],
+    "fungsi": [
+      "Kepemimpinan strategis lembaga.",
+      "Pengambilan keputusan tertinggi tingkat yayasan.",
+      "Representasi kelembagaan ke pihak luar.",
+      "Pengawasan lintas unit (RTQ & SDIT).",
+      "Pembina hubungan kemitraan & donatur strategis."
+    ]
+  },
+  "Sekretaris": {
+    "role": "Garis Yayasan · YASKUB",
+    "title": "Sekretaris",
+    "summary": "Penanggung jawab administrasi, dokumentasi, dan kesekretariatan yayasan.",
+    "tugas": [
+      "Mengelola surat-menyurat masuk dan keluar serta arsip yayasan secara tertib.",
+      "Menyusun notulen rapat pengurus dan dokumen legal kelembagaan.",
+      "Menyiapkan SK, MoU, dan dokumen administratif lain atas persetujuan Ketua.",
+      "Mengoordinasikan agenda, undangan, dan jadwal kegiatan yayasan.",
+      "Menjaga kelengkapan dan pembaruan dokumen perizinan tiap unit (izin operasional, akta, dsb).",
+      "Mendokumentasikan kegiatan dan keputusan penting yayasan sebagai arsip kelembagaan.",
+      "Menjadi penghubung administratif antara Pembina, Pengurus, dan Pengawas."
+    ],
+    "fungsi": [
+      "Administrasi kelembagaan.",
+      "Dokumentasi dan kearsipan.",
+      "Koordinasi internal pengurus.",
+      "Penjaga legalitas & kelengkapan dokumen yayasan."
+    ]
+  },
+  "Bendahara": {
+    "role": "Garis Yayasan · YASKUB",
+    "title": "Bendahara",
+    "summary": "Penanggung jawab pengelolaan keuangan yayasan dan konsolidasi keuangan seluruh unit.",
+    "tugas": [
+      "Menyusun dan mengelola anggaran (RAPB) yayasan bersama pengurus tiap unit.",
+      "Mencatat serta mengontrol pemasukan dan pengeluaran kas yayasan secara berkala.",
+      "Menerima dan mengonsolidasikan laporan keuangan unit (RTQ & SDIT) setiap bulan.",
+      "Menyusun laporan keuangan, neraca, dan arus kas secara periodik untuk Pembina/Ketua.",
+      "Mengelola penggalangan dana serta pertanggungjawaban dana donatur secara transparan.",
+      "Melakukan verifikasi dan audit internal sederhana atas pembukuan tiap unit.",
+      "Menetapkan mekanisme dan alur persetujuan pengeluaran keuangan lembaga.",
+      "Menyimpan bukti transaksi dan dokumen pendukung keuangan sesuai standar akuntabilitas."
+    ],
+    "fungsi": [
+      "Pengelolaan keuangan lembaga.",
+      "Kontrol anggaran dan arus kas.",
+      "Penjaminan akuntabilitas dana.",
+      "Konsolidator laporan keuangan lintas unit.",
+      "Pengelola dana donatur & CSR."
+    ]
+  },
+  "Pengawas": {
+    "role": "Garis Yayasan · YASKUB",
+    "title": "Pengawas",
+    "summary": "Pengawas independen yang memastikan pengurus menjalankan amanah sesuai AD/ART dan aturan.",
+    "tugas": [
+      "Mengawasi kinerja pengurus dan kepatuhan pelaksanaan program terhadap AD/ART.",
+      "Memeriksa laporan keuangan dan program kerja unit secara berkala.",
+      "Memberikan nasihat, teguran, dan rekomendasi perbaikan kepada pengurus.",
+      "Mengaudit pelaksanaan kebijakan yayasan dan efektivitas program.",
+      "Melaporkan hasil pengawasan kepada Pembina sebagai bahan evaluasi.",
+      "Memastikan tidak terjadi penyimpangan penggunaan aset dan dana yayasan.",
+      "Menelaah pengaduan atau permasalahan internal terkait tata kelola lembaga."
+    ],
+    "fungsi": [
+      "Pengawasan kelembagaan.",
+      "Audit internal.",
+      "Penjaga akuntabilitas pengurus.",
+      "Pemberi rekomendasi perbaikan tata kelola."
+    ]
+  },
+  "Mudir / Kepala RTQ": {
+    "role": "Pimpinan Operasional",
+    "title": "Mudir / Kepala RTQ",
+    "summary": "Pemimpin operasional tertinggi RTQ; penanggung jawab seluruh program tahfidz dan mutu lembaga sehari-hari.",
+    "tugas": [
+      "Memimpin dan mengoordinasikan seluruh kegiatan operasional RTQ lintas bidang.",
+      "Menerjemahkan kebijakan yayasan menjadi program kerja dan target tahunan RTQ.",
+      "Menetapkan target hafalan, standar mutu tahfidz, dan indikator keberhasilan santri.",
+      "Membina, mengarahkan, dan menilai kinerja seluruh kepala bidang, koordinator, dan ustadz.",
+      "Menyusun dan menyampaikan laporan berkala (bulanan/semester) kepada Ketua Yayasan.",
+      "Menjaga kedisiplinan, akhlak, dan budaya Qur'ani di lingkungan lembaga.",
+      "Memimpin rapat koordinasi bidang secara rutin untuk sinkronisasi program.",
+      "Mengambil keputusan operasional harian yang tidak memerlukan eskalasi ke yayasan.",
+      "Menjadi representasi RTQ dalam kegiatan resmi dan hubungan dengan wali santri."
+    ],
+    "fungsi": [
+      "Kepemimpinan operasional harian.",
+      "Penjaminan mutu program tahfidz.",
+      "Pembinaan dan penilaian SDM.",
+      "Sinkronisasi program antar bidang.",
+      "Pelapor kinerja RTQ ke yayasan."
+    ]
+  },
+  "Akademik & Tahfidz": {
+    "role": "Bidang",
+    "title": "Akademik & Tahfidz",
+    "summary": "Penanggung jawab kurikulum, target hafalan, dan mutu pembelajaran tahfidz.",
+    "tugas": [
+      "Menyusun kurikulum, silabus, dan target hafalan per marhalah (jenjang).",
+      "Menetapkan metode talaqqi, setoran (ziyadah), dan muroja'ah yang digunakan.",
+      "Mengatur kalender akademik dan jadwal pembelajaran tahfidz & mapel umum.",
+      "Menyelenggarakan evaluasi/ujian tahfidz dan tasmi' secara berkala.",
+      "Membina dan meningkatkan mutu muhaffizh serta pengampu mata pelajaran.",
+      "Mencatat, mengolah, dan mengevaluasi capaian hafalan santri secara sistematis.",
+      "Mengoordinasikan Koordinator Halaqah dan Koordinator Kurikulum dalam pelaksanaan harian.",
+      "Melaporkan capaian akademik & tahfidz kepada Mudir secara berkala."
+    ],
+    "fungsi": [
+      "Pengembangan kurikulum dan metode.",
+      "Penjaminan mutu akademik.",
+      "Evaluasi capaian hafalan.",
+      "Koordinasi lintas unit pelaksana akademik."
+    ]
+  },
+  "Kesantrian & Pengasuhan": {
+    "role": "Bidang",
+    "title": "Kesantrian & Pengasuhan",
+    "summary": "Penanggung jawab pembinaan akhlak, kedisiplinan, dan penyiapan konsep pengasuhan mukim.",
+    "tugas": [
+      "Menyusun tata tertib santri dan sistem penegakan kedisiplinan.",
+      "Membina akhlak, adab, dan karakter Qur'ani santri dalam keseharian.",
+      "Menangani perizinan, pelanggaran, dan bimbingan konseling santri.",
+      "Menyelenggarakan kegiatan pembinaan, mentoring, dan ekstrakurikuler santri.",
+      "Berkoordinasi dengan wali santri terkait perkembangan perilaku dan kedisiplinan anak.",
+      "Melaporkan kondisi kesantrian secara berkala kepada Mudir."
+    ],
+    "fungsi": [
+      "Pembinaan karakter dan akhlak.",
+      "Penegakan disiplin santri.",
+      "Penyiapan sistem pengasuhan mukim.",
+      "Penghubung lembaga-wali santri dalam aspek kesantrian."
+    ]
+  },
+  "Sarpras & Umum": {
+    "role": "Bidang",
+    "title": "Sarpras & Umum",
+    "summary": "Penanggung jawab fasilitas, logistik, dan kerumahtanggaan.",
+    "tugas": [
+      "Mengelola dan memelihara sarana-prasarana RTQ agar layak pakai.",
+      "Menyediakan kebutuhan logistik halaqah, kelas, dan kegiatan lembaga.",
+      "Mengoordinasikan kebersihan, keamanan, dan kerumahtanggaan harian.",
+      "Menyiapkan rencana, RAB, dan pengadaan kebutuhan sarana.",
+      "Menginventarisasi, mendata, dan menjaga aset lembaga secara tertib.",
+      "Menangani perbaikan dan pemeliharaan fasilitas secara responsif.",
+      "Mengoordinasikan pengadaan barang/jasa sesuai kebutuhan operasional.",
+      "Melaporkan kondisi aset dan sarana kepada Mudir secara berkala."
+    ],
+    "fungsi": [
+      "Pengelolaan aset dan fasilitas.",
+      "Dukungan logistik operasional.",
+      "Pemeliharaan fasilitas.",
+      "Pengelola pengadaan barang/jasa lembaga."
+    ]
+  },
+  "Humas & Kerja Sama": {
+    "role": "Bidang",
+    "title": "Humas & Kerja Sama",
+    "summary": "Penanggung jawab hubungan masyarakat, komunikasi wali santri, kemitraan, dan PPDB.",
+    "tugas": [
+      "Menjembatani komunikasi lembaga dengan wali santri secara rutin dan responsif.",
+      "Mengelola publikasi, media sosial, dan citra lembaga di ruang publik.",
+      "Menggalang dukungan donatur dan mitra strategis untuk program RTQ.",
+      "Mensosialisasikan konsep boarding dan program tahfidz kepada masyarakat.",
+      "Menyelenggarakan kegiatan kehumasan, open house, dan PPDB (penerimaan santri baru).",
+      "Menyusun materi promosi dan dokumentasi kegiatan lembaga.",
+      "Menangani pengaduan dan masukan dari wali santri/masyarakat sebagai bahan perbaikan.",
+      "Melaporkan hasil kegiatan humas & PPDB kepada Mudir secara berkala."
+    ],
+    "fungsi": [
+      "Komunikasi publik dan branding.",
+      "Pengembangan kemitraan.",
+      "Penggalangan dukungan eksternal.",
+      "Pengelola PPDB & promosi lembaga."
+    ]
+  },
+  "Koordinator Tata Usaha": {
+    "role": "Pendukung",
+    "title": "Koordinator Tata Usaha",
+    "summary": "Pemimpin unit Tata Usaha yang mengoordinasikan administrasi, presensi, kepegawaian, dan keuangan operasional RTQ.",
+    "tugas": [
+      "Memimpin dan membagi tugas staf Tata Usaha (administrasi, presensi/kepegawaian, keuangan).",
+      "Mengoordinasikan penyusunan dan validasi seluruh data administrasi RTQ sebelum dilaporkan.",
+      "Memastikan sistem presensi (RTQ Absensi) berjalan lancar dan datanya akurat.",
+      "Mengawal proses pembukuan kas harian dan pelaporan keuangan operasional ke Bendahara Yayasan.",
+      "Menjadi penghubung utama Tata Usaha dengan Mudir dan bidang-bidang lain terkait kebutuhan administratif.",
+      "Menyusun rekapitulasi bulanan administrasi, presensi, dan keuangan RTQ.",
+      "Mengarsipkan dan menjaga kerahasiaan dokumen serta data santri/pegawai.",
+      "Mengevaluasi kinerja staf TU dan mengusulkan perbaikan alur kerja administrasi."
+    ],
+    "fungsi": [
+      "Kepemimpinan unit Tata Usaha.",
+      "Koordinasi administrasi, presensi, dan keuangan operasional.",
+      "Penjamin akurasi dan ketertiban data & dokumen RTQ.",
+      "Penghubung TU dengan Mudir & bidang lain."
+    ]
+  },
+  "Staf Administrasi & Kesantrian": {
+    "role": "Staf TU",
+    "title": "Staf Administrasi & Kesantrian",
+    "summary": "Pengelola data santri, surat-menyurat, dan arsip dokumen administratif RTQ.",
+    "tugas": [
+      "Mengelola dan memutakhirkan biodata serta dokumen santri (formulir, KK, akta, dsb).",
+      "Menerbitkan dan mengarsipkan surat-menyurat RTQ (surat keterangan, undangan, edaran).",
+      "Mengelola pendaftaran santri baru bersama Bidang Humas & PPDB.",
+      "Menyiapkan dokumen administratif untuk kebutuhan Mudir dan bidang lain.",
+      "Mengarsipkan dokumen santri secara rapi, aman, dan mudah ditelusuri.",
+      "Melayani permintaan surat/dokumen dari wali santri sesuai prosedur.",
+      "Melaporkan rekap data santri (jumlah, mutasi, status) kepada Koordinator Tata Usaha."
+    ],
+    "fungsi": [
+      "Administrasi data & dokumen santri.",
+      "Pengelolaan surat-menyurat.",
+      "Layanan administrasi wali santri.",
+      "Pendukung proses PPDB."
+    ]
+  },
+  "Staf Presensi & Kepegawaian": {
+    "role": "Staf TU",
+    "title": "Staf Presensi & Kepegawaian",
+    "summary": "Pengelola sistem presensi (RTQ Absensi) serta data kepegawaian ustadz dan staf RTQ.",
+    "tugas": [
+      "Mengoperasikan dan memutakhirkan sistem presensi GPS & QR Code (RTQ Absensi).",
+      "Merekap kehadiran santri, muhaffizh, guru, dan staf secara harian/bulanan.",
+      "Menindaklanjuti kendala teknis presensi (QR tidak terbaca, lokasi GPS, dsb.).",
+      "Mengelola data kepegawaian (identitas, jadwal mengajar, riwayat kehadiran).",
+      "Menyiapkan laporan kehadiran sebagai dasar penilaian kinerja & honorarium.",
+      "Mengingatkan bidang terkait bila ada anomali kehadiran (ustadz/staf sering absen).",
+      "Melaporkan rekap presensi bulanan kepada Koordinator Tata Usaha."
+    ],
+    "fungsi": [
+      "Pengelolaan sistem presensi digital.",
+      "Rekapitulasi kehadiran santri & pegawai.",
+      "Administrasi data kepegawaian.",
+      "Dasar data untuk penilaian kinerja."
+    ]
+  },
+  "Staf Pengelolaan Keuangan & Pembukuan": {
+    "role": "Staf TU",
+    "title": "Staf Pengelolaan Keuangan & Pembukuan",
+    "summary": "Pengelola kas harian, pembayaran wali santri, serta pembukuan dan pelaporan keuangan operasional RTQ.",
+    "tugas": [
+      "Mencatat transaksi kas masuk dan keluar operasional RTQ setiap hari.",
+      "Mengelola pembayaran/iuran wali santri, menerbitkan kwitansi, serta memantau tunggakan.",
+      "Melakukan opname kas dan serah terima kas secara berkala untuk menjaga keakuratan saldo.",
+      "Menyusun laporan keuangan harian dan bulanan untuk Koordinator Tata Usaha.",
+      "Menyiapkan rekonsiliasi kas dan dokumen pendukung transaksi (kwitansi, nota, bukti transfer).",
+      "Menyampaikan laporan keuangan RTQ kepada Bendahara Yayasan sesuai jadwal.",
+      "Mengingatkan wali santri terkait tunggakan pembayaran sesuai kebijakan lembaga.",
+      "Menjaga keamanan dan kerapian dokumen bukti transaksi keuangan."
+    ],
+    "fungsi": [
+      "Pengelolaan kas harian & pembukuan operasional.",
+      "Pengelolaan pembayaran wali santri.",
+      "Pelaporan keuangan operasional ke Bendahara Yayasan.",
+      "Penjamin ketertiban & akurasi administrasi keuangan."
+    ]
+  },
+  "Koordinator Halaqah": {
+    "role": "Koordinator",
+    "title": "Koordinator Halaqah",
+    "summary": "Pengatur pembagian halaqah, jadwal setoran, dan kontrol capaian tiap kelompok.",
+    "tugas": [
+      "Membagi santri ke dalam halaqah sesuai capaian dan kemampuan hafalan.",
+      "Menyusun jadwal setoran (ziyadah) dan muroja'ah harian/pekanan.",
+      "Memantau dan mengevaluasi capaian hafalan tiap halaqah secara berkala.",
+      "Mengoordinasikan muhaffizh serta mengisi kekosongan bila ada yang berhalangan.",
+      "Melaporkan progres dan kendala halaqah ke Bidang Akademik & Tahfidz.",
+      "Menyelenggarakan pertemuan koordinasi rutin dengan para muhaffizh/muhaffizhah.",
+      "Mengelola data capaian hafalan santri per halaqah sebagai bahan evaluasi.",
+      "Menindaklanjuti santri dengan capaian di bawah target bersama muhaffizh terkait."
+    ],
+    "fungsi": [
+      "Koordinasi pelaksanaan halaqah.",
+      "Kontrol capaian kelompok.",
+      "Penghubung muhaffizh – akademik.",
+      "Pengelola data capaian hafalan per halaqah."
+    ]
+  },
+  "Koordinator Kurikulum": {
+    "role": "Koordinator",
+    "title": "Koordinator Kurikulum",
+    "summary": "Penanggung jawab penyusunan, penyelarasan, dan pengembangan kurikulum tahfidz serta mata pelajaran umum di RTQ.",
+    "tugas": [
+      "Menyusun dan memperbarui kurikulum, silabus, serta target hafalan per marhalah.",
+      "Menyelaraskan kurikulum tahfidz dengan mata pelajaran umum/penunjang agar tidak tumpang tindih.",
+      "Menyusun kalender akademik bersama Bidang Akademik & Tahfidz.",
+      "Mengembangkan perangkat pembelajaran (RPP/modul/lembar kerja) untuk muhaffizh dan guru.",
+      "Mengevaluasi efektivitas kurikulum berdasarkan capaian dan umpan balik santri.",
+      "Menyesuaikan kurikulum dengan regulasi pendidikan yang berlaku (mis. Kurikulum Merdeka/ketentuan Kemenag).",
+      "Melatih dan mendampingi muhaffizh/guru dalam implementasi kurikulum baru.",
+      "Menyusun dokumentasi kurikulum (KOSP, ATP, modul ajar) sebagai arsip mutu lembaga.",
+      "Melaporkan perkembangan dan hasil evaluasi kurikulum kepada Bidang Akademik & Tahfidz."
+    ],
+    "fungsi": [
+      "Pengembangan & penyelarasan kurikulum.",
+      "Penyusunan perangkat pembelajaran.",
+      "Evaluasi & pembaruan kurikulum.",
+      "Pendamping implementasi kurikulum bagi pendidik.",
+      "Penjaga kesesuaian kurikulum dengan regulasi pendidikan."
+    ]
+  },
+  "Muhaffizh / Muhaffizhah": {
+    "role": "Pelaksana Tahfidz",
+    "title": "Muhaffizh / Muhaffizhah",
+    "summary": "Pengampu halaqah yang membimbing setoran, tahsin, dan muroja'ah santri secara langsung.",
+    "tugas": [
+      "Menerima setoran hafalan baru (ziyadah) santri sesuai target marhalah.",
+      "Membimbing muroja'ah dan perbaikan bacaan (tahsin) secara rutin.",
+      "Mencatat capaian dan kendala hafalan tiap santri dalam buku/sistem monitoring.",
+      "Membina adab, akhlak, dan kedekatan personal dengan santri binaan.",
+      "Menjaga agar target hafalan sesuai marhalah tercapai tepat waktu.",
+      "Melaporkan perkembangan santri kepada Koordinator Halaqah secara berkala.",
+      "Mengidentifikasi santri yang memerlukan bimbingan khusus/tambahan.",
+      "Menjadi teladan bacaan dan akhlak Qur'ani bagi santri binaan."
+    ],
+    "fungsi": [
+      "Bimbingan tahfidz langsung.",
+      "Perbaikan bacaan (tahsin).",
+      "Pembinaan adab santri.",
+      "Pemantau & pelapor capaian individu santri."
+    ]
+  },
+  "Guru": {
+    "role": "Pelaksana Tahfidz",
+    "title": "Guru",
+    "summary": "Pengajar mata pelajaran umum dan penunjang yang melengkapi program tahfidz, di bawah koordinasi Bidang Akademik & Tahfidz.",
+    "tugas": [
+      "Menyusun dan melaksanakan rencana pembelajaran mata pelajaran umum/penunjang.",
+      "Mengajar sesuai jadwal dan kurikulum yang ditetapkan Bidang Akademik & Tahfidz.",
+      "Menilai dan melaporkan capaian belajar santri secara berkala.",
+      "Membina adab, kedisiplinan, dan keaktifan santri selama pembelajaran.",
+      "Berkoordinasi dengan Koordinator Halaqah agar jadwal mapel tidak bentrok dengan setoran tahfidz.",
+      "Melaporkan perkembangan dan kendala pembelajaran ke Bidang Akademik & Tahfidz.",
+      "Menggunakan perangkat pembelajaran yang disusun Koordinator Kurikulum secara konsisten.",
+      "Memberikan umpan balik kepada Koordinator Kurikulum untuk penyempurnaan modul ajar."
+    ],
+    "fungsi": [
+      "Pengajaran mata pelajaran umum/penunjang.",
+      "Penilaian capaian belajar santri.",
+      "Pembinaan adab di kelas.",
+      "Koordinasi jadwal dengan program tahfidz.",
+      "Pemberi umpan balik pengembangan kurikulum."
+    ]
+  }
+};
+
+
 function StrukturOrganisasiSection() {
   const [mobileMode, setMobileMode] = useState<"bagan" | "daftar">("bagan");
+  const [selectedJabatan, setSelectedJabatan] = useState<TupItem | null>(null);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedJabatan(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (selectedJabatan) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedJabatan]);
 
   return (
     <section id="struktur" className="py-16 sm:py-24 px-3 sm:px-6 bg-[#FAF8F4] relative border-b border-neutral-200/80">
@@ -742,28 +1159,35 @@ function StrukturOrganisasiSection() {
             Rumah Tahfidz Qur&apos;an
           </p>
 
+          {/* Interactive Hint */}
+          <div className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs sm:text-[13px] text-emerald-800 shadow-2xs">
+            <span>💡</span> Klik tiap kotak jabatan untuk melihat <b className="font-semibold text-[#0c3624]">Tugas Pokok &amp; Fungsi</b>
+          </div>
+
           {/* Mobile View Toggle */}
-          <div className="lg:hidden mt-6 inline-flex p-1 bg-white border border-neutral-200 rounded-xl shadow-xs">
-            <button
-              onClick={() => setMobileMode("bagan")}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
-                mobileMode === "bagan"
-                  ? "bg-[#0c3624] text-white shadow-xs"
-                  : "text-neutral-600 hover:text-[#0c3624]"
-              }`}
-            >
-              📊 Bagan Lengkap (Sesuai Foto)
-            </button>
-            <button
-              onClick={() => setMobileMode("daftar")}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
-                mobileMode === "daftar"
-                  ? "bg-[#0c3624] text-white shadow-xs"
-                  : "text-neutral-600 hover:text-[#0c3624]"
-              }`}
-            >
-              📋 Daftar Hierarki
-            </button>
+          <div className="lg:hidden mt-6 block">
+            <div className="inline-flex p-1 bg-white border border-neutral-200 rounded-xl shadow-xs">
+              <button
+                onClick={() => setMobileMode("bagan")}
+                className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
+                  mobileMode === "bagan"
+                    ? "bg-[#0c3624] text-white shadow-xs"
+                    : "text-neutral-600 hover:text-[#0c3624]"
+                }`}
+              >
+                📊 Bagan Lengkap (Sesuai Foto)
+              </button>
+              <button
+                onClick={() => setMobileMode("daftar")}
+                className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
+                  mobileMode === "daftar"
+                    ? "bg-[#0c3624] text-white shadow-xs"
+                    : "text-neutral-600 hover:text-[#0c3624]"
+                }`}
+              >
+                📋 Daftar Hierarki
+              </button>
+            </div>
           </div>
         </div>
 
@@ -790,7 +1214,12 @@ function StrukturOrganisasiSection() {
               <div className="w-[1.75px] h-5 bg-[#5A8270]" />
 
               {/* 2. PIMPINAN: Mudir / Kepala RTQ */}
-              <div className="bg-[#0c3624] text-white rounded-xl px-7 py-2.5 text-center shadow-md min-w-[260px] max-w-[300px]">
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Mudir / Kepala RTQ"])}
+                className="bg-[#0c3624] text-white rounded-xl px-7 py-2.5 text-center shadow-md min-w-[260px] max-w-[300px] cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-95 group relative border border-white/20"
+                title="Klik untuk melihat Tugas Pokok & Fungsi Mudir"
+              >
+                <span className="absolute top-1.5 right-2.5 text-[11px] text-[#F1D9A6] opacity-75 group-hover:opacity-100 font-bold">ⓘ</span>
                 <div className="text-[10px] font-bold text-[#DEAB3E] tracking-widest uppercase mb-0.5">
                   PIMPINAN
                 </div>
@@ -804,11 +1233,8 @@ function StrukturOrganisasiSection() {
 
               {/* Main Tree Connector SVG: Splits from Mudir to 5 Columns */}
               <svg className="w-[1040px] h-9 block" viewBox="0 0 1040 36" fill="none">
-                {/* Stem down from Mudir (center at 520) */}
                 <path d="M 520 0 L 520 18" stroke="#5A8270" strokeWidth="1.75" />
-                {/* Horizontal Bar spanning across all 5 column centers */}
                 <path d="M 150 18 L 890 18" stroke="#5A8270" strokeWidth="1.75" />
-                {/* 5 Drops to the 5 nodes */}
                 <path d="M 150 18 L 150 36" stroke="#5A8270" strokeWidth="1.75" />
                 <path d="M 382.5 18 L 382.5 36" stroke="#5A8270" strokeWidth="1.75" />
                 <path d="M 520 18 L 520 36" stroke="#5A8270" strokeWidth="1.75" />
@@ -824,7 +1250,12 @@ function StrukturOrganisasiSection() {
                     ────────────────────────────────────────── */}
                 <div className="w-[300px] flex flex-col items-center">
                   {/* Level 2 Card: Akademik & Tahfidz */}
-                  <div className="w-[160px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2.5 text-center shadow-xs flex flex-col justify-center">
+                  <div 
+                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Akademik & Tahfidz"])}
+                    className="w-[160px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2.5 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                    title="Klik untuk melihat Tugas Pokok & Fungsi Akademik & Tahfidz"
+                  >
+                    <span className="absolute top-1.5 right-2 text-[10px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                     <div className="text-[9px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -838,11 +1269,8 @@ function StrukturOrganisasiSection() {
 
                   {/* Sub-tree Connector SVG under Akademik & Tahfidz */}
                   <svg className="w-[300px] h-8 block" viewBox="0 0 300 32" fill="none">
-                    {/* Stem from card center (150) */}
                     <path d="M 150 0 L 150 16" stroke="#5A8270" strokeWidth="1.75" />
-                    {/* Horizontal Bar across the 3 sub-cards (47 to 253) */}
                     <path d="M 47 16 L 253 16" stroke="#5A8270" strokeWidth="1.75" />
-                    {/* 3 Drops to sub-cards */}
                     <path d="M 47 16 L 47 32" stroke="#5A8270" strokeWidth="1.75" />
                     <path d="M 150 16 L 150 32" stroke="#5A8270" strokeWidth="1.75" />
                     <path d="M 253 16 L 253 32" stroke="#5A8270" strokeWidth="1.75" />
@@ -853,7 +1281,12 @@ function StrukturOrganisasiSection() {
                     
                     {/* Sub-col 1: Koordinator Halaqah + Pelaksana Muhaffizh */}
                     <div className="w-[94px] flex flex-col items-center">
-                      <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                      <div 
+                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Halaqah"])}
+                        className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                        title="Klik untuk melihat Tugas Pokok & Fungsi Koordinator Halaqah"
+                      >
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           KOORDINATOR
                         </div>
@@ -868,7 +1301,12 @@ function StrukturOrganisasiSection() {
                       {/* Connector line down to Muhaffizh */}
                       <div className="w-[1.75px] h-4 bg-[#5A8270]" />
 
-                      <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                      <div 
+                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Muhaffizh / Muhaffizhah"])}
+                        className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                        title="Klik untuk melihat Tugas Pokok & Fungsi Muhaffizh / Muhaffizhah"
+                      >
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           PELAKSANA
                         </div>
@@ -883,7 +1321,12 @@ function StrukturOrganisasiSection() {
 
                     {/* Sub-col 2: Koordinator Kurikulum */}
                     <div className="w-[94px] flex flex-col items-center">
-                      <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                      <div 
+                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Kurikulum"])}
+                        className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                        title="Klik untuk melihat Tugas Pokok & Fungsi Koordinator Kurikulum"
+                      >
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           KOORDINATOR
                         </div>
@@ -898,7 +1341,12 @@ function StrukturOrganisasiSection() {
 
                     {/* Sub-col 3: Guru */}
                     <div className="w-[94px] flex flex-col items-center">
-                      <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                      <div 
+                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Guru"])}
+                        className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                        title="Klik untuk melihat Tugas Pokok & Fungsi Guru"
+                      >
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           PELAKSANA
                         </div>
@@ -918,7 +1366,12 @@ function StrukturOrganisasiSection() {
                     COLUMN 2: Kesantrian & Pengasuhan (110px)
                     ────────────────────────────────────────── */}
                 <div className="w-[110px] flex flex-col items-center">
-                  <div className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                  <div 
+                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Kesantrian & Pengasuhan"])}
+                    className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                    title="Klik untuk melihat Tugas Pokok & Fungsi Kesantrian & Pengasuhan"
+                  >
+                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -935,7 +1388,12 @@ function StrukturOrganisasiSection() {
                     COLUMN 3: Sarpras & Umum (110px)
                     ────────────────────────────────────────── */}
                 <div className="w-[110px] flex flex-col items-center">
-                  <div className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                  <div 
+                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Sarpras & Umum"])}
+                    className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                    title="Klik untuk melihat Tugas Pokok & Fungsi Sarpras & Umum"
+                  >
+                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -952,7 +1410,12 @@ function StrukturOrganisasiSection() {
                     COLUMN 4: Humas & Kerja Sama (110px)
                     ────────────────────────────────────────── */}
                 <div className="w-[110px] flex flex-col items-center">
-                  <div className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                  <div 
+                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Humas & Kerja Sama"])}
+                    className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                    title="Klik untuk melihat Tugas Pokok & Fungsi Humas & Kerja Sama"
+                  >
+                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -970,7 +1433,12 @@ function StrukturOrganisasiSection() {
                     ────────────────────────────────────────── */}
                 <div className="w-[300px] flex flex-col items-center">
                   {/* Level 2 Card: Koordinator Tata Usaha */}
-                  <div className="w-[160px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2.5 text-center shadow-xs flex flex-col justify-center">
+                  <div 
+                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Tata Usaha"])}
+                    className="w-[160px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2.5 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                    title="Klik untuk melihat Tugas Pokok & Fungsi Koordinator Tata Usaha"
+                  >
+                    <span className="absolute top-1.5 right-2 text-[10px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       PENDUKUNG
                     </div>
@@ -984,11 +1452,8 @@ function StrukturOrganisasiSection() {
 
                   {/* Sub-tree Connector SVG under Tata Usaha */}
                   <svg className="w-[300px] h-8 block" viewBox="0 0 300 32" fill="none">
-                    {/* Stem from card center (150) */}
                     <path d="M 150 0 L 150 16" stroke="#5A8270" strokeWidth="1.75" />
-                    {/* Horizontal Bar across the 3 sub-cards (47 to 253) */}
                     <path d="M 47 16 L 253 16" stroke="#5A8270" strokeWidth="1.75" />
-                    {/* 3 Drops to sub-cards */}
                     <path d="M 47 16 L 47 32" stroke="#5A8270" strokeWidth="1.75" />
                     <path d="M 150 16 L 150 32" stroke="#5A8270" strokeWidth="1.75" />
                     <path d="M 253 16 L 253 32" stroke="#5A8270" strokeWidth="1.75" />
@@ -998,7 +1463,12 @@ function StrukturOrganisasiSection() {
                   <div className="flex items-start gap-[9px] w-[300px]">
                     
                     {/* Sub-col 1: Staf Administrasi & Kesantrian */}
-                    <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                    <div 
+                      onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Administrasi & Kesantrian"])}
+                      className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                      title="Klik untuk melihat Tugas Pokok & Fungsi Staf Administrasi & Kesantrian"
+                    >
+                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                       <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                         STAF TU
                       </div>
@@ -1011,7 +1481,12 @@ function StrukturOrganisasiSection() {
                     </div>
 
                     {/* Sub-col 2: Staf Presensi & Kepegawaian */}
-                    <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                    <div 
+                      onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Presensi & Kepegawaian"])}
+                      className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                      title="Klik untuk melihat Tugas Pokok & Fungsi Staf Presensi & Kepegawaian"
+                    >
+                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                       <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                         STAF TU
                       </div>
@@ -1024,7 +1499,12 @@ function StrukturOrganisasiSection() {
                     </div>
 
                     {/* Sub-col 3: Staf Pengelolaan Keuangan & Pembukuan */}
-                    <div className="w-[94px] min-h-[96px] bg-white border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center">
+                    <div 
+                      onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Pengelolaan Keuangan & Pembukuan"])}
+                      className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
+                      title="Klik untuk melihat Tugas Pokok & Fungsi Staf Pengelolaan Keuangan & Pembukuan"
+                    >
+                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
                       <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                         STAF TU
                       </div>
@@ -1041,9 +1521,6 @@ function StrukturOrganisasiSection() {
 
               </div>
 
-              {/* Bottom Subtle Divider Line matching the photo */}
-              <div className="w-full max-w-4xl h-px bg-[#E2D8C3] mt-14" />
-
             </div>
           </div>
         </div>
@@ -1053,7 +1530,11 @@ function StrukturOrganisasiSection() {
            ════════════════════════════════════════════════════════ */}
         <div className={`space-y-4 max-w-md mx-auto ${mobileMode === "daftar" ? "block" : "hidden"}`}>
           {/* Mudir Card */}
-          <div className="bg-[#0c3624] text-white rounded-2xl p-4 text-center shadow-md">
+          <div 
+            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Mudir / Kepala RTQ"])}
+            className="bg-[#0c3624] text-white rounded-2xl p-4 text-center shadow-md cursor-pointer transition-all hover:shadow-lg active:scale-98 group relative"
+          >
+            <span className="absolute top-3 right-3 text-xs text-[#DEAB3E] opacity-75 group-hover:opacity-100 font-bold">ⓘ</span>
             <span className="text-[10px] font-bold text-[#DEAB3E] tracking-widest uppercase block mb-1">
               PIMPINAN
             </span>
@@ -1063,30 +1544,56 @@ function StrukturOrganisasiSection() {
 
           {/* 1. Bidang Akademik & Tahfidz */}
           <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
-            <span className="text-[10px] font-bold text-[#0c3624] uppercase tracking-wider block mb-1">
-              BIDANG
-            </span>
-            <h4 className="font-bold text-sm text-[#0c3624]">Akademik &amp; Tahfidz</h4>
-            <p className="text-xs text-neutral-600 mb-3">
-              Target hafalan, marhalah, talaqqi &amp; muroja&apos;ah, evaluasi
-            </p>
+            <div 
+              onClick={() => setSelectedJabatan(STRUKTUR_TUP["Akademik & Tahfidz"])}
+              className="cursor-pointer group relative mb-3 pb-2 border-b border-neutral-100"
+            >
+              <span className="absolute top-0 right-0 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+              <span className="text-[10px] font-bold text-[#0c3624] uppercase tracking-wider block mb-1">
+                BIDANG
+              </span>
+              <h4 className="font-bold text-sm text-[#0c3624] group-hover:text-[#9B7B3B] transition-colors">Akademik &amp; Tahfidz</h4>
+              <p className="text-xs text-neutral-600">
+                Target hafalan, marhalah, talaqqi &amp; muroja&apos;ah, evaluasi
+              </p>
+            </div>
+
             <div className="space-y-2 pl-3 border-l-2 border-[#9B7B3B]/40">
-              <div className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30">
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Halaqah"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
                 <span className="text-[9px] font-bold text-[#0c3624] uppercase block">KOORDINATOR</span>
                 <span className="text-xs font-bold text-[#0c3624] block">Koordinator Halaqah</span>
                 <span className="text-[10px] text-neutral-600 block">Pembagian halaqah &amp; jadwal setoran</span>
-                <div className="mt-2 pt-2 border-t border-neutral-200">
-                  <span className="text-[9px] font-bold text-[#0c3624] uppercase block">PELAKSANA</span>
-                  <span className="text-xs font-bold text-[#0c3624] block">Muhaffizh / Muhaffizhah</span>
-                  <span className="text-[10px] text-neutral-600 block">Pengampu halaqah &amp; bimbingan setoran</span>
-                </div>
               </div>
-              <div className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30">
+
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Muhaffizh / Muhaffizhah"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">PELAKSANA</span>
+                <span className="text-xs font-bold text-[#0c3624] block">Muhaffizh / Muhaffizhah</span>
+                <span className="text-[10px] text-neutral-600 block">Pengampu halaqah &amp; bimbingan setoran</span>
+              </div>
+
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Kurikulum"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
                 <span className="text-[9px] font-bold text-[#0c3624] uppercase block">KOORDINATOR</span>
                 <span className="text-xs font-bold text-[#0c3624] block">Koordinator Kurikulum</span>
                 <span className="text-[10px] text-neutral-600 block">Penyusunan &amp; penyelarasan kurikulum tahfidz &amp; mapel umum</span>
               </div>
-              <div className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30">
+
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Guru"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
                 <span className="text-[9px] font-bold text-[#0c3624] uppercase block">PELAKSANA</span>
                 <span className="text-xs font-bold text-[#0c3624] block">Guru</span>
                 <span className="text-[10px] text-neutral-600 block">Pengajar mata pelajaran umum &amp; penunjang</span>
@@ -1095,7 +1602,11 @@ function StrukturOrganisasiSection() {
           </div>
 
           {/* 2. Bidang Kesantrian & Pengasuhan */}
-          <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
+          <div 
+            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Kesantrian & Pengasuhan"])}
+            className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs cursor-pointer hover:border-[#9B7B3B] transition-all group relative"
+          >
+            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
             <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
               BIDANG
             </span>
@@ -1106,7 +1617,11 @@ function StrukturOrganisasiSection() {
           </div>
 
           {/* 3. Bidang Sarpras & Umum */}
-          <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
+          <div 
+            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Sarpras & Umum"])}
+            className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs cursor-pointer hover:border-[#9B7B3B] transition-all group relative"
+          >
+            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
             <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
               BIDANG
             </span>
@@ -1117,7 +1632,11 @@ function StrukturOrganisasiSection() {
           </div>
 
           {/* 4. Bidang Humas & Kerja Sama */}
-          <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
+          <div 
+            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Humas & Kerja Sama"])}
+            className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs cursor-pointer hover:border-[#9B7B3B] transition-all group relative"
+          >
+            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
             <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
               BIDANG
             </span>
@@ -1129,25 +1648,46 @@ function StrukturOrganisasiSection() {
 
           {/* 5. Koordinator Tata Usaha */}
           <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
-            <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
-              PENDUKUNG
-            </span>
-            <h4 className="font-bold text-sm text-[#0c3624]">Koordinator Tata Usaha</h4>
-            <p className="text-xs text-neutral-600 mb-3">
-              Memimpin &amp; mengoordinasikan seluruh administrasi RTQ
-            </p>
+            <div 
+              onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Tata Usaha"])}
+              className="cursor-pointer group relative mb-3 pb-2 border-b border-neutral-100"
+            >
+              <span className="absolute top-0 right-0 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+              <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
+                PENDUKUNG
+              </span>
+              <h4 className="font-bold text-sm text-[#0c3624] group-hover:text-[#9B7B3B] transition-colors">Koordinator Tata Usaha</h4>
+              <p className="text-xs text-neutral-600">
+                Memimpin &amp; mengoordinasikan seluruh administrasi RTQ
+              </p>
+            </div>
+
             <div className="space-y-2 pl-3 border-l-2 border-[#9B7B3B]/40">
-              <div className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30">
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Administrasi & Kesantrian"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
                 <span className="text-[9px] font-bold text-[#0c3624] uppercase block">STAF TU</span>
                 <span className="text-xs font-bold text-[#0c3624] block">Staf Administrasi &amp; Kesantrian</span>
                 <span className="text-[10px] text-neutral-600 block">Data santri, surat-menyurat, arsip dokumen</span>
               </div>
-              <div className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30">
+
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Presensi & Kepegawaian"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
                 <span className="text-[9px] font-bold text-[#0c3624] uppercase block">STAF TU</span>
                 <span className="text-xs font-bold text-[#0c3624] block">Staf Presensi &amp; Kepegawaian</span>
                 <span className="text-[10px] text-neutral-600 block">Operasional RTQ Absensi &amp; data kepegawaian</span>
               </div>
-              <div className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30">
+
+              <div 
+                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Pengelolaan Keuangan & Pembukuan"])}
+                className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
+              >
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
                 <span className="text-[9px] font-bold text-[#0c3624] uppercase block">STAF TU</span>
                 <span className="text-xs font-bold text-[#0c3624] block">Staf Pengelolaan Keuangan &amp; Pembukuan</span>
                 <span className="text-[10px] text-neutral-600 block">Kas harian, pembayaran wali santri, pelaporan</span>
@@ -1156,14 +1696,121 @@ function StrukturOrganisasiSection() {
           </div>
         </div>
 
+        {/* ════════════════════════════════════════════════════════
+            3. LEGENDA & CATATAN
+           ════════════════════════════════════════════════════════ */}
+        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 mt-12 pt-6 border-t border-[#E1D8C4] text-xs text-[#4d5a54]">
+          <div className="flex items-center gap-2.5">
+            <span className="w-5 h-3.5 rounded-sm bg-gradient-to-br from-[#0d5c47] to-[#0a4a39] shadow-2xs inline-block" />
+            <span className="font-medium">Pimpinan</span>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <span className="w-5 h-3.5 rounded-sm bg-[#FAF8F4] border-[1.5px] border-[#0c3624] shadow-2xs inline-block" />
+            <span className="font-medium">Bidang aktif</span>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <span className="w-5 h-3.5 rounded-sm bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] shadow-2xs inline-block" />
+            <span className="font-medium">Pelaksana tahfidz / TU</span>
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-[#7a8a83] leading-relaxed mt-4 max-w-2xl mx-auto">
+          Jalur akademik: <b className="text-[#0c3624]">Mudir → Akademik &amp; Tahfidz → Koordinator Halaqah → Muhaffizh.</b><br className="hidden sm:inline" />
+          {" "}Jalur keuangan RTQ tetap melapor ke <b className="text-[#0c3624]">Bendahara Yayasan</b>.
+        </p>
+
       </div>
+
+      {/* ════════════════════════════════════════════════════════
+          4. MODAL TUPOKSI (POPUP DETAIL TUGAS POKOK & FUNGSI)
+         ════════════════════════════════════════════════════════ */}
+      {selectedJabatan && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#09281f]/60 backdrop-blur-xs animate-in fade-in duration-200"
+          onClick={() => setSelectedJabatan(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div 
+            className="bg-[#FCFAF4] text-[#1b2b27] max-w-xl w-full max-h-[88vh] overflow-y-auto rounded-2xl border border-[#E1D8C4] shadow-2xl animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Head */}
+            <div className="bg-gradient-to-br from-[#093f31] to-[#0d5c47] text-white p-5 sm:p-6 rounded-t-2xl relative">
+              <button
+                onClick={() => setSelectedJabatan(null)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center text-xl transition-colors leading-none"
+                aria-label="Tutup"
+              >
+                &times;
+              </button>
+              <div className="text-[10px] sm:text-[11px] font-bold tracking-[0.18em] text-[#F1D9A6] uppercase">
+                {selectedJabatan.role}
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl font-bold mt-1 text-white leading-tight">
+                {selectedJabatan.title}
+              </h3>
+              {selectedJabatan.name && (
+                <div className="text-sm font-semibold text-[#D9EAD3] mt-1">
+                  {selectedJabatan.name}
+                </div>
+              )}
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-5 sm:p-6 space-y-5">
+              {/* Summary */}
+              <div className="bg-[#F0ECE0] text-[#42514B] text-xs sm:text-sm leading-relaxed p-3.5 rounded-r-xl border-l-4 border-[#B08436]">
+                {selectedJabatan.summary}
+              </div>
+
+              {/* Tugas Pokok */}
+              <div>
+                <h4 className="text-[11px] font-bold tracking-[0.14em] text-[#0D5C47] uppercase mb-2.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0D5C47]" />
+                  Tugas Pokok
+                </h4>
+                <ul className="space-y-2">
+                  {selectedJabatan.tugas.map((t, idx) => (
+                    <li key={idx} className="relative pl-5 text-xs sm:text-[13.5px] text-[#33403a] leading-relaxed">
+                      <span className="absolute left-1 top-2 w-1.5 h-1.5 rounded-[1px] bg-[#B08436] rotate-45" />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Fungsi */}
+              <div>
+                <h4 className="text-[11px] font-bold tracking-[0.14em] text-[#0D5C47] uppercase mb-2.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0D5C47]" />
+                  Fungsi
+                </h4>
+                <ul className="space-y-2">
+                  {selectedJabatan.fungsi.map((f, idx) => (
+                    <li key={idx} className="relative pl-5 text-xs sm:text-[13.5px] text-[#33403a] leading-relaxed">
+                      <span className="absolute left-1 top-2 w-1.5 h-1.5 rounded-[1px] bg-[#B08436] rotate-45" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Note if any */}
+              {selectedJabatan.note && (
+                <div className="text-xs italic text-[#7C8782] pt-3 border-t border-dashed border-[#CDD5D0] leading-relaxed">
+                  {selectedJabatan.note}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }
 
-/* ────────────────────────────────────────────────────────
-   PROGRAM PENDIDIKAN
-──────────────────────────────────────────────────────── */
 function ProgramsSection() {
   const utama = [
     {
@@ -1312,127 +1959,375 @@ function ProgramsSection() {
 }
 
 /* ────────────────────────────────────────────────────────
-   JADWAL & BIAYA PENDIDIKAN
+   JADWAL & BIAYA PENDIDIKAN (Sesuai Excel S-Ganjil 2026)
 ──────────────────────────────────────────────────────── */
+
+type JadwalItemType = {
+  jam: string;
+  waktu: string;
+  kegiatan: string;
+  guru: string;
+};
+
+type RamadhanDayItemType = {
+  jam: string;
+  waktu: string;
+  "PRA SEKOLAH": string;
+  "KELAS 1": string;
+  "KELAS 2": string;
+  "KELAS 4": string;
+  "KELAS 5": string;
+};
+
+const JADWAL_MASTER: any = {"PRA SEKOLAH": {"name": "PRA SEKOLAH", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - PRA SEKOLAH", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Membaca", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Menulis", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Berhitung", "guru": "Pak Ukasyah"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Membaca", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Bu Dian & Bu Reza"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": "Bu Septi & Bu Reza"}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Menggambar", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Snack Time", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "Praktek Ibadah", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "10.10 - 11.10", "kegiatan": "Prakarya", "guru": "Bu Septi & Bu Reza"}]}}, "KELAS 1": {"name": "KELAS 1", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 1", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Aqidah", "guru": "Pak Ukasyah"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Al - Qur'an Hadist", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Fiqih", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Bahasa Inggris", "guru": "Bu Reza"}, {"jam": "II", "waktu": "08.40 - 09.15", "kegiatan": "Coding & AI", "guru": "Bu Reza"}, {"jam": "III", "waktu": "09.15 - 09.50", "kegiatan": "Prakarya", "guru": "Bu Septi"}, {"jam": "", "waktu": "09.50 - 10.10", "kegiatan": "Snack Time", "guru": ""}, {"jam": "IV", "waktu": "10.10 - 10.45", "kegiatan": "Praktek Ibadah", "guru": "Pak Ukasyah"}, {"jam": "V", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 2": {"name": "KELAS 2", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 2", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Al - Qur'an Hadist", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Matematika", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Aqidah", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Inggris", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Fiqih", "guru": "Pak Ukasyah"}, {"jam": "II", "waktu": "08.40 - 09.15", "kegiatan": "Coding & AI", "guru": "Bu Reza"}, {"jam": "III", "waktu": "09.15 - 09.50", "kegiatan": "Prakarya", "guru": "Bu Septi"}, {"jam": "", "waktu": "09.50 - 10.10", "kegiatan": "Snack Time", "guru": ""}, {"jam": "IV", "waktu": "10.10 - 10.45", "kegiatan": "Praktek Ibadah", "guru": "Pak Ukasyah"}, {"jam": "V", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 3": {"name": "KELAS 3", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 3", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Fiqih", "guru": "Pak Ukasyah"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Aqidah", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Inggris", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Al - Qur'an Hadist", "guru": "Pak Umar"}, {"jam": "II", "waktu": "08.40 - 09.15", "kegiatan": "Coding & AI", "guru": "Bu Reza"}, {"jam": "III", "waktu": "09.15 - 09.50", "kegiatan": "Prakarya", "guru": "Bu Septi"}, {"jam": "", "waktu": "09.50 - 10.10", "kegiatan": "Istirahat", "guru": ""}, {"jam": "IV", "waktu": "10.10 - 10.45", "kegiatan": "IPAS", "guru": "Bu Reza"}, {"jam": "V", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 5": {"name": "KELAS 5", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 5", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Fiqih", "guru": "Bu Husna"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.00", "kegiatan": "Coding & AI", "guru": "Pak Umar"}, {"jam": "III", "waktu": "10.00 - 10.35", "kegiatan": "SKI", "guru": "Pak Umar"}, {"jam": "IV", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "V", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "IPAS", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Aqidah", "guru": "Bu Husna"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Dian"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Bahasa Inggris", "guru": "Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.10 - 10.45", "kegiatan": "Al -Qur'an Hadist", "guru": "Bu Husna"}, {"jam": "IV", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 6": {"name": "KELAS 6", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 6", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Fiqih", "guru": "Bu Husna"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Aqidah", "guru": "Pak Umar"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "IPAS", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.00", "kegiatan": "Coding & AI", "guru": "Pak Umar"}, {"jam": "III", "waktu": "10.00 - 10.35", "kegiatan": "SKI", "guru": "Pak Umar"}, {"jam": "IV", "waktu": "10.35 - 11.45", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "V", "waktu": "13.25 - 14.35", "kegiatan": "Al - Qur'an Hadist", "guru": "Bu Husna"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Bahasa Inggris", "guru": "Bu Septi"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.10 - 10.45", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "IV", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "JADWAL RAMADHAN": {"name": "JADWAL RAMADHAN", "title": "Jadwal Pelajaran Khusus Bulan Ramadhan 1447 H", "semester": "Bulan Ramadhan 1447 H", "classes": ["PRA SEKOLAH", "KELAS 1", "KELAS 2", "KELAS 4", "KELAS 5"], "days": {"Senin": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Membaca", "KELAS 1": "Matematika", "KELAS 2": "Fiqih", "KELAS 4": "Al - Qur'an Hadist", "KELAS 5": "Matematika"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Tahsin", "KELAS 5": "Tahsin"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "Fiqih", "KELAS 2": "Matematika", "KELAS 4": "Matematika", "KELAS 5": "Al - Qur'an Hadist"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Selasa": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Menulis", "KELAS 1": "Bahasa Indonesia", "KELAS 2": "Aqidah", "KELAS 4": "IPAS", "KELAS 5": "Fiqih"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Tahsin", "KELAS 5": "Tahsin"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "Aqidah", "KELAS 2": "Bahasa Indonesia", "KELAS 4": "Fiqih", "KELAS 5": "IPAS"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Rabu": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Berhitung", "KELAS 1": "Bahasa Arab", "KELAS 2": "PKN", "KELAS 4": "Matematika", "KELAS 5": "Aqidah"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Tahsin", "KELAS 5": "Tahsin"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "PKN", "KELAS 2": "Bahasa Arab", "KELAS 4": "Aqidah", "KELAS 5": "Matematika"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Kamis": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Membaca", "KELAS 1": "Bahasa Indonesia", "KELAS 2": "Al - Qur'an Hadist", "KELAS 4": "SKI", "KELAS 5": "Bahasa Arab"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Bahasa Arab", "KELAS 5": "PKN"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "Al - Qur'an Hadist", "KELAS 2": "Bahasa Indonesia", "KELAS 4": "PKN", "KELAS 5": "SKI"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Jum'at": [{"jam": "1", "waktu": "07.30 - 08.00", "PRA SEKOLAH": "BK/Dzikir/Sholat", "KELAS 1": "BK/Dzikir/Sholat", "KELAS 2": "BK/Dzikir/Sholat", "KELAS 4": "BK/Dzikir/Sholat", "KELAS 5": "BK/Dzikir/Sholat"}, {"jam": "2", "waktu": "08.00 - 08.45", "PRA SEKOLAH": "Praktek Ibadah", "KELAS 1": "Praktek Ibadah", "KELAS 2": "Praktek Ibadah", "KELAS 4": "Bahasa Indonesia", "KELAS 5": "Bahasa Arab"}, {"jam": "3", "waktu": "08.45 - 09.15", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "4", "waktu": "09.15 - 10.00", "PRA SEKOLAH": "", "KELAS 1": "Bahasa Inggris", "KELAS 2": "Bahasa Inggris", "KELAS 4": "Bahasa Arab", "KELAS 5": "Bahasa Indonesia"}], "Sabtu": [{"jam": "1", "waktu": "07.30 - 08.00", "PRA SEKOLAH": "Prakarya", "KELAS 1": "Prakarya", "KELAS 2": "Prakarya", "KELAS 4": "Prakarya", "KELAS 5": "Prakarya"}, {"jam": "2", "waktu": "08.00 - 08.45", "PRA SEKOLAH": "Prakarya", "KELAS 1": "Prakarya", "KELAS 2": "Prakarya", "KELAS 4": "Prakarya", "KELAS 5": "Prakarya"}, {"jam": "3", "waktu": "08.45 - 09.15", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "4", "waktu": "09.15 - 10.30", "PRA SEKOLAH": "PKBM/Menggambar", "KELAS 1": "PKBM/Bhs.Indo", "KELAS 2": "PKBM/Bhs.Indo", "KELAS 4": "PKBM/MTK", "KELAS 5": "PKBM/MTK"}]}}};
+
+const GURU_LIST = [
+  { kode: 1, nama: "Pak Ukasyah", mapel: "Praktek Ibadah, Fiqih, Berhitung, PJOK" },
+  { kode: 2, nama: "Pak Umar", mapel: "Tahfidz, Tahsin, Menggambar, Bina Karakter" },
+  { kode: 3, nama: "Bu Septi", mapel: "Al-Qur'an Hadits, Bahasa Arab, Prakarya" },
+  { kode: 4, nama: "Bu Husna", mapel: "Tahfidz, Tahsin, Fiqih, Aqidah" },
+  { kode: 5, nama: "Bu Dian", mapel: "Matematika, Pendidikan Pancasila, PJOK" },
+  { kode: 6, nama: "Bu Reza", mapel: "Bahasa Indonesia, Coding & AI, Bahasa Inggris, IPAS" },
+  { kode: 7, nama: "Bu Titin", mapel: "Matematika & Pendamping" },
+];
+
 function JadwalBiayaSection() {
-  const jadwal = [
-    { hari: "Senin", waktu: "07:30 – 08:30", kegiatan: "Tahfidz Al-Qur'an", pengajar: "Ustadz Ahmad Fauzi" },
-    { hari: "Selasa", waktu: "07:30 – 08:30", kegiatan: "Fiqh Dasar & Adab", pengajar: "Ustadzah Siti Aminah" },
-    { hari: "Rabu", waktu: "08:30 – 09:30", kegiatan: "Bahasa Arab Dasar", pengajar: "Ustadz Yusuf" },
-    { hari: "Kamis", waktu: "07:30 – 08:30", kegiatan: "Tahsin & Tajwid", pengajar: "Ustadzah Nur Aini" },
-    { hari: "Jumat", waktu: "07:30 – 08:30", kegiatan: "Akhlak & Kisah Nabi", pengajar: "Ustadz Khalid" },
-    { hari: "Sabtu", waktu: "08:00 – 09:30", kegiatan: "Ekstrakurikuler & Murajaah", pengajar: "Ustadz Bagus" },
+  const [selectedClass, setSelectedClass] = useState<string>("KELAS 1");
+  const [selectedDay, setSelectedDay] = useState<string>("Senin");
+
+  const classList = [
+    { id: "PRA SEKOLAH", label: "Pra Sekolah" },
+    { id: "KELAS 1", label: "Kelas 1" },
+    { id: "KELAS 2", label: "Kelas 2" },
+    { id: "KELAS 3", label: "Kelas 3" },
+    { id: "KELAS 5", label: "Kelas 5" },
+    { id: "KELAS 6", label: "Kelas 6" },
+    { id: "JADWAL RAMADHAN", label: "🌙 Ramadhan 1447 H" },
   ];
+
+  const daysList = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
 
   const biaya = [
-    { name: "Pendaftaran & Assesment", sub: "1 kali saat awal", price: "Rp 200.000" },
-    { name: "SPP Bulanan", sub: "per bulan", price: "Rp 150.000" },
-    { name: "Seragam & Atribut", sub: "2 set pakaian santri", price: "Rp 350.000" },
-    { name: "Buku Panduan & Mushaf", sub: "paket pembelajaran", price: "Rp 100.000" },
+    { name: "Pendaftaran & Assesment", sub: "1 kali saat awal masuk", price: "Rp 200.000" },
+    { name: "SPP Bulanan", sub: "per bulan (infaq pendidikan)", price: "Rp 150.000" },
+    { name: "Seragam & Atribut", sub: "2 set pakaian santri resmi", price: "Rp 350.000" },
+    { name: "Buku Panduan & Mushaf", sub: "paket materi & modul pembelajaran", price: "Rp 100.000" },
   ];
 
+  const isRamadhan = selectedClass === "JADWAL RAMADHAN";
+  const currentClassData = JADWAL_MASTER[selectedClass];
+
   return (
-    <section id="jadwal" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#FAF8F4]">
+    <section id="jadwal" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#FAF8F4] border-b border-neutral-200/80">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="inline-block bg-rtq-green-100 text-rtq-green-800 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3">
-            Informasi
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <span className="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3 shadow-2xs">
+            TAHUN AJARAN 2026 - 2027 · SEMESTER GANJIL
           </span>
-          <h2 className="font-serif text-2xl sm:text-4xl font-bold text-rtq-green-900 mb-3">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0c3624] tracking-tight mb-3">
             Jadwal &amp; Biaya Pendidikan
           </h2>
-          <div className="w-16 h-1 bg-rtq-gold-400 rounded-full mx-auto mb-4" />
-          <p className="text-sm sm:text-base text-neutral-600">
-            Transparansi jadwal kegiatan mingguan dan rincian biaya pendidikan tahun ajaran 2026/2027.
+          <div className="w-16 h-1 bg-[#DEAB3E] rounded-full mx-auto mb-4" />
+          <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+            Jadwal operasional pembelajaran terpadu (Tahfidz, Tahsin, Diniyah, Karakter &amp; Mapel Umum) serta transparansi rincian biaya pendidikan RTQ Abdurrahman bin Auf.
           </p>
         </div>
 
+        {/* Jenjang / Kelas Tab Selector */}
+        <div className="mb-8">
+          <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+            {classList.map((c) => {
+              const active = selectedClass === c.id;
+              const isSpecial = c.id === "JADWAL RAMADHAN";
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => setSelectedClass(c.id)}
+                  className={`px-4 py-2 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 ${
+                    active
+                      ? isSpecial
+                        ? "bg-amber-600 text-white shadow-md scale-102"
+                        : "bg-[#0c3624] text-white shadow-md scale-102"
+                      : isSpecial
+                      ? "bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100"
+                      : "bg-white text-neutral-600 border border-neutral-200/90 hover:border-[#0c3624] hover:text-[#0c3624]"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Jadwal Table */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200">
-            <h3 className="font-bold text-lg text-rtq-green-900 mb-4 flex items-center gap-2">
-              <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-              </svg>
-              <span>Jadwal Pembelajaran Mingguan</span>
-            </h3>
-            
-            <div className="overflow-x-auto">
-              <table className="table w-full text-xs sm:text-sm">
-                <thead>
-                  <tr className="bg-rtq-green-900 text-rtq-gold-300">
-                    <th className="rounded-l-xl py-3 px-3">Hari</th>
-                    <th className="py-3 px-3">Waktu</th>
-                    <th className="py-3 px-3">Materi</th>
-                    <th className="rounded-r-xl py-3 px-3">Pengajar</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-neutral-100 text-neutral-700">
-                  {jadwal.map((j) => (
-                    <tr key={j.hari} className="hover:bg-neutral-50 transition">
-                      <td className="font-bold text-rtq-green-900 py-3 px-3">{j.hari}</td>
-                      <td className="py-3 px-3">{j.waktu}</td>
-                      <td className="font-semibold py-3 px-3">{j.kegiatan}</td>
-                      <td className="text-neutral-500 py-3 px-3">{j.pengajar}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          
+          {/* ════════════════════════════════════════════════════════
+              KOLOM KIRI (7 SPAN): TABEL JADWAL PELAJARAN
+             ════════════════════════════════════════════════════════ */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-neutral-200 flex flex-col justify-between">
+            <div>
+              {/* Header Box Jadwal */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-neutral-100">
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#9B7B3B]">
+                    {isRamadhan ? "Edisi Spesial" : "Jadwal Pelajaran"}
+                  </div>
+                  <h3 className="font-bold text-lg sm:text-xl text-[#0c3624] flex items-center gap-2">
+                    <span>{isRamadhan ? "Jadwal Khusus Bulan Ramadhan 1447 H" : `Jadwal Pelajaran — ${classList.find(c => c.id === selectedClass)?.label}`}</span>
+                  </h3>
+                  <p className="text-xs text-neutral-500 mt-0.5">
+                    {isRamadhan ? "Penyesuaian jam belajar & ibadah selama bulan Ramadhan" : "Semester Ganjil · Tahun Ajaran 2026/2027"}
+                  </p>
+                </div>
+
+                {/* Badge Waktu Pulang */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200/60 text-emerald-800 text-[11px] font-semibold self-start sm:self-auto">
+                  <span>⏱️</span>
+                  <span>{isRamadhan ? "07.30 - 11.00 WIB" : selectedDay === "Jum'at" ? "Pulang: 10.10 WIB" : selectedDay === "Sabtu" ? "Pulang: 11.20 WIB" : "Pulang: 15.10 WIB"}</span>
+                </div>
+              </div>
+
+              {/* Hari Selector Tabs */}
+              <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto pb-3 mb-4 -mx-1 px-1 no-scrollbar">
+                {daysList.map((day) => {
+                  const active = selectedDay === day;
+                  return (
+                    <button
+                      key={day}
+                      onClick={() => setSelectedDay(day)}
+                      className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
+                        active
+                          ? "bg-[#0c3624] text-white shadow-2xs"
+                          : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-900"
+                      }`}
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Content Table */}
+              {!isRamadhan ? (
+                /* REGULAR CLASS TABLE */
+                <div className="overflow-x-auto">
+                  <table className="table w-full text-xs sm:text-sm">
+                    <thead>
+                      <tr className="bg-[#0c3624] text-[#F1D9A6]">
+                        <th className="rounded-l-xl py-2.5 px-3 text-center w-14">Jam</th>
+                        <th className="py-2.5 px-3 w-28">Waktu</th>
+                        <th className="py-2.5 px-3">Materi / Kegiatan</th>
+                        <th className="rounded-r-xl py-2.5 px-3 text-right">Pengampu</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-100 text-neutral-700">
+                      {(currentClassData?.days?.[selectedDay] || []).map((item: JadwalItemType, idx: number) => {
+                        const isTahfidz = item.kegiatan.toLowerCase().includes("tahfidz") || item.kegiatan.toLowerCase().includes("tahsin");
+                        const isRest = item.kegiatan.toLowerCase().includes("istirahat") || item.kegiatan.toLowerCase().includes("makan") || item.kegiatan.toLowerCase().includes("tidur") || item.kegiatan.toLowerCase().includes("piket") || item.kegiatan.toLowerCase().includes("sholat");
+                        const isKarakter = item.kegiatan.toLowerCase().includes("bina karakter") || item.kegiatan.toLowerCase().includes("ibadah");
+                        const isCoding = item.kegiatan.toLowerCase().includes("coding") || item.kegiatan.toLowerCase().includes("ai");
+
+                        return (
+                          <tr
+                            key={idx}
+                            className={`transition-colors ${
+                              isTahfidz
+                                ? "bg-emerald-50/70 hover:bg-emerald-100/60 font-medium"
+                                : isRest
+                                ? "bg-neutral-50/60 hover:bg-neutral-100/50 text-neutral-500"
+                                : "hover:bg-neutral-50"
+                            }`}
+                          >
+                            <td className="py-2.5 px-3 text-center font-bold text-neutral-600 text-xs">
+                              {item.jam || "—"}
+                            </td>
+                            <td className="py-2.5 px-3 font-semibold text-neutral-800 text-xs whitespace-nowrap">
+                              {item.waktu}
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className={`font-semibold ${isTahfidz ? "text-[#0c3624]" : "text-neutral-800"}`}>
+                                  {item.kegiatan}
+                                </span>
+                                {isTahfidz && (
+                                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-600 text-white">
+                                    Tahfidz
+                                  </span>
+                                )}
+                                {isCoding && (
+                                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-600 text-white">
+                                    Digital
+                                  </span>
+                                )}
+                                {isKarakter && (
+                                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#9B7B3B] text-white">
+                                    Karakter
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-2.5 px-3 text-right text-xs">
+                              {item.guru ? (
+                                <span className="font-medium text-[#0c3624] bg-neutral-100 px-2 py-0.5 rounded-full inline-block">
+                                  {item.guru}
+                                </span>
+                              ) : (
+                                <span className="text-neutral-400 text-[11px]">—</span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                /* RAMADHAN TABLE (MULTI CLASS VIEW FOR DAY) */
+                <div className="overflow-x-auto">
+                  <table className="table w-full text-xs">
+                    <thead>
+                      <tr className="bg-[#0c3624] text-[#F1D9A6]">
+                        <th className="rounded-l-xl py-2.5 px-2 text-center w-10">Jam</th>
+                        <th className="py-2.5 px-2 w-24">Waktu</th>
+                        <th className="py-2.5 px-2">Pra-Sekolah</th>
+                        <th className="py-2.5 px-2">Kelas 1</th>
+                        <th className="py-2.5 px-2">Kelas 2</th>
+                        <th className="py-2.5 px-2">Kelas 4</th>
+                        <th className="rounded-r-xl py-2.5 px-2">Kelas 5</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-100 text-neutral-700">
+                      {(currentClassData?.days?.[selectedDay] || []).map((row: RamadhanDayItemType, idx: number) => (
+                        <tr key={idx} className="hover:bg-amber-50/50 transition">
+                          <td className="py-2 px-2 text-center font-bold text-neutral-500">
+                            {row.jam}
+                          </td>
+                          <td className="py-2 px-2 font-bold text-neutral-800 whitespace-nowrap">
+                            {row.waktu}
+                          </td>
+                          <td className="py-2 px-2 text-neutral-700">{row["PRA SEKOLAH"] || "—"}</td>
+                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 1"] || "—"}</td>
+                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 2"] || "—"}</td>
+                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 4"] || "—"}</td>
+                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 5"] || "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Catatan Kaki Jadwal */}
+              <div className="mt-4 pt-3 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-neutral-500 gap-2">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>Materi Tahfidz &amp; Tahsin dilaksanakan intensif setiap pagi.</span>
+                </span>
+                <span className="text-[11px] text-neutral-400">
+                  RTQ Abdurrahman bin Auf · Banyuwangi
+                </span>
+              </div>
             </div>
-            <p className="text-xs text-neutral-500 mt-4 flex items-center gap-1.5">
-              <svg className="w-4 h-4 fill-[#0c3624]" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-              </svg>
-              <span>Waktu kegiatan dimulai pukul 07:30 WIB. Tersedia kelas pagi dan sore.</span>
-            </p>
+
+            {/* Quote Hadits dari Dokumen Excel */}
+            <div className="mt-6 p-4 rounded-2xl bg-[#F0ECE0] border-l-4 border-[#9B7B3B] text-neutral-700">
+              <div className="font-serif text-right text-sm text-[#0c3624] font-bold mb-1 leading-relaxed" dir="rtl">
+                اِحْـرِصْ عَـلَـى مَا يَـنْـفَـعُـكَ وَاسْتَعِنْ بِاللهِ وَلَا تَـعْجَـزْ
+              </div>
+              <p className="text-xs italic text-neutral-600 leading-snug">
+                &ldquo;Bersungguh-sungguhlah untuk mendapatkan apa yang bermanfaat bagimu, dan mintalah pertolongan kepada Allah serta janganlah sekali-kali engkau merasa lemah.&rdquo;
+              </p>
+              <div className="text-[10px] text-neutral-500 font-semibold mt-1">
+                (HR. Muslim) · Pengesahan: Dava Firdaus S.R., S.Pd (Ketua) &amp; Septia Zuhrotul L., S.Pd (PJ)
+              </div>
+            </div>
+
           </div>
 
-          {/* Biaya Card */}
+          {/* ════════════════════════════════════════════════════════
+              KOLOM KANAN (5 SPAN): RINCIAN BIAYA PENDIDIKAN
+             ════════════════════════════════════════════════════════ */}
           <div className="lg:col-span-5 flex flex-col gap-6">
+            
+            {/* Kartu Rincian Biaya */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200">
-              <h3 className="font-bold text-lg text-rtq-green-900 mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 fill-[#E8B54D]" viewBox="0 0 24 24">
-                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                </svg>
-                <span>Rincian Biaya</span>
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-lg text-[#0c3624] flex items-center gap-2">
+                  <svg className="w-5 h-5 fill-[#DEAB3E]" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <span>Rincian Biaya Pendidikan</span>
+                </h3>
+                <span className="text-[11px] font-bold text-[#9B7B3B] bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
+                  2026/2027
+                </span>
+              </div>
+
+              <p className="text-xs text-neutral-500 mb-4">
+                Biaya pendidikan terjangkau dengan fasilitas komprehensif, makan siang, program tahfidz bersanad, dan kurikulum penunjang.
+              </p>
+
               <div className="space-y-3">
                 {biaya.map((b) => (
-                  <div key={b.name} className="flex justify-between items-center py-2 border-b border-dashed border-neutral-200">
+                  <div key={b.name} className="flex justify-between items-center py-2.5 border-b border-dashed border-neutral-200">
                     <div>
-                      <div className="font-bold text-xs sm:text-sm text-rtq-green-950">{b.name}</div>
+                      <div className="font-bold text-xs sm:text-sm text-neutral-900">{b.name}</div>
                       <div className="text-[11px] text-neutral-500">{b.sub}</div>
                     </div>
-                    <div className="font-extrabold text-sm text-rtq-green-800">{b.price}</div>
+                    <div className="font-extrabold text-sm text-[#0c3624]">{b.price}</div>
                   </div>
                 ))}
               </div>
 
               {/* Total Box */}
-              <div className="mt-5 p-4 bg-rtq-green-900 text-white rounded-2xl flex items-center justify-between">
+              <div className="mt-6 p-4 sm:p-5 bg-gradient-to-br from-[#093f31] to-[#0d5c47] text-white rounded-2xl flex items-center justify-between shadow-sm">
                 <div>
-                  <div className="text-xs text-rtq-gold-300 font-bold uppercase">Total Biaya Masuk</div>
-                  <div className="text-[11px] text-white/70">Sudah termasuk pendaftaran &amp; seragam</div>
+                  <div className="text-xs text-[#F1D9A6] font-bold uppercase tracking-wider">Total Biaya Masuk Awal</div>
+                  <div className="text-[11px] text-white/75 mt-0.5">Sudah termasuk formulir, SPP bln 1, seragam &amp; buku</div>
                 </div>
-                <div className="text-lg sm:text-xl font-extrabold text-rtq-gold-300">
+                <div className="text-xl sm:text-2xl font-extrabold text-[#F1D9A6]">
                   Rp 800.000
                 </div>
               </div>
             </div>
 
-            {/* Metode Pembayaran */}
+            {/* Tim Pengajar & Guru Pengampu */}
+            <div className="bg-white rounded-3xl p-6 shadow-sm border border-neutral-200">
+              <h4 className="font-bold text-sm text-[#0c3624] mb-3 flex items-center gap-2">
+                <span>👨‍🏫</span>
+                <span>Tim Guru Pengampu (S-Ganjil 2026):</span>
+              </h4>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                {GURU_LIST.map((g) => (
+                  <div key={g.kode} className="p-2 rounded-xl bg-neutral-50 border border-neutral-100 flex flex-col">
+                    <span className="font-bold text-[#0c3624] text-[11.5px]">{g.nama}</span>
+                    <span className="text-[10px] text-neutral-500 truncate" title={g.mapel}>{g.mapel}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Metode Pembayaran & Rekening */}
             <div className="bg-[#FAF4E6] border border-[#e8dfcf] rounded-3xl p-6">
-              <h4 className="font-bold text-sm text-rtq-green-900 mb-3 flex items-center gap-2">
+              <h4 className="font-bold text-sm text-[#0c3624] mb-2 flex items-center gap-2">
                 <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
                   <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
                 </svg>
-                <span>Pembayaran Tersedia:</span>
+                <span>Metode Pembayaran:</span>
               </h4>
-              <p className="text-xs text-neutral-700 leading-relaxed">
-                Bank Syariah Indonesia (BSI), GoPay, OVO, Dana, serta Tunai langsung di kantor RTQ.
+              <p className="text-xs text-neutral-700 leading-relaxed mb-3">
+                Pembayaran infaq &amp; pendaftaran dapat ditransfer melalui <b>Bank Syariah Indonesia (BSI)</b>, e-Wallet (GoPay, OVO, Dana), maupun tunai langsung di kantor Tata Usaha RTQ.
               </p>
+              <div className="text-[11px] text-[#7A5B20] font-medium bg-amber-100/70 px-3 py-1.5 rounded-lg inline-block">
+                Konfirmasi pembayaran ke Staf Keuangan TU RTQ Abdurrahman bin Auf.
+              </div>
             </div>
+
           </div>
+
         </div>
       </div>
     </section>
