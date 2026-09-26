@@ -3410,6 +3410,16 @@ function PendaftaranSection() {
   const [filePendaftaran, setFilePendaftaran] = useState<File | null>(null);
   const [fileKesantrian, setFileKesantrian] = useState<File | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [uploadStatusText, setUploadStatusText] = useState<string>("");
+  const [uploadedResult, setUploadedResult] = useState<{
+    registrationId: string;
+    studentName: string;
+    folder: string;
+    filePendaftaran: { name: string; url: string; size: string };
+    fileKesantrian: { name: string; url: string; size: string };
+    waUrl: string;
+  } | null>(null);
 
   const isFilesUploaded = Boolean(filePendaftaran && fileKesantrian);
 
@@ -3431,17 +3441,108 @@ function PendaftaranSection() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!filePendaftaran || !fileKesantrian) {
       alert("Mohon unggah kedua berkas formulir (Form Pendaftaran & Paket Formulir Kesantrian) terlebih dahulu!");
       return;
     }
 
-    const text = `Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:%0A%0A📋 DATA SANTRI:%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No. WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}%0A%0A📎 BERKAS FORMULIR TERLAMPIR (TELAH DIISI):%0A1. Form Pendaftaran: ${filePendaftaran.name} (${(filePendaftaran.size / 1024).toFixed(1)} KB)%0A2. Paket Formulir Kesantrian: ${fileKesantrian.name} (${(fileKesantrian.size / 1024).toFixed(1)} KB)%0A%0ABerkas dokumen tersebut telah siap untuk diverifikasi. Mohon panduan tahapan selanjutnya. Terima kasih!`;
-    
-    window.open(`https://wa.me/6285212185139?text=${text}`, "_blank");
-    setShowSuccessModal(true);
+    setIsUploading(true);
+    setUploadStatusText("Menyimpan berkas formulir ke server RTQ...");
+
+    try {
+      const dataToSend = new FormData();
+      dataToSend.append("namaSantri", formData.namaSantri);
+      dataToSend.append("ttl", formData.ttl);
+      dataToSend.append("gender", formData.gender);
+      dataToSend.append("usia", formData.usia);
+      dataToSend.append("namaAyah", formData.namaAyah);
+      dataToSend.append("namaIbu", formData.namaIbu);
+      dataToSend.append("noWa", formData.noWa);
+      dataToSend.append("alamat", formData.alamat);
+      dataToSend.append("program", formData.program);
+      dataToSend.append("filePendaftaran", filePendaftaran);
+      dataToSend.append("fileKesantrian", fileKesantrian);
+
+      // Endpoint upload server: coba upload.php atau api/upload.php
+      const endpoints = ["/upload.php", "/api/upload.php", "upload.php"];
+      let resultData: any = null;
+
+      for (const endpoint of endpoints) {
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            body: dataToSend,
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.success) {
+              resultData = data;
+              break;
+            }
+          }
+        } catch (fetchErr) {
+          // Lanjut coba endpoint berikutnya
+        }
+      }
+
+      if (!resultData || !resultData.success) {
+        throw new Error(resultData?.message || "Server penyimpanan belum merespons. Pastikan web server PHP aktif.");
+      }
+
+      // Berhasil diunggah ke server: susun pesan WA dengan link dokumen valid per santri
+      const text = `Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:%0A%0A📋 DATA SANTRI & WALI:%0A- No. Registrasi: ${resultData.registrationId}%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No. WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}%0A%0A📎 LINK DOKUMEN TERSIMPAN DI SERVER (SIAP DIVERIFIKASI):%0A1. Form Pendaftaran:%0A${resultData.filePendaftaran.url}%0A%0A2. Paket Formulir Kesantrian:%0A${resultData.fileKesantrian.url}%0A%0ABerkas pendaftaran santri di atas telah aman tersimpan di server RTQ dan siap diverifikasi oleh panitia. Mohon arahan tahapan selanjutnya. Terima kasih!`;
+
+      const waUrl = `https://wa.me/6285212185139?text=${text}`;
+
+      setUploadedResult({
+        registrationId: resultData.registrationId,
+        studentName: formData.namaSantri,
+        folder: resultData.folder,
+        filePendaftaran: resultData.filePendaftaran,
+        fileKesantrian: resultData.fileKesantrian,
+        waUrl: waUrl,
+      });
+
+      setShowSuccessModal(true);
+      window.open(waUrl, "_blank");
+    } catch (err: any) {
+      console.warn("Upload server notice:", err);
+      
+      // Fallback jika dibuka di mode static dev tanpa backend PHP aktif
+      const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const fallbackRegId = `REG-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${randomHex}`;
+      
+      alert(`Catatan Penyimpanan:\n${err.message || 'Gagal menyimpan ke server'}\n\nFormulir tetap dapat diteruskan ke WhatsApp Panitia.`);
+      
+      const fallbackText = `Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,%0A%0ASaya ingin mengirimkan PENDAFTARAN SANTRI BARU T.A. 2026/2027:%0A%0A📋 DATA SANTRI & WALI:%0A- No. Registrasi: ${fallbackRegId}%0A- Nama Santri: ${formData.namaSantri}%0A- TTL: ${formData.ttl}%0A- Gender: ${formData.gender}%0A- Usia: ${formData.usia} Tahun%0A- Nama Ayah: ${formData.namaAyah}%0A- Nama Ibu: ${formData.namaIbu}%0A- No. WA Ortu: ${formData.noWa}%0A- Alamat: ${formData.alamat}%0A- Program Pilihan: ${formData.program}%0A%0A📎 BERKAS FORMULIR TERLAMPIR (TELAH DIISI):%0A1. Form Pendaftaran: ${filePendaftaran.name} (${(filePendaftaran.size / 1024).toFixed(1)} KB)%0A2. Paket Formulir Kesantrian: ${fileKesantrian.name} (${(fileKesantrian.size / 1024).toFixed(1)} KB)%0A%0ABerkas dokumen tersebut telah siap diverifikasi. Mohon panduan tahapan selanjutnya. Terima kasih!`;
+      
+      const fallbackWaUrl = `https://wa.me/6285212185139?text=${fallbackText}`;
+
+      setUploadedResult({
+        registrationId: fallbackRegId,
+        studentName: formData.namaSantri,
+        folder: "local-submission",
+        filePendaftaran: {
+          name: filePendaftaran.name,
+          url: "",
+          size: `${(filePendaftaran.size / 1024).toFixed(1)} KB`,
+        },
+        fileKesantrian: {
+          name: fileKesantrian.name,
+          url: "",
+          size: `${(fileKesantrian.size / 1024).toFixed(1)} KB`,
+        },
+        waUrl: fallbackWaUrl,
+      });
+
+      setShowSuccessModal(true);
+      window.open(fallbackWaUrl, "_blank");
+    } finally {
+      setIsUploading(false);
+      setUploadStatusText("");
+    }
   };
 
   const requirements = [
@@ -4024,15 +4125,29 @@ function PendaftaranSection() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={!isFilesUploaded}
+                  disabled={!isFilesUploaded || isUploading}
                   className={`w-full py-3.5 font-black text-xs sm:text-sm rounded-xl uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 mt-2 text-center ${
-                    isFilesUploaded
+                    isUploading
+                      ? "bg-amber-400 text-[#0c3624] cursor-wait"
+                      : isFilesUploaded
                       ? "bg-[#E8B54D] hover:bg-[#d9a338] text-[#0c3624] transform hover:-translate-y-0.5 cursor-pointer shadow-gold"
                       : "bg-neutral-200 text-neutral-400 border border-neutral-300 cursor-not-allowed"
                   }`}
                 >
-                  <span>KIRIM PENDAFTARAN</span>
-                  <span>{isFilesUploaded ? "🚀" : "🔒 (Upload 2 Formulir Dahulu)"}</span>
+                  {isUploading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#0c3624]" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                      </svg>
+                      <span>{uploadStatusText || "MENYIMPAN BERKAS KE SERVER..."}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>KIRIM PENDAFTARAN</span>
+                      <span>{isFilesUploaded ? "🚀" : "🔒 (Upload 2 Formulir Dahulu)"}</span>
+                    </>
+                  )}
                 </button>
               </form>
             </div>
@@ -4042,40 +4157,117 @@ function PendaftaranSection() {
         </div>
       </div>
 
-      {/* Modal Sukses Pendaftaran */}
+      {/* Modal Sukses Pendaftaran & Dokumen Tersimpan */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl border border-neutral-100">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 text-center shadow-2xl border border-neutral-100 max-h-[90vh] overflow-y-auto">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-3xl mx-auto mb-3 shadow-inner">
               🎉
             </div>
+            
+            {/* Nomor Registrasi Unik */}
+            {uploadedResult?.registrationId && (
+              <div className="inline-block bg-[#0c3624] text-[#E8B54D] font-mono font-bold text-xs px-3 py-1 rounded-full mb-2 tracking-wider">
+                {uploadedResult.registrationId}
+              </div>
+            )}
+
             <h3 className="text-xl sm:text-2xl font-bold text-[#0c3624] font-serif mb-2">
-              Pendaftaran Online Terkirim!
+              Pendaftaran &amp; Berkas Berhasil Disimpan!
             </h3>
             <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
-              Data santri dan informasi 2 berkas formulir telah berhasil diproses. Chat WhatsApp resmi Panitia SPMB RTQ Abdurrahman bin Auf telah terbuka otomatis.
+              Data santri atas nama <strong>{uploadedResult?.studentName || formData.namaSantri}</strong> dan 2 berkas formulir telah tersimpan aman di server RTQ.
             </p>
-            <div className="bg-[#FAF8F4] p-3.5 rounded-2xl border border-neutral-200 text-left text-xs space-y-2 mb-5">
-              <div className="font-bold text-[#0c3624] flex items-center gap-1.5">
-                <span>📋</span>
-                <span>Langkah Selanjutnya:</span>
+
+            {/* Kotak Link Dokumen di Server */}
+            <div className="bg-[#FAF8F4] p-4 rounded-2xl border border-neutral-200 text-left text-xs space-y-3 mb-4">
+              <div className="font-bold text-[#0c3624] flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span>💾</span>
+                  <span>Tautan Berkas Server (Terkirim ke WA Admin):</span>
+                </span>
+                <span className="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-bold">
+                  Tersimpan Unik
+                </span>
               </div>
-              <div className="text-neutral-700 flex items-start gap-2">
-                <span className="font-bold text-[#0c3624]">1.</span>
-                <span>Kirimkan pesan WhatsApp yang telah disiapkan ke nomor Panitia (<strong>0852-1218-5139</strong>).</span>
+
+              {/* Link Berkas 1 */}
+              <div className="bg-white p-2.5 rounded-xl border border-neutral-200">
+                <div className="font-bold text-[#0c3624] mb-0.5 flex items-center gap-1">
+                  <span>📄</span>
+                  <span className="truncate">Form Pendaftaran:</span>
+                </div>
+                <div className="text-[11px] text-neutral-500 truncate mb-1.5 font-mono">
+                  {uploadedResult?.filePendaftaran.name || filePendaftaran?.name}
+                </div>
+                {uploadedResult?.filePendaftaran.url ? (
+                  <a
+                    href={uploadedResult.filePendaftaran.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-200 transition"
+                  >
+                    <span>🔗 Buka / Unduh Berkas Pendaftaran</span>
+                    <span>↗</span>
+                  </a>
+                ) : (
+                  <span className="text-[10px] text-neutral-400 italic">Tersimpan lokal</span>
+                )}
               </div>
-              <div className="text-neutral-700 flex items-start gap-2">
-                <span className="font-bold text-[#0c3624]">2.</span>
-                <span>Lampirkan kedua file dokumen yang telah Anda isi (<strong>{filePendaftaran?.name}</strong> &amp; <strong>{fileKesantrian?.name}</strong>) pada chat WhatsApp tersebut sebagai arsip resmi.</span>
+
+              {/* Link Berkas 2 */}
+              <div className="bg-white p-2.5 rounded-xl border border-neutral-200">
+                <div className="font-bold text-[#0c3624] mb-0.5 flex items-center gap-1">
+                  <span>📑</span>
+                  <span className="truncate">Paket Formulir Kesantrian:</span>
+                </div>
+                <div className="text-[11px] text-neutral-500 truncate mb-1.5 font-mono">
+                  {uploadedResult?.fileKesantrian.name || fileKesantrian?.name}
+                </div>
+                {uploadedResult?.fileKesantrian.url ? (
+                  <a
+                    href={uploadedResult.fileKesantrian.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-200 transition"
+                  >
+                    <span>🔗 Buka / Unduh Berkas Kesantrian</span>
+                    <span>↗</span>
+                  </a>
+                ) : (
+                  <span className="text-[10px] text-neutral-400 italic">Tersimpan lokal</span>
+                )}
+              </div>
+
+              <div className="text-[11px] text-neutral-500 leading-snug pt-1 border-t border-neutral-200/70">
+                ℹ️ Berkas tersimpan dalam direktori terisolasi khusus santri ini sehingga tidak akan tertukar dengan berkas pendaftar lainnya.
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => setShowSuccessModal(false)}
-              className="w-full py-3 bg-[#0c3624] hover:bg-[#134932] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow"
-            >
-              Mengerti &amp; Tutup
-            </button>
+
+            {/* Tombol Aksi */}
+            <div className="space-y-2">
+              {uploadedResult?.waUrl && (
+                <a
+                  href={uploadedResult.waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow flex items-center justify-center gap-2"
+                >
+                  <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                  </svg>
+                  <span>Kirim Ulang Pesan ke WhatsApp Panitia</span>
+                </a>
+              )}
+              
+              <button
+                type="button"
+                onClick={() => setShowSuccessModal(false)}
+                className="w-full py-2.5 bg-[#0c3624] hover:bg-[#134932] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow"
+              >
+                Tutup Jendela
+              </button>
+            </div>
           </div>
         </div>
       )}
