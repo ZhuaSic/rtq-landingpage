@@ -3028,6 +3028,7 @@ function PendaftaranSection() {
    KONTAK KAMI & MEDIA SOSIAL (Matching Reference Screenshot)
 ──────────────────────────────────────────────────────── */
 function ContactSection() {
+  const [mapMode, setMapMode] = useState<"mockup" | "google">("mockup");
   const [msgForm, setMsgForm] = useState({
     nama: "",
     noWa: "",
@@ -3125,7 +3126,7 @@ function ContactSection() {
                       Alamat:
                     </h4>
                     <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">
-                      Jl. Raya Banyuwangi No 315 RT 002 RW 006 Dusun Krajan II Kembiritan, Genteng Banyuwangi, Jawa Timur 68465
+                      Jl. Hasanudin No. 81, Dusun Krajan II, Kembiritan, Kec. Genteng, Kabupaten Banyuwangi, Jawa Timur 68465
                     </p>
                   </div>
                 </div>
@@ -3320,30 +3321,107 @@ function ContactSection() {
               </form>
             </div>
 
-            {/* 2. Lokasi Kami (Interactive Map) */}
+            {/* 2. Lokasi Kami (Matching Mockup Reference & Live Google Maps) */}
             <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-neutral-200/80">
-              <h3 className="font-black text-lg text-[#0c3624] mb-3 text-center">
-                Lokasi Kami
-              </h3>
-
-              {/* Map Preview with Pin */}
-              <div className="relative w-full h-[150px] sm:h-[180px] rounded-2xl overflow-hidden border border-neutral-200 shadow-inner group">
-                <iframe
-                  title="Peta Lokasi RTQ Abdurrahman bin Auf"
-                  src="https://maps.google.com/maps?q=Kembiritan,+Genteng,+Banyuwangi&t=&z=14&ie=UTF8&iwloc=&output=embed"
-                  className="w-full h-full border-0 grayscale group-hover:grayscale-0 transition-all duration-300"
-                  loading="lazy"
-                  allowFullScreen
-                />
-                <a
-                  href="https://maps.google.com/?q=Jl.+Raya+Banyuwangi+No+315+RT+002+RW+006+Dusun+Krajan+II+Kembiritan+Genteng+Banyuwangi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-2.5 right-2.5 bg-[#0c3624] text-white hover:bg-[#E8B54D] hover:text-[#0c3624] text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-md transition flex items-center gap-1"
-                >
-                  <span>Buka di Google Maps</span> ↗
-                </a>
+              <div className="flex items-center justify-between mb-3.5">
+                <h3 className="font-black text-lg text-[#0c3624]">
+                  Lokasi Kami
+                </h3>
+                {/* Switcher Mode: Desain Mockup vs Google Maps */}
+                <div className="inline-flex p-0.5 bg-neutral-100 rounded-xl border border-neutral-200 text-[11px] font-semibold">
+                  <button
+                    type="button"
+                    onClick={() => setMapMode("mockup")}
+                    className={`px-2.5 py-1 rounded-lg transition ${
+                      mapMode === "mockup"
+                        ? "bg-white text-[#0c3624] font-bold shadow-xs"
+                        : "text-neutral-500 hover:text-neutral-800"
+                    }`}
+                  >
+                    🗺️ Peta Desain
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMapMode("google")}
+                    className={`px-2.5 py-1 rounded-lg transition ${
+                      mapMode === "google"
+                        ? "bg-white text-[#0c3624] font-bold shadow-xs"
+                        : "text-neutral-500 hover:text-neutral-800"
+                    }`}
+                  >
+                    📍 Google Maps
+                  </button>
+                </div>
               </div>
+
+              {mapMode === "mockup" ? (
+                /* Map Illustration Exactly from Mockup (1:1) */
+                <div className="relative w-full rounded-2xl overflow-hidden border border-neutral-200 shadow-xs group bg-[#f5f3eb]">
+                  <div className="relative w-full h-[155px] sm:h-[185px] overflow-hidden">
+                    <Image
+                      src="/map-mockup.png"
+                      alt="Peta Lokasi RTQ Banyuwangi"
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                    
+                    {/* Hover Overlay Button to Open Google Maps Navigation */}
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute inset-0 z-10 flex items-center justify-center bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <span className="bg-[#0c3624] hover:bg-[#E8B54D] hover:text-[#0c3624] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 duration-300">
+                        <span>📍 Buka di Google Maps</span> ↗
+                      </span>
+                    </a>
+                  </div>
+
+                  {/* Address info footer bar */}
+                  <div className="p-3 bg-[#FAF8F4] border-t border-neutral-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+                    <div className="flex items-center gap-1.5 text-neutral-800 font-medium">
+                      <span className="text-[#DEAB3E] font-bold text-sm">📍</span>
+                      <span className="line-clamp-1">Jl. Hasanudin No. 81, Kembiritan, Genteng, Banyuwangi</span>
+                    </div>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0c3624] hover:text-[#DEAB3E] hover:underline whitespace-nowrap self-end sm:self-auto"
+                    >
+                      <span>Petunjuk Arah</span> ↗
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                /* Live Interactive Google Maps Embed (No Grayscale, High Zoom) */
+                <div className="relative w-full rounded-2xl overflow-hidden border border-neutral-200 shadow-inner">
+                  <div className="w-full h-[180px] sm:h-[220px]">
+                    <iframe
+                      title="Peta Lokasi RTQ Abdurrahman bin Auf"
+                      src="https://maps.google.com/maps?q=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                      className="w-full h-full border-0"
+                      loading="lazy"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="p-2.5 bg-[#FAF8F4] border-t border-neutral-200/80 flex items-center justify-between text-xs">
+                    <span className="text-[11px] text-neutral-600 line-clamp-1">
+                      Jl. Hasanudin No. 81, Kembiritan, Kec. Genteng
+                    </span>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-bold text-[#0c3624] hover:underline whitespace-nowrap ml-2"
+                    >
+                      Navigasi Penuh ↗
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* 3. Media Sosial Kami */}
@@ -3565,7 +3643,7 @@ function Footer() {
                 <svg className="w-4 h-4 fill-[#E8B54D] flex-shrink-0 mt-0.5" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                 </svg>
-                <span>Jl. Raya Banyuwangi No 315 RT 002 RW 006 Dusun Krajan II Kembiritan, Genteng Banyuwangi, Jawa Timur 68465</span>
+                <span>Jl. Hasanudin No. 81, Dusun Krajan II, Kembiritan, Kec. Genteng, Banyuwangi, Jawa Timur 68465</span>
               </p>
               <p className="flex items-center gap-2">
                 <svg className="w-4 h-4 fill-[#25D366] flex-shrink-0" viewBox="0 0 24 24">
