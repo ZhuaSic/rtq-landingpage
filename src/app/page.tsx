@@ -10,6 +10,11 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("beranda");
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<{ [key: string]: boolean }>({
+    profil: false,
+    program: false,
+  });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -17,28 +22,21 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { id: "beranda", label: "Beranda" },
-    { id: "profil", label: "Profil" },
-    { id: "struktur", label: "Struktur" },
-    { id: "program", label: "Program" },
-    { id: "jadwal", label: "Jadwal & Biaya" },
-    { id: "galeri", label: "Galeri" },
-    { id: "pendaftaran", label: "Pendaftaran" },
-    { id: "kontak", label: "Kontak" },
-  ];
-
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setActiveSection(id);
+    setOpenDropdown(null);
     setMobileOpen(false);
   };
+
+  const isProfilActive = activeSection === "profil" || activeSection === "struktur";
+  const isProgramActive = activeSection === "program" || activeSection === "jadwal" || activeSection === "brosur";
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 pt-3 sm:pt-4 transition-all duration-300">
         <div
-          className={`max-w-6xl mx-auto rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 flex items-center justify-between transition-all duration-300 ${
+          className={`max-w-6xl mx-auto rounded-2xl sm:rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between transition-all duration-300 ${
             scrolled
               ? "bg-white/95 backdrop-blur-md shadow-lg border border-neutral-200/80"
               : "bg-white/95 shadow-md border border-neutral-100"
@@ -68,27 +66,213 @@ function Navbar() {
             </div>
           </div>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Links (Streamlined 5 Key Items) */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-200 ${
-                    isActive
-                      ? "text-rtq-green-900 font-bold"
-                      : "text-neutral-600 hover:text-rtq-green-800"
+            {/* 1. Beranda */}
+            <button
+              onClick={() => scrollTo("beranda")}
+              className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-200 ${
+                activeSection === "beranda"
+                  ? "text-rtq-green-900 font-bold"
+                  : "text-neutral-600 hover:text-rtq-green-800"
+              }`}
+            >
+              Beranda
+              {activeSection === "beranda" && (
+                <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
+              )}
+            </button>
+
+            {/* 2. Profil (Dropdown: Tentang RTQ & Struktur Organisasi) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setOpenDropdown("profil")}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <button
+                onClick={() => scrollTo("profil")}
+                className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-200 flex items-center gap-1.5 ${
+                  isProfilActive
+                    ? "text-rtq-green-900 font-bold"
+                    : "text-neutral-600 hover:text-rtq-green-800"
+                }`}
+              >
+                <span>Profil</span>
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    openDropdown === "profil" ? "rotate-180" : ""
                   }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
-                  )}
-                </button>
-              );
-            })}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+                {isProfilActive && (
+                  <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
+                )}
+              </button>
+
+              {/* Dropdown Menu */}
+              {openDropdown === "profil" && (
+                <div className="absolute top-full left-0 pt-2 w-64 z-50 animate-fadeIn">
+                  <div className="bg-white rounded-2xl shadow-xl border border-neutral-100 p-2 text-left">
+                    <button
+                      onClick={() => scrollTo("profil")}
+                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF4E6] transition-colors text-left group"
+                    >
+                      <span className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0c3624] flex items-center justify-center text-sm flex-shrink-0 group-hover:bg-[#DEAB3E] group-hover:text-white transition-colors">
+                        🏛️
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold text-[#0c3624] group-hover:text-[#916b1b]">
+                          Tentang RTQ ABA
+                        </div>
+                        <div className="text-[11px] text-neutral-500">
+                          Visi, misi, profil &amp; fasilitas
+                        </div>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => scrollTo("struktur")}
+                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF4E6] transition-colors text-left group"
+                    >
+                      <span className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0c3624] flex items-center justify-center text-sm flex-shrink-0 group-hover:bg-[#DEAB3E] group-hover:text-white transition-colors">
+                        👥
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold text-[#0c3624] group-hover:text-[#916b1b]">
+                          Struktur Organisasi
+                        </div>
+                        <div className="text-[11px] text-neutral-500">
+                          Bagan kepengurusan &amp; asatidzah
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* 3. Program & Biaya (Dropdown: Program, Biaya, Brosur) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setOpenDropdown("program")}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <button
+                onClick={() => scrollTo("program")}
+                className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-200 flex items-center gap-1.5 ${
+                  isProgramActive
+                    ? "text-rtq-green-900 font-bold"
+                    : "text-neutral-600 hover:text-rtq-green-800"
+                }`}
+              >
+                <span>Program &amp; Biaya</span>
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    openDropdown === "program" ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+                {isProgramActive && (
+                  <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
+                )}
+              </button>
+
+              {/* Dropdown Menu */}
+              {openDropdown === "program" && (
+                <div className="absolute top-full left-0 pt-2 w-72 z-50 animate-fadeIn">
+                  <div className="bg-white rounded-2xl shadow-xl border border-neutral-100 p-2 text-left">
+                    <button
+                      onClick={() => scrollTo("program")}
+                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF4E6] transition-colors text-left group"
+                    >
+                      <span className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0c3624] flex items-center justify-center text-sm flex-shrink-0 group-hover:bg-[#DEAB3E] group-hover:text-white transition-colors">
+                        📖
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold text-[#0c3624] group-hover:text-[#916b1b]">
+                          Program Unggulan
+                        </div>
+                        <div className="text-[11px] text-neutral-500">
+                          Tahfidz &amp; Kesetaraan SD/MI
+                        </div>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => scrollTo("jadwal")}
+                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF4E6] transition-colors text-left group"
+                    >
+                      <span className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0c3624] flex items-center justify-center text-sm flex-shrink-0 group-hover:bg-[#DEAB3E] group-hover:text-white transition-colors">
+                        💰
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold text-[#0c3624] group-hover:text-[#916b1b]">
+                          Jadwal &amp; Biaya Pendidikan
+                        </div>
+                        <div className="text-[11px] text-neutral-500">
+                          Rincian infaq, SPP &amp; alur masuk
+                        </div>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => scrollTo("brosur")}
+                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF4E6] transition-colors text-left group"
+                    >
+                      <span className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0c3624] flex items-center justify-center text-sm flex-shrink-0 group-hover:bg-[#DEAB3E] group-hover:text-white transition-colors">
+                        📄
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold text-[#0c3624] group-hover:text-[#916b1b] flex items-center gap-1.5">
+                          <span>Brosur Resmi SPMB</span>
+                          <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-100 text-amber-800 font-bold">
+                            Baru
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-neutral-500">
+                          Poster &amp; liflet resolusi penuh
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* 4. Galeri */}
+            <button
+              onClick={() => scrollTo("galeri")}
+              className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-200 ${
+                activeSection === "galeri"
+                  ? "text-rtq-green-900 font-bold"
+                  : "text-neutral-600 hover:text-rtq-green-800"
+              }`}
+            >
+              Galeri
+              {activeSection === "galeri" && (
+                <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
+              )}
+            </button>
+
+            {/* 5. Kontak */}
+            <button
+              onClick={() => scrollTo("kontak")}
+              className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-200 ${
+                activeSection === "kontak"
+                  ? "text-rtq-green-900 font-bold"
+                  : "text-neutral-600 hover:text-rtq-green-800"
+              }`}
+            >
+              Kontak
+              {activeSection === "kontak" && (
+                <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
+              )}
+            </button>
           </nav>
 
           {/* Action CTA & Mobile Hamburger */}
@@ -120,13 +304,13 @@ function Navbar() {
         onClick={() => setMobileOpen(false)}
       >
         <div
-          className={`fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-rtq-green-950 text-white p-6 shadow-2xl flex flex-col justify-between transition-transform duration-300 ease-out ${
+          className={`fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-rtq-green-950 text-white p-6 shadow-2xl flex flex-col justify-between transition-transform duration-300 ease-out overflow-y-auto ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div>
-            <div className="flex items-center justify-between pb-6 border-b border-white/10">
+            <div className="flex items-center justify-between pb-5 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <Image src="/logo-official.png" alt="Logo RTQ" width={40} height={40} className="rounded-full" />
                 <span className="font-extrabold text-sm text-rtq-gold-300">RTQ ABA</span>
@@ -138,23 +322,145 @@ function Navbar() {
                 ✕
               </button>
             </div>
-            <div className="flex flex-col gap-2 mt-6">
-              {navLinks.map((link) => (
+
+            {/* Mobile Nav Links Grouped Accordion */}
+            <div className="flex flex-col gap-1.5 mt-5">
+              {/* Beranda */}
+              <button
+                onClick={() => scrollTo("beranda")}
+                className={`text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                  activeSection === "beranda"
+                    ? "bg-rtq-gold-400 text-rtq-green-950 font-bold"
+                    : "text-white/90 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                Beranda
+              </button>
+
+              {/* Profil Group */}
+              <div className="rounded-xl overflow-hidden bg-white/5">
                 <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  className={`text-left px-4 py-3 rounded-xl text-base font-semibold transition ${
-                    activeSection === link.id
-                      ? "bg-rtq-gold-400 text-rtq-green-950 font-bold"
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  }`}
+                  onClick={() => setMobileExpanded(prev => ({ ...prev, profil: !prev.profil }))}
+                  className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-white/90 hover:bg-white/10 transition"
                 >
-                  {link.label}
+                  <span className="flex items-center gap-2">
+                    <span>🏛️</span>
+                    <span>Profil Lembaga</span>
+                  </span>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 text-white/60 ${
+                      mobileExpanded.profil ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
-              ))}
+                {mobileExpanded.profil && (
+                  <div className="pl-6 pr-3 pb-2 pt-1 flex flex-col gap-1 border-t border-white/5">
+                    <button
+                      onClick={() => scrollTo("profil")}
+                      className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                        activeSection === "profil" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      • Tentang RTQ ABA
+                    </button>
+                    <button
+                      onClick={() => scrollTo("struktur")}
+                      className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                        activeSection === "struktur" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      • Struktur Organisasi
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Program & Biaya Group */}
+              <div className="rounded-xl overflow-hidden bg-white/5">
+                <button
+                  onClick={() => setMobileExpanded(prev => ({ ...prev, program: !prev.program }))}
+                  className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-white/90 hover:bg-white/10 transition"
+                >
+                  <span className="flex items-center gap-2">
+                    <span>📖</span>
+                    <span>Program &amp; Biaya</span>
+                  </span>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 text-white/60 ${
+                      mobileExpanded.program ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileExpanded.program && (
+                  <div className="pl-6 pr-3 pb-2 pt-1 flex flex-col gap-1 border-t border-white/5">
+                    <button
+                      onClick={() => scrollTo("program")}
+                      className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                        activeSection === "program" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      • Program Unggulan
+                    </button>
+                    <button
+                      onClick={() => scrollTo("jadwal")}
+                      className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                        activeSection === "jadwal" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      • Jadwal &amp; Biaya Pendidikan
+                    </button>
+                    <button
+                      onClick={() => scrollTo("brosur")}
+                      className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition flex items-center justify-between ${
+                        activeSection === "brosur" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      <span>• Brosur Resmi SPMB</span>
+                      <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-400 text-neutral-950 font-bold">
+                        Baru
+                      </span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Galeri */}
+              <button
+                onClick={() => scrollTo("galeri")}
+                className={`text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                  activeSection === "galeri"
+                    ? "bg-rtq-gold-400 text-rtq-green-950 font-bold"
+                    : "text-white/90 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                Galeri Kegiatan
+              </button>
+
+              {/* Kontak */}
+              <button
+                onClick={() => scrollTo("kontak")}
+                className={`text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                  activeSection === "kontak"
+                    ? "bg-rtq-gold-400 text-rtq-green-950 font-bold"
+                    : "text-white/90 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                Kontak &amp; Lokasi
+              </button>
             </div>
           </div>
-          <div className="pt-6 border-t border-white/10">
+
+          <div className="pt-5 border-t border-white/10 mt-6">
             <button
               onClick={() => scrollTo("pendaftaran")}
               className="w-full py-3.5 bg-rtq-gold-400 text-rtq-green-950 font-extrabold rounded-xl text-center shadow-lg hover:bg-rtq-gold-300 transition"
@@ -1994,6 +2300,7 @@ const GURU_LIST = [
 function JadwalBiayaSection() {
   const [selectedClass, setSelectedClass] = useState<string>("KELAS 1");
   const [selectedDay, setSelectedDay] = useState<string>("Senin");
+  const [gelombangTab, setGelombangTab] = useState<"gel1" | "gel2">("gel1");
 
   const classList = [
     { id: "PRA SEKOLAH", label: "Pra Sekolah" },
@@ -2006,13 +2313,6 @@ function JadwalBiayaSection() {
   ];
 
   const daysList = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
-
-  const biaya = [
-    { name: "Pendaftaran & Assesment", sub: "1 kali saat awal masuk", price: "Rp 200.000" },
-    { name: "SPP Bulanan", sub: "per bulan (infaq pendidikan)", price: "Rp 150.000" },
-    { name: "Seragam & Atribut", sub: "2 set pakaian santri resmi", price: "Rp 350.000" },
-    { name: "Buku Panduan & Mushaf", sub: "paket materi & modul pembelajaran", price: "Rp 100.000" },
-  ];
 
   const isRamadhan = selectedClass === "JADWAL RAMADHAN";
   const currentClassData = JADWAL_MASTER[selectedClass];
@@ -2252,46 +2552,198 @@ function JadwalBiayaSection() {
              ════════════════════════════════════════════════════════ */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             
-            {/* Kartu Rincian Biaya */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-lg text-[#0c3624] flex items-center gap-2">
-                  <svg className="w-5 h-5 fill-[#DEAB3E]" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                  <span>Rincian Biaya Pendidikan</span>
-                </h3>
-                <span className="text-[11px] font-bold text-[#9B7B3B] bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
-                  2026/2027
+            {/* Kartu Rincian Biaya Pendidikan & Pendaftaran (Sesuai Dokumen BIAYA PENDAFTARAN.docx) */}
+            <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-neutral-200">
+              
+              {/* Header Card */}
+              <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-neutral-100">
+                <div>
+                  <div className="text-[10px] sm:text-[11px] font-bold text-[#9B7B3B] uppercase tracking-wider">
+                    Sistem Penerimaan Santri Baru (SPMB)
+                  </div>
+                  <h3 className="font-bold text-lg sm:text-xl text-[#0c3624] flex items-center gap-2 mt-0.5">
+                    <svg className="w-5 h-5 fill-[#DEAB3E]" viewBox="0 0 24 24">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <span>Biaya Pendaftaran</span>
+                  </h3>
+                </div>
+                <span className="text-[11px] font-bold text-[#0c3624] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full whitespace-nowrap shadow-2xs">
+                  2026–2027
                 </span>
               </div>
 
-              <p className="text-xs text-neutral-500 mb-4">
-                Biaya pendidikan terjangkau dengan fasilitas komprehensif, makan siang, program tahfidz bersanad, dan kurikulum penunjang.
-              </p>
+              {/* Tab Switcher Gelombang 1 vs Gelombang 2 */}
+              <div className="flex items-center gap-2 p-1 bg-[#F5EFE6] rounded-2xl mb-4">
+                <button
+                  type="button"
+                  onClick={() => setGelombangTab("gel1")}
+                  className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all text-center ${
+                    gelombangTab === "gel1"
+                      ? "bg-[#0c3624] text-[#F1D9A6] shadow-sm"
+                      : "text-neutral-700 hover:text-[#0c3624] hover:bg-white/50"
+                  }`}
+                >
+                  <div>GELOMBANG 1</div>
+                  <div className="text-[10px] font-normal opacity-85">01 Nov 25 – 31 Jan 26</div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGelombangTab("gel2")}
+                  className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all text-center ${
+                    gelombangTab === "gel2"
+                      ? "bg-[#0c3624] text-[#F1D9A6] shadow-sm"
+                      : "text-neutral-700 hover:text-[#0c3624] hover:bg-white/50"
+                  }`}
+                >
+                  <div>GELOMBANG 2</div>
+                  <div className="text-[10px] font-normal opacity-85">01 Feb 26 – 30 Jun 26*</div>
+                </button>
+              </div>
 
-              <div className="space-y-3">
-                {biaya.map((b) => (
-                  <div key={b.name} className="flex justify-between items-center py-2.5 border-b border-dashed border-neutral-200">
-                    <div>
-                      <div className="font-bold text-xs sm:text-sm text-neutral-900">{b.name}</div>
-                      <div className="text-[11px] text-neutral-500">{b.sub}</div>
-                    </div>
-                    <div className="font-extrabold text-sm text-[#0c3624]">{b.price}</div>
+              {/* Tabel Rincian Biaya (Sesuai BIAYA PENDAFTARAN.docx) */}
+              <div className="overflow-hidden rounded-2xl border border-neutral-200 mb-4 bg-white shadow-2xs">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="bg-[#0c3624] text-white">
+                      <th className="py-2.5 px-3 text-left font-bold">DAFTAR</th>
+                      <th className="py-2.5 px-3 text-right font-bold text-[#F1D9A6]">LAKI - LAKI</th>
+                      <th className="py-2.5 px-3 text-right font-bold text-[#F1D9A6]">PEREMPUAN</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-neutral-100 text-neutral-800">
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">Pendaftaran</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 100,000.00</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 100,000.00</td>
+                    </tr>
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">Seragam</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 500,000.00</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 700,000.00</td>
+                    </tr>
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">
+                        Buku <span className="text-[#9B7B3B] font-bold">***</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1" ? "Rp 330,000.00" : "Rp 280,000.00"}
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1" ? "Rp 330,000.00" : "Rp 280,000.00"}
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">
+                        Uang Kegiatan <span className="text-[#9B7B3B] font-bold">***</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 350,000.00</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 350,000.00</td>
+                    </tr>
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">
+                        Gedung &amp; Sarana <span className="text-[#9B7B3B] font-bold">**</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1" ? "Rp 1,500,000.00" : "Rp 1,750,000.00"}
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1" ? "Rp 1,500,000.00" : "Rp 1,750,000.00"}
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">Raport &amp; Foto</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 120,000.00</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 120,000.00</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr className="bg-[#FAF4E6] border-t-2 border-[#DEAB3E] font-black text-xs text-[#0c3624]">
+                      <td className="py-3 px-3">
+                        <div>TOTAL MASUK</div>
+                        <div className="text-[10px] font-normal text-neutral-500">
+                          {gelombangTab === "gel1" ? "Gelombang 1" : "Gelombang 2"}
+                        </div>
+                      </td>
+                      <td className="py-3 px-3 text-right font-mono text-sm text-[#0c3624]">
+                        {gelombangTab === "gel1" ? "Rp 2.900.000" : "Rp 3.100.000"}
+                      </td>
+                      <td className="py-3 px-3 text-right font-mono text-sm text-[#0c3624]">
+                        {gelombangTab === "gel1" ? "Rp 3.100.000" : "Rp 3.300.000"}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              {/* SPP Pilihan Section */}
+              <div className="mb-4 p-4 rounded-2xl bg-[#F8F9FA] border border-neutral-200">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="font-bold text-xs sm:text-sm text-[#0c3624] flex items-center gap-1.5">
+                    <span>🗓️</span>
+                    <span>SPP (Infaq Bulanan)*:</span>
+                  </span>
+                  <span className="text-[10px] font-semibold text-neutral-500 bg-white px-2 py-0.5 rounded-md border border-neutral-200">
+                    Pilihan Mandiri
+                  </span>
+                </div>
+                <p className="text-[11px] text-neutral-500 mb-2.5">
+                  Besaran SPP bulanan dipilih sesuai kerelaan &amp; kemampuan wali santri:
+                </p>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="bg-white p-2 rounded-xl border border-neutral-200 shadow-2xs hover:border-[#0c3624] transition">
+                    <span className="text-[10px] font-semibold text-neutral-400 block">Opsi 1</span>
+                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">Rp 100.000</span>
+                    <span className="text-[9px] text-neutral-400 block">/ bulan</span>
                   </div>
-                ))}
+                  <div className="bg-white p-2 rounded-xl border border-neutral-200 shadow-2xs hover:border-[#0c3624] transition">
+                    <span className="text-[10px] font-semibold text-neutral-400 block">Opsi 2</span>
+                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">Rp 125.000</span>
+                    <span className="text-[9px] text-neutral-400 block">/ bulan</span>
+                  </div>
+                  <div className="bg-[#FFFDF7] p-2 rounded-xl border-2 border-[#DEAB3E] shadow-2xs">
+                    <span className="text-[10px] font-bold text-[#9B7B3B] block">Opsi 3</span>
+                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">Rp 150.000</span>
+                    <span className="text-[9px] text-[#9B7B3B] block font-semibold">/ bulan</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Total Box */}
-              <div className="mt-6 p-4 sm:p-5 bg-gradient-to-br from-[#093f31] to-[#0d5c47] text-white rounded-2xl flex items-center justify-between shadow-sm">
-                <div>
-                  <div className="text-xs text-[#F1D9A6] font-bold uppercase tracking-wider">Total Biaya Masuk Awal</div>
-                  <div className="text-[11px] text-white/75 mt-0.5">Sudah termasuk formulir, SPP bln 1, seragam &amp; buku</div>
+              {/* Catatan Kaki Sesuai Dokumen BIAYA PENDAFTARAN.docx */}
+              <div className="p-3.5 rounded-2xl bg-[#FAF8F4] border border-neutral-200/90 text-[11px] text-neutral-600 space-y-1.5">
+                <div className="font-bold text-[#0c3624] text-[11.5px] flex items-center gap-1.5 mb-1">
+                  <span>📌</span>
+                  <span>Keterangan Biaya (Dokumen Resmi):</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-extrabold text-[#F1D9A6]">
-                  Rp 800.000
+                <div className="flex items-start gap-1.5">
+                  <span className="font-bold text-[#9B7B3B] mt-0.5">*</span>
+                  <span>Belum termasuk SPP bulan Juli</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="font-bold text-[#9B7B3B] mt-0.5">**</span>
+                  <span>Uang Gedung &amp; sarana bisa dicicil selama 1 tahun ajaran</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="font-bold text-[#9B7B3B] mt-0.5">***</span>
+                  <span>Uang buku &amp; uang kegiatan sekolah untuk 1 tahun ajaran</span>
+                </div>
+                <div className="flex items-start gap-1.5 pt-1 border-t border-neutral-200/60 text-neutral-500">
+                  <span className="text-[#DEAB3E] font-bold">ℹ️</span>
+                  <span><em>Gelombang 2 tidak dibuka jika kuota (15 santri) sudah terpenuhi pada Gelombang 1.</em></span>
                 </div>
               </div>
+
+              {/* CTA Konsultasi SPMB ke WhatsApp */}
+              <a
+                href="https://wa.me/6285212185139?text=Assalamu%27alaikum%20Panitia%20SPMB%20RTQ%20Abdurrahman%20bin%20Auf,%20saya%20ingin%20konsultasi%20mengenai%20rincian%20Biaya%20Pendaftaran%20Santri%20Baru."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 w-full py-3.5 px-4 rounded-2xl bg-[#0c3624] hover:bg-[#134932] text-[#F1D9A6] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all duration-200 hover:-translate-y-0.5"
+              >
+                <span>💬 Konsultasi Biaya via WhatsApp (0852-1218-5139)</span>
+                <span>↗</span>
+              </a>
+
             </div>
 
             {/* Tim Pengajar & Guru Pengampu */}
@@ -2330,6 +2782,341 @@ function JadwalBiayaSection() {
 
         </div>
       </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────────────
+   BROSUR RESMI SPMB 2026/2027 SECTION
+──────────────────────────────────────────────────────── */
+function BrosurSpmbSection() {
+  const [activeTab, setActiveTab] = useState<"all" | "poster" | "liflet">("all");
+  const [previewImage, setPreviewImage] = useState<{ src: string; title: string; desc: string; type: string } | null>(null);
+
+  const brochures = [
+    {
+      id: "poster",
+      title: "Brosur Poster SPMB 2026/2027",
+      subtitle: "Format Vertikal • Ikhtisar Informasi Utama & Keunggulan",
+      src: "/brosur-spmb-1.jpg",
+      aspect: "aspect-[3/4]",
+      tag: "Poster Resmi",
+      description: "Menampilkan informasi pembukaan SPMB 2026/2027, kurikulum terpadu (Kesetaraan SD/MI - PKBM Bina Makmur), visi & keunggulan, serta kuota eksklusif hanya 15 santri.",
+      highlights: [
+        "Pendidikan Kesetaraan SD/MI Resmi",
+        "Target Tahfidz 4 Juz Mutqin & Ber-Sanad",
+        "Kuota Sangat Terbatas: 15 Santri",
+        "Ekstrakurikuler Memanah, Renang, Beladiri"
+      ]
+    },
+    {
+      id: "liflet",
+      title: "Brosur Liflet 3 Lipatan SPMB 2026/2027",
+      subtitle: "Format Lanskap 3-Fold • Rincian Biaya, Syarat & Alur",
+      src: "/brosur-spmb-2.jpg",
+      aspect: "aspect-[4/3]",
+      tag: "Liflet Lengkap",
+      description: "Menampilkan rincian tabel biaya pendidikan lengkap (Gelombang 1 & 2), infaq pendaftaran, pilihan SPP bulanan, 6 persyaratan berkas, serta 5 langkah alur pendaftaran santri baru.",
+      highlights: [
+        "Rincian Uang Pangkal Putra & Putri Lengkap",
+        "Opsi SPP Bulanan Mandiri: Rp 100rb / 125rb / 150rb",
+        "6 Syarat Berkas Administrasi Pendaftaran",
+        "5 Langkah Alur Pendaftaran & Narahubung"
+      ]
+    }
+  ];
+
+  const filteredBrochures = activeTab === "all" 
+    ? brochures 
+    : brochures.filter(b => b.id === activeTab);
+
+  return (
+    <section id="brosur" className="py-20 bg-gradient-to-b from-[#F5EFE6] via-[#FAF8F4] to-[#F5EFE6] relative overflow-hidden">
+      {/* Background Ornaments */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#0c3624]/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DEAB3E]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0c3624]/10 text-[#0c3624] text-xs font-bold uppercase tracking-wider mb-4 border border-[#0c3624]/20 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#DEAB3E] animate-pulse"></span>
+            Brosur Resmi SPMB TA 2026/2027
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0c3624] tracking-tight font-serif mb-4">
+            Brosur &amp; Informasi Pendaftaran
+          </h2>
+          <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+            Dapatkan informasi lengkap mengenai Penerimaan Santri Baru RTQ Abdurrahman bin Auf. Anda dapat melihat resolusi tinggi, memperbesar detail teks, serta mengunduh berkas brosur resmi di bawah ini.
+          </p>
+
+          {/* Filter Tab Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-8">
+            <button
+              onClick={() => setActiveTab("all")}
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm flex items-center gap-2 ${
+                activeTab === "all"
+                  ? "bg-[#0c3624] text-white shadow-md shadow-[#0c3624]/20 scale-105"
+                  : "bg-white text-neutral-700 hover:bg-[#e8dfcf] border border-neutral-200"
+              }`}
+            >
+              <span>🌟</span>
+              <span>Tampilkan Keduanya</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("poster")}
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm flex items-center gap-2 ${
+                activeTab === "poster"
+                  ? "bg-[#0c3624] text-white shadow-md shadow-[#0c3624]/20 scale-105"
+                  : "bg-white text-neutral-700 hover:bg-[#e8dfcf] border border-neutral-200"
+              }`}
+            >
+              <span>📄</span>
+              <span>Versi Poster (Vertikal)</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("liflet")}
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm flex items-center gap-2 ${
+                activeTab === "liflet"
+                  ? "bg-[#0c3624] text-white shadow-md shadow-[#0c3624]/20 scale-105"
+                  : "bg-white text-neutral-700 hover:bg-[#e8dfcf] border border-neutral-200"
+              }`}
+            >
+              <span>📰</span>
+              <span>Versi Liflet 3 Lipatan (Lanskap)</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Brochure Cards Display Grid */}
+        <div className={`grid gap-8 lg:gap-10 ${
+          activeTab === "all" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1 max-w-4xl mx-auto"
+        }`}>
+          {filteredBrochures.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-3xl border border-[#e8dfcf] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group"
+            >
+              {/* Card Image Container with Hover Overlay */}
+              <div 
+                className="relative bg-neutral-900/5 cursor-pointer overflow-hidden border-b border-neutral-100 flex items-center justify-center p-3 sm:p-4"
+                onClick={() => setPreviewImage({ src: item.src, title: item.title, desc: item.description, type: item.tag })}
+              >
+                <div className={`w-full max-w-full ${item.aspect} relative rounded-2xl overflow-hidden shadow-md group-hover:scale-[1.01] transition-transform duration-300`}>
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="w-full h-full object-contain bg-neutral-100/50"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-5 text-white">
+                    <span className="text-xs font-semibold flex items-center gap-2 bg-[#DEAB3E] text-[#0c3624] px-3 py-1.5 rounded-full shadow-lg">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                      Klik untuk Memperbesar Resolusi Tinggi
+                    </span>
+                    <span className="text-xs text-white/90 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                      🔍 Zoom
+                    </span>
+                  </div>
+                </div>
+
+                {/* Badge top-left */}
+                <div className="absolute top-6 left-6 z-10">
+                  <span className="px-3.5 py-1.5 rounded-full bg-[#0c3624]/90 backdrop-blur-md text-[#DEAB3E] font-bold text-xs tracking-wider shadow-md border border-[#DEAB3E]/30 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#DEAB3E]"></span>
+                    {item.tag}
+                  </span>
+                </div>
+              </div>
+
+              {/* Card Details & Actions */}
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between bg-white">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0c3624] font-serif mb-1 group-hover:text-[#DEAB3E] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#7A5B20] font-medium mb-4">
+                    {item.subtitle}
+                  </p>
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-5">
+                    {item.description}
+                  </p>
+
+                  {/* Highlights list */}
+                  <div className="bg-[#FAF4E6]/60 rounded-2xl p-4 border border-[#e8dfcf] mb-6">
+                    <h4 className="text-xs font-bold text-[#0c3624] uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                      <svg className="w-4 h-4 text-[#DEAB3E]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      Sorotan Isi Brosur:
+                    </h4>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {item.highlights.map((h, idx) => (
+                        <li key={idx} className="text-xs text-neutral-700 flex items-start gap-2">
+                          <span className="text-[#DEAB3E] font-bold">✓</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Card CTA Buttons */}
+                <div className="pt-2 border-t border-neutral-100 flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => setPreviewImage({ src: item.src, title: item.title, desc: item.description, type: item.tag })}
+                    className="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl bg-[#0c3624] hover:bg-[#082619] text-white text-xs sm:text-sm font-semibold transition-all shadow-md flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                    <span>Perbesar Resolusi</span>
+                  </button>
+
+                  <a
+                    href={item.src}
+                    download={item.id === "poster" ? "Brosur-SPMB-Poster-RTQ-ABA.jpg" : "Brosur-SPMB-Liflet-RTQ-ABA.jpg"}
+                    className="px-4 py-2.5 rounded-xl bg-[#FAF4E6] hover:bg-[#f2e7cd] text-[#0c3624] border border-[#d6c5a5] text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2"
+                    title="Unduh Berkas Gambar"
+                  >
+                    <svg className="w-4 h-4 text-[#7A5B20]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    <span>Unduh Brosur</span>
+                  </a>
+
+                  <a
+                    href={`https://wa.me/6281234567890?text=${encodeURIComponent(`Assalamu'alaikum, saya ingin bertanya lebih lanjut mengenai brosur ${item.title} RTQ Abdurrahman bin Auf.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center"
+                    title="Konsultasi Brosur via WhatsApp"
+                  >
+                    <svg className="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Official Information Highlights Banner */}
+        <div className="mt-12 bg-gradient-to-r from-[#0c3624] via-[#134932] to-[#0c3624] rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-[#DEAB3E]/40 relative overflow-hidden">
+          <div className="absolute right-0 top-0 bottom-0 w-80 bg-white/5 transform skew-x-12 pointer-events-none"></div>
+          
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="space-y-2 text-center lg:text-left">
+              <div className="inline-block px-3 py-1 rounded-full bg-[#DEAB3E]/20 text-[#DEAB3E] text-xs font-semibold uppercase tracking-wider border border-[#DEAB3E]/30">
+                Poin Penting SPMB 2026/2027
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold font-serif text-white">
+                Siap Mendaftarkan Putra-Putri Anda?
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-200 max-w-2xl leading-relaxed">
+                Pendaftaran dapat dilakukan secara online melalui website ini atau langsung hadir di kantor Sekretariat RTQ Abdurrahman bin Auf Genteng, Banyuwangi. Kuota santri dibatasi agar pembinaan Al-Qur&apos;an lebih intensif dan bermutu.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => {
+                  document.getElementById("pendaftaran")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-6 py-3 rounded-full bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] font-bold text-sm shadow-lg transition-all transform hover:scale-105 flex items-center gap-2"
+              >
+                <span>Daftar Online Sekarang</span>
+                <span>→</span>
+              </button>
+              <a
+                href="https://wa.me/6281234567890?text=Assalamu'alaikum%2C%20saya%20ingin%20konsultasi%20pendaftaran%20santri%20baru%20RTQ%20Abdurrahman%20bin%20Auf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all flex items-center gap-2"
+              >
+                <span>WhatsApp Admin</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Lightbox Modal for High-Resolution View */}
+      {previewImage && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn"
+          onClick={() => setPreviewImage(null)}
+        >
+          <div 
+            className="relative max-w-6xl w-full max-h-[95vh] bg-[#1a231f] rounded-2xl sm:rounded-3xl border border-[#DEAB3E]/40 overflow-hidden flex flex-col shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="px-5 py-4 bg-[#0c3624] border-b border-[#DEAB3E]/30 flex items-center justify-between">
+              <div>
+                <div className="text-xs text-[#DEAB3E] font-bold tracking-wider uppercase mb-0.5">
+                  {previewImage.type} • Tampilan Resolusi Tinggi
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white font-serif">
+                  {previewImage.title}
+                </h4>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={previewImage.src}
+                  download="Brosur-RTQ-ABA.jpg"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] text-xs font-bold transition-all flex items-center gap-1.5 shadow"
+                  title="Unduh Gambar"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  <span>Unduh</span>
+                </a>
+                <button
+                  onClick={() => setPreviewImage(null)}
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all text-lg font-bold"
+                  aria-label="Tutup Pratinjau"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Image Body with Zoom/Scroll */}
+            <div className="flex-1 overflow-auto p-2 sm:p-4 bg-neutral-950 flex items-center justify-center max-h-[75vh]">
+              <img
+                src={previewImage.src}
+                alt={previewImage.title}
+                className="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all"
+              />
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-5 py-3 bg-[#0c3624]/90 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-neutral-300">
+              <span className="flex items-center gap-1.5 text-neutral-300">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                Gunakan scroll atau cubit layar untuk memperbesar tampilan teks pada brosur.
+              </span>
+              <div className="flex items-center gap-3">
+                <a
+                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(`Assalamu'alaikum, saya ingin bertanya tentang brosur ${previewImage.title} RTQ Abdurrahman bin Auf.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#DEAB3E] hover:underline font-semibold flex items-center gap-1"
+                >
+                  <span>Tanya Panitia via WhatsApp</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -2661,10 +3448,12 @@ function PendaftaranSection() {
   };
 
   const requirements = [
-    "Usia 6–12 tahun, siap mengikuti pendidikan dasar Islam",
-    "Mampu membaca Al-Qur'an dasar / Iqra jilid 3",
-    "Melampirkan fotokopi Akte Kelahiran & Kartu Keluarga",
-    "Surat keterangan sehat dari dokter/puskesmas",
+    "Usia minimal 7 tahun per Juli 2026 – 12 tahun",
+    "Pas foto 3 x 4 latar merah (3 lembar)",
+    "Fotocopy Kartu Keluarga / KK (3 lembar)",
+    "Fotocopy Akte Kelahiran (3 lembar)",
+    "Fotocopy rapor terakhir (khusus siswa pindahan)",
+    "Sehat jasmani & rohani",
   ];
 
   const steps = [
@@ -2675,38 +3464,48 @@ function PendaftaranSection() {
           <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
         </svg>
       ),
-      title: "Daftar Online",
-      desc: "Isi formulir pendaftaran",
+      title: "Ambil Formulir",
+      desc: "Di kantor RTQ Abdurrahman Bin Auf",
     },
     {
       num: 2,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
         </svg>
       ),
-      title: "Verifikasi Dokumen",
-      desc: "Petugas verifikasi berkas",
+      title: "Isi & Lengkapi",
+      desc: "Lengkapi berkas pendaftaran santri",
     },
     {
       num: 3,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
         </svg>
       ),
-      title: "Ujian & Wawancara",
-      desc: "Tes baca Al-Qur'an & wawancara",
+      title: "Kumpulkan Berkas",
+      desc: "Serahkan ke Panitia SPMB RTQ",
     },
     {
       num: 4,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
+          <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+        </svg>
+      ),
+      title: "Biaya Pendaftaran",
+      desc: "Membayar biaya Rp 100.000",
+    },
+    {
+      num: 5,
+      icon: (
+        <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
           <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
         </svg>
       ),
-      title: "Pengumuman & Daftar Ulang",
-      desc: "Hasil & pembayaran daftar ulang",
+      title: "Daftar Ulang",
+      desc: "Pelunasan / cicilan Uang Pangkal",
     },
   ];
 
@@ -2735,18 +3534,43 @@ function PendaftaranSection() {
               Tahun Ajaran 2026/2027 • RTQ Abdurrahman bin Auf
             </p>
 
+            {/* Periode Pendaftaran (Gelombang 1 & 2 Sesuai Brosur) */}
+            <div className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-[#0c3624] to-[#124b33] text-white shadow-sm border border-emerald-900/40">
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[11px] font-bold text-[#F1D9A6] uppercase tracking-wider flex items-center gap-1.5">
+                  <span>📅</span> Periode Pendaftaran SPMB 2026–2027
+                </span>
+                <span className="text-[10px] font-bold bg-[#DEAB3E] text-[#0c3624] px-2.5 py-0.5 rounded-full">
+                  Resmi
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <div className="bg-white/10 p-2.5 rounded-xl border border-white/15">
+                  <div className="text-[#DEAB3E] font-bold text-[10.5px] uppercase tracking-wide">GELOMBANG 1 :</div>
+                  <div className="font-extrabold text-white text-sm mt-0.5">01 NOV 25 – 31 JAN 26</div>
+                </div>
+                <div className="bg-white/10 p-2.5 rounded-xl border border-white/15">
+                  <div className="text-[#DEAB3E] font-bold text-[10.5px] uppercase tracking-wide">GELOMBANG 2 :</div>
+                  <div className="font-extrabold text-white text-sm mt-0.5">01 FEB 26 – 30 JUNI 26*</div>
+                </div>
+              </div>
+              <p className="text-[10px] text-white/70 italic mt-2">
+                * Gelombang 2 tidak dibuka jika kuota sudah terpenuhi
+              </p>
+            </div>
+
             {/* Persyaratan Pendaftaran */}
-            <div className="mb-10">
+            <div className="mb-8">
               <h3 className="text-base sm:text-lg font-black text-[#0c3624] mb-3">
-                Persyaratan Pendaftaran:
+                Syarat Pendaftaran:
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {requirements.map((req) => (
-                  <li key={req} className="flex items-center gap-3">
-                    <span className="w-5 h-5 rounded-full bg-[#E8B54D] text-[#0c3624] flex items-center justify-center font-black text-xs flex-shrink-0 shadow-xs">
+                  <li key={req} className="flex items-start gap-2.5 p-2 rounded-xl bg-white border border-neutral-200/80 shadow-2xs">
+                    <span className="w-5 h-5 rounded-full bg-[#E8B54D] text-[#0c3624] flex items-center justify-center font-black text-xs flex-shrink-0 mt-0.5 shadow-xs">
                       ✓
                     </span>
-                    <span className="text-xs sm:text-sm text-neutral-700 font-medium">
+                    <span className="text-xs text-neutral-700 font-medium leading-snug">
                       {req}
                     </span>
                   </li>
@@ -2754,27 +3578,27 @@ function PendaftaranSection() {
               </ul>
             </div>
 
-            {/* 4 Langkah Pendaftaran */}
+            {/* 5 Alur Pendaftaran */}
             <div>
-              <h3 className="text-base sm:text-lg font-black text-[#0c3624] mb-6">
-                4 Langkah Pendaftaran:
+              <h3 className="text-base sm:text-lg font-black text-[#0c3624] mb-5">
+                Alur Pendaftaran (5 Langkah):
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 relative">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 relative">
                 {steps.map((s) => (
                   <div
                     key={s.num}
-                    className="relative bg-white border border-neutral-200/80 rounded-2xl p-3.5 pt-5 flex flex-col items-center text-center shadow-xs"
+                    className="relative bg-white border border-neutral-200/80 rounded-2xl p-3 pt-5 flex flex-col items-center text-center shadow-xs hover:border-[#DEAB3E] transition"
                   >
                     {/* Number Badge on top */}
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-[#E8B54D] text-[#0c3624] font-black text-xs flex items-center justify-center shadow-xs">
                       {s.num}
                     </div>
 
-                    <div className="text-2xl mb-1.5 mt-1">{s.icon}</div>
-                    <h4 className="font-bold text-xs text-[#0c3624] leading-tight mb-1">
+                    <div className="text-xl mb-1.5 mt-1">{s.icon}</div>
+                    <h4 className="font-bold text-[11px] text-[#0c3624] leading-tight mb-1">
                       {s.title}
                     </h4>
-                    <p className="text-[10px] text-neutral-500 leading-tight">
+                    <p className="text-[9.5px] text-neutral-500 leading-tight">
                       {s.desc}
                     </p>
                   </div>
@@ -2967,55 +3791,6 @@ function PendaftaranSection() {
               </form>
             </div>
 
-            {/* Kontak Kami Yellow/Gold Box */}
-            <div className="bg-[#E8B54D] rounded-2xl p-4 sm:p-5 text-[#0c3624] shadow-xs flex flex-col gap-2.5">
-              <div className="flex items-center gap-2 font-black text-sm sm:text-base">
-                <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                </svg>
-                <span>Kontak Kami</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-bold">
-                <svg className="w-4 h-4 fill-[#0c3624]" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
-                </svg>
-                <span>WhatsApp: </span>
-                <a
-                  href="https://wa.me/6285212185139"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  0852-1218-5139
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-bold flex-wrap">
-                <svg className="w-4 h-4 fill-[#0c3624]" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-                <span>Email: </span>
-                <a href="mailto:rtqaba@gmail.com" className="hover:underline">
-                  rtqaba@gmail.com
-                </a>
-                <span>/</span>
-                <a
-                  href="mailto:kesejahteraanumat01@gmail.com"
-                  className="hover:underline"
-                >
-                  kesejahteraanumat01@gmail.com
-                </a>
-              </div>
-              <div className="flex items-start gap-2 text-[11px] font-semibold leading-snug">
-                <svg className="w-4 h-4 fill-[#0c3624] flex-shrink-0 mt-0.5" viewBox="0 0 24 24">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                <span>
-                  Jl. Raya Banyuwangi No 315 RT 002 RW 006 Dusun Krajan II
-                  Kembiritan, Genteng Banyuwangi, Jawa Timur
-                </span>
-              </div>
-            </div>
-
           </div>
 
         </div>
@@ -3126,7 +3901,7 @@ function ContactSection() {
                       Alamat:
                     </h4>
                     <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">
-                      Jl. Hasanudin No. 81, Dusun Krajan II, Kembiritan, Kec. Genteng, Kabupaten Banyuwangi, Jawa Timur 68465
+                      Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng, Kabupaten Banyuwangi, Jawa Timur 68465
                     </p>
                   </div>
                 </div>
@@ -3643,7 +4418,7 @@ function Footer() {
                 <svg className="w-4 h-4 fill-[#E8B54D] flex-shrink-0 mt-0.5" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                 </svg>
-                <span>Jl. Hasanudin No. 81, Dusun Krajan II, Kembiritan, Kec. Genteng, Banyuwangi, Jawa Timur 68465</span>
+                <span>Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng, Banyuwangi, Jawa Timur 68465</span>
               </p>
               <p className="flex items-center gap-2">
                 <svg className="w-4 h-4 fill-[#25D366] flex-shrink-0" viewBox="0 0 24 24">
@@ -3752,6 +4527,7 @@ export default function HomePage() {
         <StrukturOrganisasiSection />
         <ProgramsSection />
         <JadwalBiayaSection />
+        <BrosurSpmbSection />
         <GallerySection />
         <PendaftaranSection />
         <ContactSection />
