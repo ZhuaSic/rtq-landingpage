@@ -2787,288 +2787,259 @@ function JadwalBiayaSection() {
 }
 
 /* ────────────────────────────────────────────────────────
-   BROSUR RESMI SPMB 2026/2027 SECTION
+   BROSUR RESMI PPDB 2026/2027 SECTION (1 BROSUR TUNGGAL)
 ──────────────────────────────────────────────────────── */
 function BrosurSpmbSection() {
-  const [activeTab, setActiveTab] = useState<"all" | "poster" | "liflet">("all");
-  const [previewImage, setPreviewImage] = useState<{ src: string; title: string; desc: string; type: string } | null>(null);
+  const [showLightbox, setShowLightbox] = useState<boolean>(false);
 
-  const brochures = [
-    {
-      id: "poster",
-      title: "Brosur Poster SPMB 2026/2027",
-      subtitle: "Format Vertikal • Ikhtisar Informasi Utama & Keunggulan",
-      src: "/brosur-spmb-1.jpg",
-      aspect: "aspect-[3/4]",
-      tag: "Poster Resmi",
-      description: "Menampilkan informasi pembukaan SPMB 2026/2027, kurikulum terpadu (Kesetaraan SD/MI - PKBM Bina Makmur), visi & keunggulan, serta kuota eksklusif hanya 15 santri.",
-      highlights: [
-        "Pendidikan Kesetaraan SD/MI Resmi",
-        "Target Tahfidz 4 Juz Mutqin & Ber-Sanad",
-        "Kuota Sangat Terbatas: 15 Santri",
-        "Ekstrakurikuler Memanah, Renang, Beladiri"
-      ]
-    },
-    {
-      id: "liflet",
-      title: "Brosur Liflet 3 Lipatan SPMB 2026/2027",
-      subtitle: "Format Lanskap 3-Fold • Rincian Biaya, Syarat & Alur",
-      src: "/brosur-spmb-2.jpg",
-      aspect: "aspect-[4/3]",
-      tag: "Liflet Lengkap",
-      description: "Menampilkan rincian tabel biaya pendidikan lengkap (Gelombang 1 & 2), infaq pendaftaran, pilihan SPP bulanan, 6 persyaratan berkas, serta 5 langkah alur pendaftaran santri baru.",
-      highlights: [
-        "Rincian Uang Pangkal Putra & Putri Lengkap",
-        "Opsi SPP Bulanan Mandiri: Rp 100rb / 125rb / 150rb",
-        "6 Syarat Berkas Administrasi Pendaftaran",
-        "5 Langkah Alur Pendaftaran & Narahubung"
-      ]
-    }
-  ];
-
-  const filteredBrochures = activeTab === "all" 
-    ? brochures 
-    : brochures.filter(b => b.id === activeTab);
+  const posterData = {
+    title: "Poster Resmi PPDB TA 2026/2027",
+    institution: "Rumah Tahfidz Qur'an Abdurrahman bin Auf",
+    src: "/brosur-ppdb-2026.jpg",
+    downloadName: "Brosur-PPDB-2026-RTQ-ABA.jpg",
+    address: "Jl. Hasanudin No 81 Banyuwangi",
+    phone: "0852-1218-5139",
+    waUrl: "https://wa.me/6285212185139?text=Assalamu'alaikum%20Panitia%20PPDB%20RTQ%20Abdurrahman%20bin%20Auf,%20saya%20ingin%20konsultasi%20mengenai%20brosur%20resmi%20PPDB%202026/2027.",
+    programs: [
+      {
+        icon: "📖",
+        title: "Tahsin 8 JP",
+        sub: "Tahsin Al-Qur'an Intensif",
+        desc: "Pembinaan tajwid, makharijul huruf, dan talaqqi intensif agar bacaan santri fasih, tartil, dan ber-sanad."
+      },
+      {
+        icon: "📋",
+        title: "11 Mapel Lengkap",
+        sub: "Kurikulum Lengkap Berstandar",
+        desc: "Integrasi mata pelajaran Diniyah (Fiqih, Aqidah, Hadits, Bahasa Arab) serta pelajaran umum kesetaraan SD/MI."
+      },
+      {
+        icon: "🧠",
+        title: "Deep Learning STEM",
+        sub: "Sains Teknologi Inovasi",
+        desc: "Pendekatan belajar modern berbasis sains, eksplorasi teknologi, logika matematika, serta dasar coding & AI."
+      },
+      {
+        icon: "📈",
+        title: "Kurva S Monitoring",
+        sub: "Pemantauan Perkembangan Santri",
+        desc: "Evaluasi terukur dan pelaporan berkala grafik capaian hafalan, pemahaman materi, serta adab harian santri."
+      }
+    ]
+  };
 
   return (
-    <section id="brosur" className="py-20 bg-gradient-to-b from-[#F5EFE6] via-[#FAF8F4] to-[#F5EFE6] relative overflow-hidden">
+    <section id="brosur" className="py-16 sm:py-24 bg-gradient-to-b from-[#F5EFE6] via-[#FAF8F4] to-[#F5EFE6] relative overflow-hidden">
       {/* Background Ornaments */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#0c3624]/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DEAB3E]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0c3624]/10 text-[#0c3624] text-xs font-bold uppercase tracking-wider mb-4 border border-[#0c3624]/20 shadow-sm">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0c3624]/10 text-[#0c3624] text-xs font-bold uppercase tracking-wider mb-3 border border-[#0c3624]/20 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#DEAB3E] animate-pulse"></span>
-            Brosur Resmi SPMB TA 2026/2027
+            Brosur Resmi PPDB TA 2026/2027
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0c3624] tracking-tight font-serif mb-4">
-            Brosur &amp; Informasi Pendaftaran
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0c3624] tracking-tight font-serif mb-3">
+            Brosur Promosi Pendaftaran
           </h2>
-          <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-            Dapatkan informasi lengkap mengenai Penerimaan Santri Baru RTQ Abdurrahman bin Auf. Anda dapat melihat resolusi tinggi, memperbesar detail teks, serta mengunduh berkas brosur resmi di bawah ini.
+          <div className="w-16 h-1 bg-[#DEAB3E] rounded-full mx-auto mb-4"></div>
+          <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+            Informasi resmi Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Rumah Tahfidz Qur&apos;an Abdurrahman bin Auf. Anda dapat melihat dalam resolusi tinggi atau mengunduh berkas poster di bawah ini.
           </p>
-
-          {/* Filter Tab Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-8">
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm flex items-center gap-2 ${
-                activeTab === "all"
-                  ? "bg-[#0c3624] text-white shadow-md shadow-[#0c3624]/20 scale-105"
-                  : "bg-white text-neutral-700 hover:bg-[#e8dfcf] border border-neutral-200"
-              }`}
-            >
-              <span>🌟</span>
-              <span>Tampilkan Keduanya</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("poster")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm flex items-center gap-2 ${
-                activeTab === "poster"
-                  ? "bg-[#0c3624] text-white shadow-md shadow-[#0c3624]/20 scale-105"
-                  : "bg-white text-neutral-700 hover:bg-[#e8dfcf] border border-neutral-200"
-              }`}
-            >
-              <span>📄</span>
-              <span>Versi Poster (Vertikal)</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("liflet")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm flex items-center gap-2 ${
-                activeTab === "liflet"
-                  ? "bg-[#0c3624] text-white shadow-md shadow-[#0c3624]/20 scale-105"
-                  : "bg-white text-neutral-700 hover:bg-[#e8dfcf] border border-neutral-200"
-              }`}
-            >
-              <span>📰</span>
-              <span>Versi Liflet 3 Lipatan (Lanskap)</span>
-            </button>
-          </div>
         </div>
 
-        {/* Brochure Cards Display Grid */}
-        <div className={`grid gap-8 lg:gap-10 ${
-          activeTab === "all" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1 max-w-4xl mx-auto"
-        }`}>
-          {filteredBrochures.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-3xl border border-[#e8dfcf] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group"
-            >
-              {/* Card Image Container with Hover Overlay */}
-              <div 
-                className="relative bg-neutral-900/5 cursor-pointer overflow-hidden border-b border-neutral-100 flex items-center justify-center p-3 sm:p-4"
-                onClick={() => setPreviewImage({ src: item.src, title: item.title, desc: item.description, type: item.tag })}
-              >
-                <div className={`w-full max-w-full ${item.aspect} relative rounded-2xl overflow-hidden shadow-md group-hover:scale-[1.01] transition-transform duration-300`}>
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="w-full h-full object-contain bg-neutral-100/50"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-5 text-white">
-                    <span className="text-xs font-semibold flex items-center gap-2 bg-[#DEAB3E] text-[#0c3624] px-3 py-1.5 rounded-full shadow-lg">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                      </svg>
-                      Klik untuk Memperbesar Resolusi Tinggi
-                    </span>
-                    <span className="text-xs text-white/90 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-lg">
-                      🔍 Zoom
-                    </span>
-                  </div>
-                </div>
+        {/* 2-Column Showcase Card */}
+        <div className="bg-white rounded-3xl border border-[#e8dfcf] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            
+            {/* LEFT COLUMN (5 SPAN): THE POSTER DISPLAY */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-[#0c3624] to-[#072418] p-5 sm:p-7 flex flex-col items-center justify-between text-white relative">
+              {/* Badge Poster */}
+              <div className="w-full flex items-center justify-between mb-4">
+                <span className="px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md text-[#DEAB3E] font-bold text-xs tracking-wider border border-[#DEAB3E]/40 flex items-center gap-1.5 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#DEAB3E]"></span>
+                  Poster Resmi PPDB
+                </span>
+                <span className="text-[11px] font-semibold text-emerald-200 bg-white/10 px-2.5 py-1 rounded-lg">
+                  Resolusi Tinggi
+                </span>
+              </div>
 
-                {/* Badge top-left */}
-                <div className="absolute top-6 left-6 z-10">
-                  <span className="px-3.5 py-1.5 rounded-full bg-[#0c3624]/90 backdrop-blur-md text-[#DEAB3E] font-bold text-xs tracking-wider shadow-md border border-[#DEAB3E]/30 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#DEAB3E]"></span>
-                    {item.tag}
+              {/* Poster Image Container with Zoom Overlay */}
+              <div 
+                className="relative w-full max-w-[360px] mx-auto rounded-2xl overflow-hidden shadow-2xl border-2 border-[#DEAB3E]/40 cursor-pointer group transition-transform duration-300 hover:scale-[1.01]"
+                onClick={() => setShowLightbox(true)}
+              >
+                <img
+                  src={posterData.src}
+                  alt={posterData.title}
+                  className="w-full h-auto object-contain block bg-neutral-900"
+                />
+                
+                {/* Hover overlay with Zoom hint */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white">
+                  <span className="inline-flex items-center justify-center gap-2 bg-[#DEAB3E] text-[#0c3624] font-bold text-xs px-3.5 py-2 rounded-xl shadow-lg mb-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                    <span>Klik untuk Memperbesar Resolusi Penuh</span>
+                  </span>
+                  <span className="text-[10px] text-center text-white/80">
+                    Bisa diperbesar dan diunduh langsung
                   </span>
                 </div>
               </div>
 
-              {/* Card Details & Actions */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between bg-white">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0c3624] font-serif mb-1 group-hover:text-[#DEAB3E] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#7A5B20] font-medium mb-4">
-                    {item.subtitle}
-                  </p>
-                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-5">
-                    {item.description}
-                  </p>
+              {/* Quick Actions Under Poster */}
+              <div className="w-full max-w-[360px] flex items-center gap-2 mt-4 pt-3 border-t border-white/15">
+                <button
+                  type="button"
+                  onClick={() => setShowLightbox(true)}
+                  className="flex-1 py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 border border-white/20"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                  <span>Perbesar</span>
+                </button>
+                <a
+                  href={posterData.src}
+                  download={posterData.downloadName}
+                  className="flex-1 py-2.5 px-3 rounded-xl bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] font-black text-xs transition flex items-center justify-center gap-1.5 shadow"
+                  title="Unduh file gambar poster"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  <span>Unduh Poster</span>
+                </a>
+              </div>
+            </div>
 
-                  {/* Highlights list */}
-                  <div className="bg-[#FAF4E6]/60 rounded-2xl p-4 border border-[#e8dfcf] mb-6">
-                    <h4 className="text-xs font-bold text-[#0c3624] uppercase tracking-wider mb-2.5 flex items-center gap-2">
-                      <svg className="w-4 h-4 text-[#DEAB3E]" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      Sorotan Isi Brosur:
-                    </h4>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {item.highlights.map((h, idx) => (
-                        <li key={idx} className="text-xs text-neutral-700 flex items-start gap-2">
-                          <span className="text-[#DEAB3E] font-bold">✓</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
+            {/* RIGHT COLUMN (7 SPAN): DETAILED PROGRAM UNGGULAN & ACTIONS */}
+            <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#9B7B3B] mb-1">
+                  Penerimaan Peserta Didik Baru (PPDB) TA 2026/2027
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0c3624] font-serif mb-2">
+                  Rumah Tahfidz Qur&apos;an Abdurrahman bin Auf
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
+                  Mencetak generasi santri penghafal Al-Qur&apos;an yang fasih membaca, tartil menghafal, berakhlak karimah, serta siap menghadapi era modern melalui sains dan teknologi inovasi.
+                </p>
+
+                {/* 4 Program Unggulan Grid (Matching the Poster) */}
+                <div className="mb-6">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#0c3624] mb-3 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#DEAB3E]"></span>
+                    <span>4 Program Unggulan (Sesuai Brosur):</span>
+                  </h4>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {posterData.programs.map((prog, idx) => (
+                      <div
+                        key={idx}
+                        className="p-3.5 rounded-2xl bg-[#FAF8F4] border border-[#e8dfcf] hover:border-[#DEAB3E] transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5 mb-1.5">
+                          <span className="w-8 h-8 rounded-xl bg-[#0c3624] text-white flex items-center justify-center text-sm shadow-xs">
+                            {prog.icon}
+                          </span>
+                          <div>
+                            <div className="font-extrabold text-xs sm:text-sm text-[#0c3624]">
+                              {prog.title}
+                            </div>
+                            <div className="text-[10.5px] font-semibold text-[#7A5B20]">
+                              {prog.sub}
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-[11px] text-neutral-600 leading-relaxed">
+                          {prog.desc}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Card CTA Buttons */}
-                <div className="pt-2 border-t border-neutral-100 flex flex-wrap items-center gap-3">
-                  <button
-                    onClick={() => setPreviewImage({ src: item.src, title: item.title, desc: item.description, type: item.tag })}
-                    className="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl bg-[#0c3624] hover:bg-[#082619] text-white text-xs sm:text-sm font-semibold transition-all shadow-md flex items-center justify-center gap-2"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
-                    <span>Perbesar Resolusi</span>
-                  </button>
-
-                  <a
-                    href={item.src}
-                    download={item.id === "poster" ? "Brosur-SPMB-Poster-RTQ-ABA.jpg" : "Brosur-SPMB-Liflet-RTQ-ABA.jpg"}
-                    className="px-4 py-2.5 rounded-xl bg-[#FAF4E6] hover:bg-[#f2e7cd] text-[#0c3624] border border-[#d6c5a5] text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2"
-                    title="Unduh Berkas Gambar"
-                  >
-                    <svg className="w-4 h-4 text-[#7A5B20]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    <span>Unduh Brosur</span>
-                  </a>
-
-                  <a
-                    href={`https://wa.me/6281234567890?text=${encodeURIComponent(`Assalamu'alaikum, saya ingin bertanya lebih lanjut mengenai brosur ${item.title} RTQ Abdurrahman bin Auf.`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center"
-                    title="Konsultasi Brosur via WhatsApp"
-                  >
-                    <svg className="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24">
-                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                    </svg>
-                  </a>
+                {/* Highlight Kontak & Alamat Resmi dari Brosur */}
+                <div className="p-4 rounded-2xl bg-[#F4F9F6] border border-emerald-200 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                  <div className="space-y-1">
+                    <div className="font-bold text-[#0c3624] flex items-center gap-1.5">
+                      <span>📍</span>
+                      <span>{posterData.address}</span>
+                    </div>
+                    <div className="font-medium text-emerald-800 flex items-center gap-1.5">
+                      <span>📱</span>
+                      <span>WhatsApp Panitia: <strong>{posterData.phone}</strong></span>
+                    </div>
+                  </div>
+                  <div className="px-3 py-1.5 rounded-xl bg-emerald-700 text-white font-bold text-[11px] whitespace-nowrap shadow-xs">
+                    Kuota: 15 Santri
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Official Information Highlights Banner */}
-        <div className="mt-12 bg-gradient-to-r from-[#0c3624] via-[#134932] to-[#0c3624] rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-[#DEAB3E]/40 relative overflow-hidden">
-          <div className="absolute right-0 top-0 bottom-0 w-80 bg-white/5 transform skew-x-12 pointer-events-none"></div>
-          
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center lg:text-left">
-              <div className="inline-block px-3 py-1 rounded-full bg-[#DEAB3E]/20 text-[#DEAB3E] text-xs font-semibold uppercase tracking-wider border border-[#DEAB3E]/30">
-                Poin Penting SPMB 2026/2027
+              {/* Call to Actions */}
+              <div className="pt-4 border-t border-neutral-100 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    document.getElementById("pendaftaran")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="flex-1 min-w-[170px] py-3.5 px-5 rounded-2xl bg-[#0c3624] hover:bg-[#134932] text-[#F1D9A6] font-extrabold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
+                >
+                  <span>Daftar Online Sekarang</span>
+                  <span>→</span>
+                </button>
+
+                <a
+                  href={posterData.waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3.5 px-5 rounded-2xl bg-[#E8B54D] hover:bg-[#cf9e33] text-[#0c3624] font-bold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
+                >
+                  <svg className="w-4 h-4 fill-[#0c3624]" viewBox="0 0 24 24">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                  </svg>
+                  <span>Konsultasi Panitia</span>
+                </a>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold font-serif text-white">
-                Siap Mendaftarkan Putra-Putri Anda?
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-200 max-w-2xl leading-relaxed">
-                Pendaftaran dapat dilakukan secara online melalui website ini atau langsung hadir di kantor Sekretariat RTQ Abdurrahman bin Auf Genteng, Banyuwangi. Kuota santri dibatasi agar pembinaan Al-Qur&apos;an lebih intensif dan bermutu.
-              </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <button
-                onClick={() => {
-                  document.getElementById("pendaftaran")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="px-6 py-3 rounded-full bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] font-bold text-sm shadow-lg transition-all transform hover:scale-105 flex items-center gap-2"
-              >
-                <span>Daftar Online Sekarang</span>
-                <span>→</span>
-              </button>
-              <a
-                href="https://wa.me/6281234567890?text=Assalamu'alaikum%2C%20saya%20ingin%20konsultasi%20pendaftaran%20santri%20baru%20RTQ%20Abdurrahman%20bin%20Auf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all flex items-center gap-2"
-              >
-                <span>WhatsApp Admin</span>
-              </a>
-            </div>
           </div>
         </div>
 
       </div>
 
       {/* Lightbox Modal for High-Resolution View */}
-      {previewImage && (
+      {showLightbox && (
         <div 
           className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn"
-          onClick={() => setPreviewImage(null)}
+          onClick={() => setShowLightbox(false)}
         >
           <div 
-            className="relative max-w-6xl w-full max-h-[95vh] bg-[#1a231f] rounded-2xl sm:rounded-3xl border border-[#DEAB3E]/40 overflow-hidden flex flex-col shadow-2xl"
+            className="relative max-w-4xl w-full max-h-[95vh] bg-[#1a231f] rounded-2xl sm:rounded-3xl border border-[#DEAB3E]/40 overflow-hidden flex flex-col shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="px-5 py-4 bg-[#0c3624] border-b border-[#DEAB3E]/30 flex items-center justify-between">
               <div>
                 <div className="text-xs text-[#DEAB3E] font-bold tracking-wider uppercase mb-0.5">
-                  {previewImage.type} • Tampilan Resolusi Tinggi
+                  Brosur Resmi PPDB TA 2026/2027 • Tampilan Resolusi Penuh
                 </div>
                 <h4 className="text-base sm:text-lg font-bold text-white font-serif">
-                  {previewImage.title}
+                  {posterData.title}
                 </h4>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href={previewImage.src}
-                  download="Brosur-RTQ-ABA.jpg"
+                  href={posterData.src}
+                  download={posterData.downloadName}
                   className="px-3.5 py-1.5 rounded-lg bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] text-xs font-bold transition-all flex items-center gap-1.5 shadow"
                   title="Unduh Gambar"
                 >
@@ -3078,7 +3049,8 @@ function BrosurSpmbSection() {
                   <span>Unduh</span>
                 </a>
                 <button
-                  onClick={() => setPreviewImage(null)}
+                  type="button"
+                  onClick={() => setShowLightbox(false)}
                   className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all text-lg font-bold"
                   aria-label="Tutup Pratinjau"
                 >
@@ -3090,8 +3062,8 @@ function BrosurSpmbSection() {
             {/* Modal Image Body with Zoom/Scroll */}
             <div className="flex-1 overflow-auto p-2 sm:p-4 bg-neutral-950 flex items-center justify-center max-h-[75vh]">
               <img
-                src={previewImage.src}
-                alt={previewImage.title}
+                src={posterData.src}
+                alt={posterData.title}
                 className="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all"
               />
             </div>
@@ -3100,16 +3072,16 @@ function BrosurSpmbSection() {
             <div className="px-5 py-3 bg-[#0c3624]/90 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-neutral-300">
               <span className="flex items-center gap-1.5 text-neutral-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                Gunakan scroll atau cubit layar untuk memperbesar tampilan teks pada brosur.
+                Gunakan scroll atau cubit layar untuk memperbesar tampilan teks pada poster.
               </span>
               <div className="flex items-center gap-3">
                 <a
-                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(`Assalamu'alaikum, saya ingin bertanya tentang brosur ${previewImage.title} RTQ Abdurrahman bin Auf.`)}`}
+                  href={posterData.waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#DEAB3E] hover:underline font-semibold flex items-center gap-1"
                 >
-                  <span>Tanya Panitia via WhatsApp</span>
+                  <span>Hubungi Panitia (0852-1218-5139)</span>
                   <span>↗</span>
                 </a>
               </div>
