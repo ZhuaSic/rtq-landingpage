@@ -3465,30 +3465,54 @@ function PendaftaranSection() {
       dataToSend.append("filePendaftaran", filePendaftaran);
       dataToSend.append("fileKesantrian", fileKesantrian);
 
-      // Endpoint upload server: coba upload.php atau api/upload.php
-      const endpoints = ["/upload.php", "/api/upload.php", "upload.php"];
-      let resultData: any = null;
+      // Deteksi endpoint upload yang fleksibel (mendukung root domain, subfolder XAMPP, dan node server)
+      const currentPath = window.location.pathname;
+      const folderPath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      
+      const candidateEndpoints = Array.from(new Set([
+        `${folderPath}upload.php`,
+        `${folderPath}api/upload`,
+        `${folderPath}api/upload.php`,
+        "/upload.php",
+        "/api/upload",
+        "/api/upload.php",
+        "/landingpageRTQ/upload.php",
+        "/landingpageRTQ/rtq-aba/public/upload.php",
+        "upload.php",
+      ]));
 
-      for (const endpoint of endpoints) {
+      let resultData: any = null;
+      let lastErrorMessage = "";
+
+      for (const endpoint of candidateEndpoints) {
         try {
           const res = await fetch(endpoint, {
             method: "POST",
             body: dataToSend,
           });
-          if (res.ok) {
-            const data = await res.json();
-            if (data && data.success) {
-              resultData = data;
-              break;
-            }
+          
+          const rawText = await res.text();
+          let parsed: any = null;
+          try {
+            parsed = JSON.parse(rawText);
+          } catch (jsonErr) {
+            // Bukan format JSON (misal HTML atau plain text dari dev server)
+            continue;
           }
-        } catch (fetchErr) {
-          // Lanjut coba endpoint berikutnya
+
+          if (parsed && parsed.success && parsed.filePendaftaran?.url && parsed.fileKesantrian?.url) {
+            resultData = parsed;
+            break;
+          } else if (parsed && parsed.message) {
+            lastErrorMessage = parsed.message;
+          }
+        } catch (fetchErr: any) {
+          lastErrorMessage = fetchErr?.message || "Koneksi ke endpoint gagal";
         }
       }
 
       if (!resultData || !resultData.success) {
-        throw new Error(resultData?.message || "Server penyimpanan belum merespons. Pastikan web server PHP aktif.");
+        throw new Error(lastErrorMessage || "Server penyimpanan berkas belum merespons. Pastikan web server PHP (Apache/Nginx) atau node server.js aktif.");
       }
 
       // Berhasil diunggah ke server: susun pesan WA dengan link dokumen valid per santri
