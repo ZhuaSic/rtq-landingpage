@@ -3097,84 +3097,21 @@ function BrosurSpmbSection() {
    GALERI KEGIATAN (Matching Reference Screenshot)
 ──────────────────────────────────────────────────────── */
 function GallerySection() {
-  const categories = ["Semua", "Tahsin", "Tahfidz", "Adab", "Outdoor", "Muhadhoroh"];
-  const [selectedCategory, setSelectedCategory] = useState("Semua");
-  const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
-
   const allGalleries = [
     {
       id: 1,
-      category: "Tahsin",
-      title: "Tahsin • Kelas Anak Putra",
-      topic: "Surat Al-Fatihah",
-      date: "12 Oktober 2024",
-      desc: "Dokumentasi kegiatan Tahsin untuk anak putra, fokus pada tajwid dan pelafalan Surat Al-Fatihah bersama Ustadz.",
-      src: "/galeri-tahsin.jpg",
-    },
-    {
-      id: 2,
-      category: "Tahfidz",
-      title: "Tahfidz • Kelas Hifdzil Quran",
-      topic: "Juz 30 Muroja'ah",
-      date: "10 Oktober 2024",
-      desc: "Bimbingan hafalan Juz 30 dan muroja'ah berkala untuk memantapkan hafalan para santri.",
-      src: "/hero-santri-exact.jpg",
-    },
-    {
-      id: 3,
-      category: "Adab",
-      title: "Adab • Pembinaan Karakter",
-      topic: "Santun di Kelas",
-      date: "05 Oktober 2024",
-      desc: "Pendidikan adab terhadap guru, Al-Qur'an, dan sesama santri sebelum memulai pembelajaran.",
-      src: "/galeri-iqro.jpg",
-    },
-    {
-      id: 4,
-      category: "Tahfidz",
-      title: "Tahfidz • Setoran Hafalan",
-      topic: "Tahfidz Intensif Harian",
-      date: "30 September 2024",
-      desc: "Setoran hafalan baru one-on-one santri kepada Ustadz pengampu dengan talaqqi bersanad.",
-      src: "/hero-santri.jpg",
-    },
-    {
-      id: 5,
-      category: "Tahsin",
-      title: "Tahsin • Kelas Iqro 3",
-      topic: "Makhraj Huruf",
-      date: "28 September 2024",
-      desc: "Latihan artikulasi pengucapan makharijul huruf hijaiyah dengan bimbingan teliti.",
-      src: "/galeri-iqro.jpg",
-    },
-    {
-      id: 6,
-      category: "Outdoor",
-      title: "Outdoor • Belajar di Kebun",
-      topic: "Belajar di Kebun",
-      date: "25 September 2024",
-      desc: "Kegiatan tahfidz dan tadabbur alam di lingkungan terbuka yang asri dan sejuk.",
-      src: "/news-featured.jpg",
-    },
-    {
-      id: 7,
-      category: "Tahfidz",
-      title: "Tahfidz • Wisuda Juz 30",
-      topic: "Wisuda Juz 30",
-      date: "18 September 2024",
-      desc: "Momen wisuda kelulusan tahfidz santri yang berhasil menuntaskan target hafalan.",
-      src: "/galeri-wisuda.jpg",
-    },
-    {
-      id: 8,
-      category: "Muhadhoroh",
-      title: "Muhadhoroh • Lomba Ceramah Anak",
-      topic: "Lomba Pidato & Da'i Cilik",
-      date: "15 September 2024",
-      desc: "Ajang mengasah keberanian dan kemampuan dakwah santri cilik di hadapan umum.",
-      src: "/galeri-ceramah.jpg",
+      category: "Administrasi",
+      title: "Administrasi & Tata Usaha",
+      topic: "Manajemen Data & Layanan Santri",
+      date: "Dokumentasi Resmi",
+      desc: "Aktivitas pengelolaan administrasi, rekapitulasi data santri, dan pelayanan operasional di kantor RTQ Abdurrahman bin Auf.",
+      src: "/galeri-administrasi.jpg",
     },
   ];
+
+  const categories = ["Semua", ...Array.from(new Set(allGalleries.map((item) => item.category)))];
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
 
   const filtered =
     selectedCategory === "Semua"
@@ -3306,13 +3243,13 @@ function GallerySection() {
             </button>
 
             {/* Modal Image */}
-            <div className="relative w-full h-[240px] sm:h-[280px] bg-black flex-shrink-0">
+            <div className="relative w-full h-[320px] sm:h-[420px] bg-neutral-950 flex-shrink-0 flex items-center justify-center">
               <Image
                 src={currentItem.src}
                 alt={currentItem.title}
                 fill
                 sizes="600px"
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>
