@@ -3100,6 +3100,24 @@ function GallerySection() {
   const allGalleries = [
     {
       id: 1,
+      category: "Santri Putri",
+      title: "Halaqah Qur'an • Santri Putri",
+      topic: "Tahfidz & Muroja'ah Al-Qur'an",
+      date: "Dokumentasi Resmi",
+      desc: "Suasana belajar dan muroja'ah hafalan Al-Qur'an santriwati cilik di ruang literasi dan perpustakaan RTQ Abdurrahman bin Auf.",
+      src: "/galeri-santri-putri.jpg",
+    },
+    {
+      id: 2,
+      category: "Santri Putra",
+      title: "Kelas Pembelajaran • Santri Putra",
+      topic: "Bimbingan Talaqqi bersama Ustadz",
+      date: "Dokumentasi Resmi",
+      desc: "Kegiatan belajar mengajar intensif dan bimbingan hafalan santri putra yang dibimbing langsung oleh Ustadz di ruang kelas.",
+      src: "/galeri-santri-putra.jpg",
+    },
+    {
+      id: 3,
       category: "Administrasi",
       title: "Administrasi & Tata Usaha",
       topic: "Manajemen Data & Layanan Santri",
@@ -3186,8 +3204,8 @@ function GallerySection() {
           </div>
         </div>
 
-        {/* Gallery Cards Grid (4 columns on desktop) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* Gallery Cards Grid (3 columns on desktop) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filtered.map((item, index) => (
             <div
               key={item.id}
@@ -3195,7 +3213,7 @@ function GallerySection() {
               className="group bg-white rounded-2xl overflow-hidden shadow-xs border border-neutral-200/80 hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col"
             >
               {/* Image Container */}
-              <div className="relative w-full aspect-[4/3] sm:h-48 overflow-hidden bg-neutral-100 flex-shrink-0">
+              <div className="relative w-full aspect-[4/3] sm:h-52 overflow-hidden bg-neutral-100 flex-shrink-0">
                 <Image
                   src={item.src}
                   alt={item.title}
