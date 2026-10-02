@@ -11,7 +11,9 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("beranda");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileExpanded, setMobileExpanded] = useState<{ [key: string]: boolean }>({
+  const [mobileExpanded, setMobileExpanded] = useState<{
+    [key: string]: boolean;
+  }>({
     profil: false,
     program: false,
   });
@@ -29,8 +31,12 @@ function Navbar() {
     setMobileOpen(false);
   };
 
-  const isProfilActive = activeSection === "profil" || activeSection === "struktur";
-  const isProgramActive = activeSection === "program" || activeSection === "jadwal" || activeSection === "brosur";
+  const isProfilActive =
+    activeSection === "profil" || activeSection === "struktur";
+  const isProgramActive =
+    activeSection === "program" ||
+    activeSection === "jadwal" ||
+    activeSection === "brosur";
 
   return (
     <>
@@ -106,7 +112,12 @@ function Navbar() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.5"
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
                 {isProfilActive && (
                   <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
@@ -177,7 +188,12 @@ function Navbar() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.5"
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
                 {isProgramActive && (
                   <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-rtq-gold-500 rounded-full" />
@@ -288,8 +304,18 @@ function Navbar() {
               className="lg:hidden p-2 rounded-xl text-rtq-green-900 hover:bg-neutral-100 transition"
               aria-label="Buka Menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
@@ -299,7 +325,9 @@ function Navbar() {
       {/* Mobile Drawer */}
       <div
         className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setMobileOpen(false)}
       >
@@ -312,8 +340,16 @@ function Navbar() {
           <div>
             <div className="flex items-center justify-between pb-5 border-b border-white/10">
               <div className="flex items-center gap-3">
-                <Image src="/logo-official.png" alt="Logo RTQ" width={40} height={40} className="rounded-full" />
-                <span className="font-extrabold text-sm text-rtq-gold-300">RTQ ABA</span>
+                <Image
+                  src="/logo-official.png"
+                  alt="Logo RTQ"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <span className="font-extrabold text-sm text-rtq-gold-300">
+                  RTQ ABA
+                </span>
               </div>
               <button
                 onClick={() => setMobileOpen(false)}
@@ -340,7 +376,12 @@ function Navbar() {
               {/* Profil Group */}
               <div className="rounded-xl overflow-hidden bg-white/5">
                 <button
-                  onClick={() => setMobileExpanded(prev => ({ ...prev, profil: !prev.profil }))}
+                  onClick={() =>
+                    setMobileExpanded((prev) => ({
+                      ...prev,
+                      profil: !prev.profil,
+                    }))
+                  }
                   className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-white/90 hover:bg-white/10 transition"
                 >
                   <span className="flex items-center gap-2">
@@ -355,7 +396,12 @@ function Navbar() {
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
                 {mobileExpanded.profil && (
@@ -363,7 +409,9 @@ function Navbar() {
                     <button
                       onClick={() => scrollTo("profil")}
                       className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                        activeSection === "profil" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                        activeSection === "profil"
+                          ? "text-rtq-gold-300 font-bold"
+                          : "text-white/70 hover:text-white"
                       }`}
                     >
                       • Tentang RTQ ABA
@@ -371,7 +419,9 @@ function Navbar() {
                     <button
                       onClick={() => scrollTo("struktur")}
                       className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                        activeSection === "struktur" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                        activeSection === "struktur"
+                          ? "text-rtq-gold-300 font-bold"
+                          : "text-white/70 hover:text-white"
                       }`}
                     >
                       • Struktur Organisasi
@@ -383,7 +433,12 @@ function Navbar() {
               {/* Program & Biaya Group */}
               <div className="rounded-xl overflow-hidden bg-white/5">
                 <button
-                  onClick={() => setMobileExpanded(prev => ({ ...prev, program: !prev.program }))}
+                  onClick={() =>
+                    setMobileExpanded((prev) => ({
+                      ...prev,
+                      program: !prev.program,
+                    }))
+                  }
                   className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-white/90 hover:bg-white/10 transition"
                 >
                   <span className="flex items-center gap-2">
@@ -398,7 +453,12 @@ function Navbar() {
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
                 {mobileExpanded.program && (
@@ -406,7 +466,9 @@ function Navbar() {
                     <button
                       onClick={() => scrollTo("program")}
                       className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                        activeSection === "program" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                        activeSection === "program"
+                          ? "text-rtq-gold-300 font-bold"
+                          : "text-white/70 hover:text-white"
                       }`}
                     >
                       • Program Unggulan
@@ -414,7 +476,9 @@ function Navbar() {
                     <button
                       onClick={() => scrollTo("jadwal")}
                       className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                        activeSection === "jadwal" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                        activeSection === "jadwal"
+                          ? "text-rtq-gold-300 font-bold"
+                          : "text-white/70 hover:text-white"
                       }`}
                     >
                       • Jadwal &amp; Biaya Pendidikan
@@ -422,7 +486,9 @@ function Navbar() {
                     <button
                       onClick={() => scrollTo("brosur")}
                       className={`text-left px-3 py-2 rounded-lg text-xs font-medium transition flex items-center justify-between ${
-                        activeSection === "brosur" ? "text-rtq-gold-300 font-bold" : "text-white/70 hover:text-white"
+                        activeSection === "brosur"
+                          ? "text-rtq-gold-300 font-bold"
+                          : "text-white/70 hover:text-white"
                       }`}
                     >
                       <span>• Brosur Resmi SPMB</span>
@@ -481,33 +547,45 @@ function HeroSection() {
   const keunggulan = [
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-1.1 0-2 .9-2 2V5c0-.6.4-1 1-1h13v12z"/>
-          <path d="M8 8h8v2H8zm0 4h5v2H8z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-1.1 0-2 .9-2 2V5c0-.6.4-1 1-1h13v12z" />
+          <path d="M8 8h8v2H8zm0 4h5v2H8z" />
         </svg>
       ),
       label: "Tahfidz Quran",
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
         </svg>
       ),
       label: "Pendidikan Karakter",
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 2c-.6 0-1 .4-1 1v.5C8.2 4.1 6 6.8 6 10v4H4v7h16v-7h-2v-4c0-3.2-2.2-5.9-5-6.5V3c0-.6-.4-1-1-1zm0 3.5c2.5 0 4.5 2 4.5 4.5v4h-9v-4c0-2.5 2-4.5 4.5-4.5zM11 16h2v3h-2v-3z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 2c-.6 0-1 .4-1 1v.5C8.2 4.1 6 6.8 6 10v4H4v7h16v-7h-2v-4c0-3.2-2.2-5.9-5-6.5V3c0-.6-.4-1-1-1zm0 3.5c2.5 0 4.5 2 4.5 4.5v4h-9v-4c0-2.5 2-4.5 4.5-4.5zM11 16h2v3h-2v-3z" />
         </svg>
       ),
       label: "Lingkungan Islami",
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
         </svg>
       ),
       label: "Akhlak Mulia",
@@ -517,8 +595,11 @@ function HeroSection() {
   const programFasilitas = [
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
         </svg>
       ),
       title: "Kurikulum Bertaraf",
@@ -526,8 +607,11 @@ function HeroSection() {
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm7-9.5l-1.5 1.5 1.5 1.5 1.5-1.5-1.5-1.5z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm7-9.5l-1.5 1.5 1.5 1.5 1.5-1.5-1.5-1.5z" />
         </svg>
       ),
       title: "Guru Bersertifikat",
@@ -535,8 +619,11 @@ function HeroSection() {
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
         </svg>
       ),
       title: "Metode Tahfidz",
@@ -544,8 +631,11 @@ function HeroSection() {
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
         </svg>
       ),
       title: "Kelas Kecil Personal",
@@ -553,8 +643,11 @@ function HeroSection() {
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
         </svg>
       ),
       title: "Lingkungan Islami",
@@ -562,8 +655,11 @@ function HeroSection() {
     },
     {
       icon: (
-        <svg className="w-5 h-5 fill-current text-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.65-.5-.65C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-2.22l1.35-1.76C14.31 4.09 14.63 4 15 4zM9 4c.37 0 .69.09.87.24L11.22 6H9c-.55 0-1-.45-1-1s.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76V8h2v.76L15.38 12 17 10.83 14.92 8H20v6z"/>
+        <svg
+          className="w-5 h-5 fill-current text-[#0c3624]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.65-.5-.65C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-2.22l1.35-1.76C14.31 4.09 14.63 4 15 4zM9 4c.37 0 .69.09.87.24L11.22 6H9c-.55 0-1-.45-1-1s.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76V8h2v.76L15.38 12 17 10.83 14.92 8H20v6z" />
         </svg>
       ),
       title: "Beasiswa Santri",
@@ -576,10 +672,12 @@ function HeroSection() {
   };
 
   return (
-    <section id="beranda" className="relative pt-24 sm:pt-28 pb-10 sm:pb-14 px-3 sm:px-4 islamic-pattern-subtle overflow-hidden">
+    <section
+      id="beranda"
+      className="relative pt-24 sm:pt-28 pb-10 sm:pb-14 px-3 sm:px-4 islamic-pattern-subtle overflow-hidden"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
-          
           {/* 1. LEFT WHITE CARD (Identity & Keunggulan) */}
           <div className="lg:col-span-4 bg-white rounded-3xl p-4 sm:p-5 shadow-sm border border-neutral-100 flex flex-col items-center text-center justify-between gap-3 transition hover:shadow-md">
             {/* Logo Emblem */}
@@ -595,7 +693,9 @@ function HeroSection() {
                 />
               </div>
               <h1 className="font-extrabold text-sm sm:text-base text-rtq-green-900 leading-tight">
-                RTQ<br />Abdurrahman bin Auf
+                RTQ
+                <br />
+                Abdurrahman bin Auf
               </h1>
               <p className="text-[10px] text-neutral-500 italic mt-0.5 font-medium">
                 Generasi Qur&apos;ani Penerus Peradaban Mulia
@@ -628,7 +728,7 @@ function HeroSection() {
             <div className="w-full bg-[#EBF7F0] border border-[#d2edd9] rounded-xl py-2 px-3 flex flex-col sm:flex-row items-center justify-between gap-1 text-[10px] text-[#0c3624]">
               <span className="font-semibold flex items-center gap-1.5">
                 <svg className="w-3.5 h-3.5 fill-[#0c3624]" viewBox="0 0 24 24">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
                 <span>Banyuwangi</span>
               </span>
@@ -639,7 +739,7 @@ function HeroSection() {
                 className="font-bold text-[#0c3624] hover:text-emerald-700 flex items-center gap-1.5"
               >
                 <svg className="w-3.5 h-3.5 fill-[#25D366]" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
                 </svg>
                 <span>0852-1218-5139</span>
               </a>
@@ -648,7 +748,6 @@ function HeroSection() {
 
           {/* 2. UNIFIED RIGHT CONTAINER (Hero Banner Card Flush Left + Program & Fasilitas inside 1 Card) */}
           <div className="lg:col-span-8 bg-[#F8F3EA] rounded-3xl overflow-hidden shadow-sm border border-[#ede5d4] grid grid-cols-1 md:grid-cols-12 items-stretch">
-            
             {/* Left Column: Dark Green Hero Banner Card (Full flush to Top, Left, and Bottom) */}
             <div className="md:col-span-6 lg:col-span-6 relative bg-[#0c3624] flex flex-col justify-end w-full h-[400px] sm:h-[440px] lg:h-[460px] min-h-[380px] overflow-hidden">
               {/* Full Background Photo */}
@@ -667,13 +766,16 @@ function HeroSection() {
               {/* Text & Buttons at bottom */}
               <div className="relative z-10 px-3 pb-3 pt-1 text-center flex flex-col items-center justify-center">
                 <h2 className="font-serif text-base sm:text-lg font-bold text-[#F3CD67] leading-tight text-center drop-shadow-sm mb-0.5">
-                  <span className="block text-[11px] sm:text-xs font-normal text-[#F3CD67]">Membentuk</span>
+                  <span className="block text-[11px] sm:text-xs font-normal text-[#F3CD67]">
+                    Membentuk
+                  </span>
                   Generasi Qur&apos;ani
                 </h2>
                 <p className="text-[10px] text-white/95 leading-tight max-w-[210px] mb-2.5 font-normal text-center drop-shadow-sm">
-                  Pendidikan Tahfidz Quran untuk anak usia 6-12 tahun dengan metode holistik dan karakter Islami
+                  Pendidikan Tahfidz Quran untuk anak usia 6-12 tahun dengan
+                  metode holistik dan karakter Islami
                 </p>
-                
+
                 <div className="flex flex-row items-center justify-center gap-2 w-full max-w-[220px]">
                   <button
                     onClick={() => scrollTo("pendaftaran")}
@@ -698,7 +800,10 @@ function HeroSection() {
               </h2>
               <div className="flex flex-col gap-2.5 sm:gap-3">
                 {programFasilitas.map((item) => (
-                  <div key={item.title} className="flex items-center gap-3 group">
+                  <div
+                    key={item.title}
+                    className="flex items-center gap-3 group"
+                  >
                     <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#F5DA9A] text-[#0c3624] flex items-center justify-center flex-shrink-0 text-sm sm:text-base shadow-xs group-hover:scale-105 transition-transform">
                       {item.icon}
                     </div>
@@ -714,9 +819,7 @@ function HeroSection() {
                 ))}
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>
@@ -732,8 +835,11 @@ function StatsBar() {
       number: "150+",
       label: "Santri Aktif",
       icon: (
-        <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]" viewBox="0 0 24 24">
-          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        <svg
+          className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
         </svg>
       ),
     },
@@ -741,8 +847,11 @@ function StatsBar() {
       number: "30+",
       label: "Hafiz/Hafizhah",
       icon: (
-        <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]" viewBox="0 0 24 24">
-          <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+        <svg
+          className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
         </svg>
       ),
     },
@@ -750,8 +859,11 @@ function StatsBar() {
       number: "6+",
       label: "Tahun Mengabdi",
       icon: (
-        <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]" viewBox="0 0 24 24">
-          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+        <svg
+          className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
         </svg>
       ),
     },
@@ -759,8 +871,11 @@ function StatsBar() {
       number: "10",
       label: "Maks. Santri/Kelas",
       icon: (
-        <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]" viewBox="0 0 24 24">
-          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        <svg
+          className="w-7 h-7 sm:w-8 sm:h-8 fill-[#E8B54D]"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
         </svg>
       ),
     },
@@ -772,7 +887,9 @@ function StatsBar() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col items-center">
-              <div className="mb-2 flex items-center justify-center">{s.icon}</div>
+              <div className="mb-2 flex items-center justify-center">
+                {s.icon}
+              </div>
               <span className="font-serif font-extrabold text-2xl sm:text-4xl text-rtq-gold-300 leading-none">
                 {s.number}
               </span>
@@ -798,7 +915,7 @@ function AboutSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
         </svg>
       ),
       title: "IKHLAS",
@@ -807,7 +924,7 @@ function AboutSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
         </svg>
       ),
       title: "AMANAH",
@@ -816,8 +933,8 @@ function AboutSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-1.1 0-2 .9-2 2V5c0-.6.4-1 1-1h13v12z"/>
-          <path d="M8 8h8v2H8zm0 4h5v2H8z"/>
+          <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-1.1 0-2 .9-2 2V5c0-.6.4-1 1-1h13v12z" />
+          <path d="M8 8h8v2H8zm0 4h5v2H8z" />
         </svg>
       ),
       title: "ILMU",
@@ -826,7 +943,7 @@ function AboutSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 2c-.6 0-1 .4-1 1v.5C8.2 4.1 6 6.8 6 10v4H4v7h16v-7h-2v-4c0-3.2-2.2-5.9-5-6.5V3c0-.6-.4-1-1-1zm0 3.5c2.5 0 4.5 2 4.5 4.5v4h-9v-4c0-2.5 2-4.5 4.5-4.5zM11 16h2v3h-2v-3z"/>
+          <path d="M12 2c-.6 0-1 .4-1 1v.5C8.2 4.1 6 6.8 6 10v4H4v7h16v-7h-2v-4c0-3.2-2.2-5.9-5-6.5V3c0-.6-.4-1-1-1zm0 3.5c2.5 0 4.5 2 4.5 4.5v4h-9v-4c0-2.5 2-4.5 4.5-4.5zM11 16h2v3h-2v-3z" />
         </svg>
       ),
       title: "AKHLAK",
@@ -840,7 +957,7 @@ function AboutSection() {
       <div className="bg-[#0c3624] text-white py-10 sm:py-14 px-4 sm:px-6 relative overflow-hidden">
         {/* Subtle Islamic pattern overlay */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8B54D_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-        
+
         <div className="max-w-6xl mx-auto relative z-10">
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-2">
             Profil Kami
@@ -854,17 +971,25 @@ function AboutSection() {
       {/* 2. Tentang RTQ (White Background + Ornamental Frame Image) */}
       <div className="bg-white py-12 sm:py-16 px-4 sm:px-6 border-b border-neutral-100">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
           {/* Left Text Content */}
           <div className="lg:col-span-7 flex flex-col">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0c3624] mb-4 tracking-tight">
               Tentang RTQ
             </h2>
             <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed mb-3">
-              <strong>RTQ (Rumah Tahfiz Al-Quran)</strong> adalah lembaga pendidikan Islam yang fokus pada pembinaan generasi penghafal Al-Qur&apos;an sejak tahun 2018. Berlokasi di lingkungan yang asri dan kondusif, RTQ hadir sebagai wadah untuk mendidik anak-anak dan remaja agar tumbuh dengan kecintaan terhadap Al-Qur&apos;an, akhlak mulia, serta ilmu yang bermanfaat.
+              <strong>RTQ (Rumah Tahfiz Al-Quran)</strong> adalah lembaga
+              pendidikan Islam yang fokus pada pembinaan generasi penghafal
+              Al-Qur&apos;an sejak tahun 2018. Berlokasi di lingkungan yang asri
+              dan kondusif, RTQ hadir sebagai wadah untuk mendidik anak-anak dan
+              remaja agar tumbuh dengan kecintaan terhadap Al-Qur&apos;an,
+              akhlak mulia, serta ilmu yang bermanfaat.
             </p>
             <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
-              Kami berkomitmen mencetak santri yang berakhlak Qur&apos;ani, berdaya saing, dan berkontribusi positif bagi masyarakat melalui pembelajaran Al-Qur&apos;an yang sistematis, terpadu, dan modern dengan tetap berpegang pada nilai-nilai Islam Ahlus Sunnah Wal Jamaah.
+              Kami berkomitmen mencetak santri yang berakhlak Qur&apos;ani,
+              berdaya saing, dan berkontribusi positif bagi masyarakat melalui
+              pembelajaran Al-Qur&apos;an yang sistematis, terpadu, dan modern
+              dengan tetap berpegang pada nilai-nilai Islam Ahlus Sunnah Wal
+              Jamaah.
             </p>
 
             {/* 3 Golden Badges / Pills */}
@@ -872,26 +997,32 @@ function AboutSection() {
               <div className="bg-white border border-[#E8B54D] rounded-full px-3.5 py-1.5 flex items-center gap-2 shadow-xs">
                 <span className="w-5 h-5 rounded-full bg-[#FDF6E2] text-[#0c3624] flex items-center justify-center text-xs">
                   <svg className="w-3 h-3 fill-[#0c3624]" viewBox="0 0 24 24">
-                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
                   </svg>
                 </span>
-                <span className="text-xs font-bold text-[#0c3624]">150+ Santri Aktif</span>
+                <span className="text-xs font-bold text-[#0c3624]">
+                  150+ Santri Aktif
+                </span>
               </div>
               <div className="bg-white border border-[#E8B54D] rounded-full px-3.5 py-1.5 flex items-center gap-2 shadow-xs">
                 <span className="w-5 h-5 rounded-full bg-[#FDF6E2] text-[#0c3624] flex items-center justify-center text-xs">
                   <svg className="w-3 h-3 fill-[#0c3624]" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
                   </svg>
                 </span>
-                <span className="text-xs font-bold text-[#0c3624]">30+ Hafizh/Hafizhah</span>
+                <span className="text-xs font-bold text-[#0c3624]">
+                  30+ Hafizh/Hafizhah
+                </span>
               </div>
               <div className="bg-white border border-[#E8B54D] rounded-full px-3.5 py-1.5 flex items-center gap-2 shadow-xs">
                 <span className="w-5 h-5 rounded-full bg-[#FDF6E2] text-[#0c3624] flex items-center justify-center text-xs">
                   <svg className="w-3 h-3 fill-[#0c3624]" viewBox="0 0 24 24">
-                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z" />
                   </svg>
                 </span>
-                <span className="text-xs font-bold text-[#0c3624]">6 Tahun Mengabdi</span>
+                <span className="text-xs font-bold text-[#0c3624]">
+                  6 Tahun Mengabdi
+                </span>
               </div>
             </div>
           </div>
@@ -909,14 +1040,12 @@ function AboutSection() {
               />
             </div>
           </div>
-
         </div>
       </div>
 
       {/* 3. Visi, Misi & 4 Pilar Section */}
       <div className="bg-[#FAF8F4] py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          
           {/* Section Title */}
           <div className="text-center mb-8 sm:mb-10">
             <h2 className="text-2xl sm:text-3xl font-black text-[#0c3624] tracking-tight">
@@ -927,19 +1056,21 @@ function AboutSection() {
 
           {/* 3-Column Layout: VISI (3 cols) | MISI (3 cols) | 4 Pilar Nilai RTQ (6 cols) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
-            
             {/* Card 1: VISI */}
             <div className="lg:col-span-3 bg-[#0c3624] text-white rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center shadow-md border border-[#164e32]">
               <div className="w-12 h-12 rounded-full bg-[#E8B54D] text-[#0c3624] flex items-center justify-center text-xl font-bold mb-3 shadow-xs">
                 <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
                 </svg>
               </div>
               <h3 className="font-bold text-[#F3CD67] text-base uppercase tracking-wider mb-2">
                 VISI
               </h3>
               <p className="text-xs text-white/90 leading-relaxed">
-                Menjadi lembaga tahfiz Al-Qur&apos;an terpercaya yang melahirkan generasi penghafal Al-Qur&apos;an berakhlak mulia, cerdas, dan berdaya saing untuk membangun peradaban Islami yang rahmatan lil&apos;alamin.
+                Menjadi lembaga tahfiz Al-Qur&apos;an terpercaya yang melahirkan
+                generasi penghafal Al-Qur&apos;an berakhlak mulia, cerdas, dan
+                berdaya saing untuk membangun peradaban Islami yang rahmatan
+                lil&apos;alamin.
               </p>
             </div>
 
@@ -948,7 +1079,7 @@ function AboutSection() {
               <div className="flex flex-col items-center mb-3">
                 <div className="w-12 h-12 rounded-full bg-[#E8B54D] text-[#0c3624] flex items-center justify-center text-xl font-bold mb-2 shadow-xs">
                   <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-                    <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
                   </svg>
                 </div>
                 <h3 className="font-bold text-[#0c3624] text-base uppercase tracking-wider">
@@ -961,7 +1092,8 @@ function AboutSection() {
                     1
                   </span>
                   <span className="leading-snug">
-                    Menyelenggarakan pendidikan tahfiz Al-Qur&apos;an dengan metode yang sistematis dan berkesinambungan.
+                    Menyelenggarakan pendidikan tahfiz Al-Qur&apos;an dengan
+                    metode yang sistematis dan berkesinambungan.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -969,7 +1101,8 @@ function AboutSection() {
                     2
                   </span>
                   <span className="leading-snug">
-                    Membina akhlak dan karakter Islami melalui keteladanan dan pembiasaan ibadah.
+                    Membina akhlak dan karakter Islami melalui keteladanan dan
+                    pembiasaan ibadah.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -977,7 +1110,8 @@ function AboutSection() {
                     3
                   </span>
                   <span className="leading-snug">
-                    Mengembangkan pembelajaran terpadu antara Al-Qur&apos;an, ilmu umum, dan keterampilan hidup.
+                    Mengembangkan pembelajaran terpadu antara Al-Qur&apos;an,
+                    ilmu umum, dan keterampilan hidup.
                   </span>
                 </li>
               </ul>
@@ -1014,9 +1148,7 @@ function AboutSection() {
                 ))}
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>
@@ -1037,11 +1169,12 @@ interface TupItem {
 }
 
 const STRUKTUR_TUP: Record<string, TupItem> = {
-  "Pembina": {
-    "role": "Garis Yayasan · YASKUB",
-    "title": "Pembina",
-    "summary": "Organ tertinggi yayasan yang memegang kewenangan yang tidak diserahkan kepada Pengurus maupun Pengawas (sesuai UU Yayasan & AD/ART).",
-    "tugas": [
+  Pembina: {
+    role: "Garis Yayasan · YASKUB",
+    title: "Pembina",
+    summary:
+      "Organ tertinggi yayasan yang memegang kewenangan yang tidak diserahkan kepada Pengurus maupun Pengawas (sesuai UU Yayasan & AD/ART).",
+    tugas: [
       "Menetapkan dan mengubah Anggaran Dasar yayasan.",
       "Mengangkat dan memberhentikan anggota Pengurus serta Pengawas berdasarkan mekanisme AD/ART.",
       "Menetapkan kebijakan umum yayasan sebagai acuan Pengurus dalam menjalankan kepengurusan.",
@@ -1049,21 +1182,22 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Mengesahkan laporan tahunan yayasan yang disusun oleh Pengurus.",
       "Memutuskan penggabungan, perubahan bentuk, atau pembubaran yayasan sesuai ketentuan hukum.",
       "Memberikan arahan strategis jangka panjang atas visi dan marwah dakwah lembaga.",
-      "Menjadi rujukan tertinggi dalam penyelesaian perselisihan internal antar organ yayasan."
+      "Menjadi rujukan tertinggi dalam penyelesaian perselisihan internal antar organ yayasan.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pemegang kewenangan tertinggi yayasan.",
       "Penentu arah dan kebijakan umum kelembagaan.",
       "Pengangkat & pemberhentian Pengurus/Pengawas.",
       "Penjaga marwah visi-misi dan nilai dakwah yayasan.",
-      "Pemutus perkara strategis/legal yang tidak dilimpahkan ke Pengurus."
-    ]
+      "Pemutus perkara strategis/legal yang tidak dilimpahkan ke Pengurus.",
+    ],
   },
-  "Ketua": {
-    "role": "Garis Yayasan · YASKUB",
-    "title": "Ketua",
-    "summary": "Pemegang kebijakan tertinggi yayasan dan penanggung jawab arah strategis seluruh unit (RTQ & SDIT).",
-    "tugas": [
+  Ketua: {
+    role: "Garis Yayasan · YASKUB",
+    title: "Ketua",
+    summary:
+      "Pemegang kebijakan tertinggi yayasan dan penanggung jawab arah strategis seluruh unit (RTQ & SDIT).",
+    tugas: [
       "Menetapkan visi, misi, dan kebijakan strategis yayasan untuk seluruh unit.",
       "Mengesahkan program kerja dan anggaran tahunan tiap unit (RTQ & SDIT).",
       "Mengangkat serta memberhentikan pengurus, kepala unit, dan pejabat struktural lain.",
@@ -1072,41 +1206,43 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Mengawasi pencapaian target lembaga secara menyeluruh lintas unit.",
       "Memimpin rapat koordinasi pengurus yayasan secara berkala.",
       "Menyetujui pengeluaran dan kebijakan strategis di atas kewenangan kepala unit.",
-      "Menjaga arah pengembangan lembaga tetap selaras dengan visi dakwah pendidikan Qur'ani."
+      "Menjaga arah pengembangan lembaga tetap selaras dengan visi dakwah pendidikan Qur'ani.",
     ],
-    "fungsi": [
+    fungsi: [
       "Kepemimpinan strategis lembaga.",
       "Pengambilan keputusan tertinggi tingkat yayasan.",
       "Representasi kelembagaan ke pihak luar.",
       "Pengawasan lintas unit (RTQ & SDIT).",
-      "Pembina hubungan kemitraan & donatur strategis."
-    ]
+      "Pembina hubungan kemitraan & donatur strategis.",
+    ],
   },
-  "Sekretaris": {
-    "role": "Garis Yayasan · YASKUB",
-    "title": "Sekretaris",
-    "summary": "Penanggung jawab administrasi, dokumentasi, dan kesekretariatan yayasan.",
-    "tugas": [
+  Sekretaris: {
+    role: "Garis Yayasan · YASKUB",
+    title: "Sekretaris",
+    summary:
+      "Penanggung jawab administrasi, dokumentasi, dan kesekretariatan yayasan.",
+    tugas: [
       "Mengelola surat-menyurat masuk dan keluar serta arsip yayasan secara tertib.",
       "Menyusun notulen rapat pengurus dan dokumen legal kelembagaan.",
       "Menyiapkan SK, MoU, dan dokumen administratif lain atas persetujuan Ketua.",
       "Mengoordinasikan agenda, undangan, dan jadwal kegiatan yayasan.",
       "Menjaga kelengkapan dan pembaruan dokumen perizinan tiap unit (izin operasional, akta, dsb).",
       "Mendokumentasikan kegiatan dan keputusan penting yayasan sebagai arsip kelembagaan.",
-      "Menjadi penghubung administratif antara Pembina, Pengurus, dan Pengawas."
+      "Menjadi penghubung administratif antara Pembina, Pengurus, dan Pengawas.",
     ],
-    "fungsi": [
+    fungsi: [
       "Administrasi kelembagaan.",
       "Dokumentasi dan kearsipan.",
       "Koordinasi internal pengurus.",
-      "Penjaga legalitas & kelengkapan dokumen yayasan."
-    ]
+      "Penjaga legalitas & kelengkapan dokumen yayasan.",
+    ],
   },
-  "Bendahara": {
-    "role": "Garis Yayasan · YASKUB",
-    "title": "Bendahara",
-    "summary": "Penanggung jawab pengelolaan keuangan yayasan dan konsolidasi keuangan seluruh unit.",
-    "tugas": [
+  Bendahara: {
+    role: "Garis Yayasan · YASKUB",
+    title: "Bendahara",
+    summary:
+      "Penanggung jawab pengelolaan keuangan yayasan dan konsolidasi keuangan seluruh unit.",
+    tugas: [
       "Menyusun dan mengelola anggaran (RAPB) yayasan bersama pengurus tiap unit.",
       "Mencatat serta mengontrol pemasukan dan pengeluaran kas yayasan secara berkala.",
       "Menerima dan mengonsolidasikan laporan keuangan unit (RTQ & SDIT) setiap bulan.",
@@ -1114,41 +1250,43 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Mengelola penggalangan dana serta pertanggungjawaban dana donatur secara transparan.",
       "Melakukan verifikasi dan audit internal sederhana atas pembukuan tiap unit.",
       "Menetapkan mekanisme dan alur persetujuan pengeluaran keuangan lembaga.",
-      "Menyimpan bukti transaksi dan dokumen pendukung keuangan sesuai standar akuntabilitas."
+      "Menyimpan bukti transaksi dan dokumen pendukung keuangan sesuai standar akuntabilitas.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengelolaan keuangan lembaga.",
       "Kontrol anggaran dan arus kas.",
       "Penjaminan akuntabilitas dana.",
       "Konsolidator laporan keuangan lintas unit.",
-      "Pengelola dana donatur & CSR."
-    ]
+      "Pengelola dana donatur & CSR.",
+    ],
   },
-  "Pengawas": {
-    "role": "Garis Yayasan · YASKUB",
-    "title": "Pengawas",
-    "summary": "Pengawas independen yang memastikan pengurus menjalankan amanah sesuai AD/ART dan aturan.",
-    "tugas": [
+  Pengawas: {
+    role: "Garis Yayasan · YASKUB",
+    title: "Pengawas",
+    summary:
+      "Pengawas independen yang memastikan pengurus menjalankan amanah sesuai AD/ART dan aturan.",
+    tugas: [
       "Mengawasi kinerja pengurus dan kepatuhan pelaksanaan program terhadap AD/ART.",
       "Memeriksa laporan keuangan dan program kerja unit secara berkala.",
       "Memberikan nasihat, teguran, dan rekomendasi perbaikan kepada pengurus.",
       "Mengaudit pelaksanaan kebijakan yayasan dan efektivitas program.",
       "Melaporkan hasil pengawasan kepada Pembina sebagai bahan evaluasi.",
       "Memastikan tidak terjadi penyimpangan penggunaan aset dan dana yayasan.",
-      "Menelaah pengaduan atau permasalahan internal terkait tata kelola lembaga."
+      "Menelaah pengaduan atau permasalahan internal terkait tata kelola lembaga.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengawasan kelembagaan.",
       "Audit internal.",
       "Penjaga akuntabilitas pengurus.",
-      "Pemberi rekomendasi perbaikan tata kelola."
-    ]
+      "Pemberi rekomendasi perbaikan tata kelola.",
+    ],
   },
   "Mudir / Kepala RTQ": {
-    "role": "Pimpinan Operasional",
-    "title": "Mudir / Kepala RTQ",
-    "summary": "Pemimpin operasional tertinggi RTQ; penanggung jawab seluruh program tahfidz dan mutu lembaga sehari-hari.",
-    "tugas": [
+    role: "Pimpinan Operasional",
+    title: "Mudir / Kepala RTQ",
+    summary:
+      "Pemimpin operasional tertinggi RTQ; penanggung jawab seluruh program tahfidz dan mutu lembaga sehari-hari.",
+    tugas: [
       "Memimpin dan mengoordinasikan seluruh kegiatan operasional RTQ lintas bidang.",
       "Menerjemahkan kebijakan yayasan menjadi program kerja dan target tahunan RTQ.",
       "Menetapkan target hafalan, standar mutu tahfidz, dan indikator keberhasilan santri.",
@@ -1157,21 +1295,22 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menjaga kedisiplinan, akhlak, dan budaya Qur'ani di lingkungan lembaga.",
       "Memimpin rapat koordinasi bidang secara rutin untuk sinkronisasi program.",
       "Mengambil keputusan operasional harian yang tidak memerlukan eskalasi ke yayasan.",
-      "Menjadi representasi RTQ dalam kegiatan resmi dan hubungan dengan wali santri."
+      "Menjadi representasi RTQ dalam kegiatan resmi dan hubungan dengan wali santri.",
     ],
-    "fungsi": [
+    fungsi: [
       "Kepemimpinan operasional harian.",
       "Penjaminan mutu program tahfidz.",
       "Pembinaan dan penilaian SDM.",
       "Sinkronisasi program antar bidang.",
-      "Pelapor kinerja RTQ ke yayasan."
-    ]
+      "Pelapor kinerja RTQ ke yayasan.",
+    ],
   },
   "Akademik & Tahfidz": {
-    "role": "Bidang",
-    "title": "Akademik & Tahfidz",
-    "summary": "Penanggung jawab kurikulum, target hafalan, dan mutu pembelajaran tahfidz.",
-    "tugas": [
+    role: "Bidang",
+    title: "Akademik & Tahfidz",
+    summary:
+      "Penanggung jawab kurikulum, target hafalan, dan mutu pembelajaran tahfidz.",
+    tugas: [
       "Menyusun kurikulum, silabus, dan target hafalan per marhalah (jenjang).",
       "Menetapkan metode talaqqi, setoran (ziyadah), dan muroja'ah yang digunakan.",
       "Mengatur kalender akademik dan jadwal pembelajaran tahfidz & mapel umum.",
@@ -1179,39 +1318,40 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Membina dan meningkatkan mutu muhaffizh serta pengampu mata pelajaran.",
       "Mencatat, mengolah, dan mengevaluasi capaian hafalan santri secara sistematis.",
       "Mengoordinasikan Koordinator Halaqah dan Koordinator Kurikulum dalam pelaksanaan harian.",
-      "Melaporkan capaian akademik & tahfidz kepada Mudir secara berkala."
+      "Melaporkan capaian akademik & tahfidz kepada Mudir secara berkala.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengembangan kurikulum dan metode.",
       "Penjaminan mutu akademik.",
       "Evaluasi capaian hafalan.",
-      "Koordinasi lintas unit pelaksana akademik."
-    ]
+      "Koordinasi lintas unit pelaksana akademik.",
+    ],
   },
   "Kesantrian & Pengasuhan": {
-    "role": "Bidang",
-    "title": "Kesantrian & Pengasuhan",
-    "summary": "Penanggung jawab pembinaan akhlak, kedisiplinan, dan penyiapan konsep pengasuhan mukim.",
-    "tugas": [
+    role: "Bidang",
+    title: "Kesantrian & Pengasuhan",
+    summary:
+      "Penanggung jawab pembinaan akhlak, kedisiplinan, dan penyiapan konsep pengasuhan mukim.",
+    tugas: [
       "Menyusun tata tertib santri dan sistem penegakan kedisiplinan.",
       "Membina akhlak, adab, dan karakter Qur'ani santri dalam keseharian.",
       "Menangani perizinan, pelanggaran, dan bimbingan konseling santri.",
       "Menyelenggarakan kegiatan pembinaan, mentoring, dan ekstrakurikuler santri.",
       "Berkoordinasi dengan wali santri terkait perkembangan perilaku dan kedisiplinan anak.",
-      "Melaporkan kondisi kesantrian secara berkala kepada Mudir."
+      "Melaporkan kondisi kesantrian secara berkala kepada Mudir.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pembinaan karakter dan akhlak.",
       "Penegakan disiplin santri.",
       "Penyiapan sistem pengasuhan mukim.",
-      "Penghubung lembaga-wali santri dalam aspek kesantrian."
-    ]
+      "Penghubung lembaga-wali santri dalam aspek kesantrian.",
+    ],
   },
   "Sarpras & Umum": {
-    "role": "Bidang",
-    "title": "Sarpras & Umum",
-    "summary": "Penanggung jawab fasilitas, logistik, dan kerumahtanggaan.",
-    "tugas": [
+    role: "Bidang",
+    title: "Sarpras & Umum",
+    summary: "Penanggung jawab fasilitas, logistik, dan kerumahtanggaan.",
+    tugas: [
       "Mengelola dan memelihara sarana-prasarana RTQ agar layak pakai.",
       "Menyediakan kebutuhan logistik halaqah, kelas, dan kegiatan lembaga.",
       "Mengoordinasikan kebersihan, keamanan, dan kerumahtanggaan harian.",
@@ -1219,20 +1359,21 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menginventarisasi, mendata, dan menjaga aset lembaga secara tertib.",
       "Menangani perbaikan dan pemeliharaan fasilitas secara responsif.",
       "Mengoordinasikan pengadaan barang/jasa sesuai kebutuhan operasional.",
-      "Melaporkan kondisi aset dan sarana kepada Mudir secara berkala."
+      "Melaporkan kondisi aset dan sarana kepada Mudir secara berkala.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengelolaan aset dan fasilitas.",
       "Dukungan logistik operasional.",
       "Pemeliharaan fasilitas.",
-      "Pengelola pengadaan barang/jasa lembaga."
-    ]
+      "Pengelola pengadaan barang/jasa lembaga.",
+    ],
   },
   "Humas & Kerja Sama": {
-    "role": "Bidang",
-    "title": "Humas & Kerja Sama",
-    "summary": "Penanggung jawab hubungan masyarakat, komunikasi wali santri, kemitraan, dan PPDB.",
-    "tugas": [
+    role: "Bidang",
+    title: "Humas & Kerja Sama",
+    summary:
+      "Penanggung jawab hubungan masyarakat, komunikasi wali santri, kemitraan, dan PPDB.",
+    tugas: [
       "Menjembatani komunikasi lembaga dengan wali santri secara rutin dan responsif.",
       "Mengelola publikasi, media sosial, dan citra lembaga di ruang publik.",
       "Menggalang dukungan donatur dan mitra strategis untuk program RTQ.",
@@ -1240,20 +1381,21 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menyelenggarakan kegiatan kehumasan, open house, dan PPDB (penerimaan santri baru).",
       "Menyusun materi promosi dan dokumentasi kegiatan lembaga.",
       "Menangani pengaduan dan masukan dari wali santri/masyarakat sebagai bahan perbaikan.",
-      "Melaporkan hasil kegiatan humas & PPDB kepada Mudir secara berkala."
+      "Melaporkan hasil kegiatan humas & PPDB kepada Mudir secara berkala.",
     ],
-    "fungsi": [
+    fungsi: [
       "Komunikasi publik dan branding.",
       "Pengembangan kemitraan.",
       "Penggalangan dukungan eksternal.",
-      "Pengelola PPDB & promosi lembaga."
-    ]
+      "Pengelola PPDB & promosi lembaga.",
+    ],
   },
   "Koordinator Tata Usaha": {
-    "role": "Pendukung",
-    "title": "Koordinator Tata Usaha",
-    "summary": "Pemimpin unit Tata Usaha yang mengoordinasikan administrasi, presensi, kepegawaian, dan keuangan operasional RTQ.",
-    "tugas": [
+    role: "Pendukung",
+    title: "Koordinator Tata Usaha",
+    summary:
+      "Pemimpin unit Tata Usaha yang mengoordinasikan administrasi, presensi, kepegawaian, dan keuangan operasional RTQ.",
+    tugas: [
       "Memimpin dan membagi tugas staf Tata Usaha (administrasi, presensi/kepegawaian, keuangan).",
       "Mengoordinasikan penyusunan dan validasi seluruh data administrasi RTQ sebelum dilaporkan.",
       "Memastikan sistem presensi (RTQ Absensi) berjalan lancar dan datanya akurat.",
@@ -1261,60 +1403,63 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menjadi penghubung utama Tata Usaha dengan Mudir dan bidang-bidang lain terkait kebutuhan administratif.",
       "Menyusun rekapitulasi bulanan administrasi, presensi, dan keuangan RTQ.",
       "Mengarsipkan dan menjaga kerahasiaan dokumen serta data santri/pegawai.",
-      "Mengevaluasi kinerja staf TU dan mengusulkan perbaikan alur kerja administrasi."
+      "Mengevaluasi kinerja staf TU dan mengusulkan perbaikan alur kerja administrasi.",
     ],
-    "fungsi": [
+    fungsi: [
       "Kepemimpinan unit Tata Usaha.",
       "Koordinasi administrasi, presensi, dan keuangan operasional.",
       "Penjamin akurasi dan ketertiban data & dokumen RTQ.",
-      "Penghubung TU dengan Mudir & bidang lain."
-    ]
+      "Penghubung TU dengan Mudir & bidang lain.",
+    ],
   },
   "Staf Administrasi & Kesantrian": {
-    "role": "Staf TU",
-    "title": "Staf Administrasi & Kesantrian",
-    "summary": "Pengelola data santri, surat-menyurat, dan arsip dokumen administratif RTQ.",
-    "tugas": [
+    role: "Staf TU",
+    title: "Staf Administrasi & Kesantrian",
+    summary:
+      "Pengelola data santri, surat-menyurat, dan arsip dokumen administratif RTQ.",
+    tugas: [
       "Mengelola dan memutakhirkan biodata serta dokumen santri (formulir, KK, akta, dsb).",
       "Menerbitkan dan mengarsipkan surat-menyurat RTQ (surat keterangan, undangan, edaran).",
       "Mengelola pendaftaran santri baru bersama Bidang Humas & PPDB.",
       "Menyiapkan dokumen administratif untuk kebutuhan Mudir dan bidang lain.",
       "Mengarsipkan dokumen santri secara rapi, aman, dan mudah ditelusuri.",
       "Melayani permintaan surat/dokumen dari wali santri sesuai prosedur.",
-      "Melaporkan rekap data santri (jumlah, mutasi, status) kepada Koordinator Tata Usaha."
+      "Melaporkan rekap data santri (jumlah, mutasi, status) kepada Koordinator Tata Usaha.",
     ],
-    "fungsi": [
+    fungsi: [
       "Administrasi data & dokumen santri.",
       "Pengelolaan surat-menyurat.",
       "Layanan administrasi wali santri.",
-      "Pendukung proses PPDB."
-    ]
+      "Pendukung proses PPDB.",
+    ],
   },
   "Staf Presensi & Kepegawaian": {
-    "role": "Staf TU",
-    "title": "Staf Presensi & Kepegawaian",
-    "summary": "Pengelola sistem presensi (RTQ Absensi) serta data kepegawaian ustadz dan staf RTQ.",
-    "tugas": [
+    role: "Staf TU",
+    title: "Staf Presensi & Kepegawaian",
+    summary:
+      "Pengelola sistem presensi (RTQ Absensi) serta data kepegawaian ustadz dan staf RTQ.",
+    tugas: [
       "Mengoperasikan dan memutakhirkan sistem presensi GPS & QR Code (RTQ Absensi).",
       "Merekap kehadiran santri, muhaffizh, guru, dan staf secara harian/bulanan.",
       "Menindaklanjuti kendala teknis presensi (QR tidak terbaca, lokasi GPS, dsb.).",
       "Mengelola data kepegawaian (identitas, jadwal mengajar, riwayat kehadiran).",
       "Menyiapkan laporan kehadiran sebagai dasar penilaian kinerja & honorarium.",
       "Mengingatkan bidang terkait bila ada anomali kehadiran (ustadz/staf sering absen).",
-      "Melaporkan rekap presensi bulanan kepada Koordinator Tata Usaha."
+      "Melaporkan rekap presensi bulanan kepada Koordinator Tata Usaha.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengelolaan sistem presensi digital.",
       "Rekapitulasi kehadiran santri & pegawai.",
       "Administrasi data kepegawaian.",
-      "Dasar data untuk penilaian kinerja."
-    ]
+      "Dasar data untuk penilaian kinerja.",
+    ],
   },
   "Staf Pengelolaan Keuangan & Pembukuan": {
-    "role": "Staf TU",
-    "title": "Staf Pengelolaan Keuangan & Pembukuan",
-    "summary": "Pengelola kas harian, pembayaran wali santri, serta pembukuan dan pelaporan keuangan operasional RTQ.",
-    "tugas": [
+    role: "Staf TU",
+    title: "Staf Pengelolaan Keuangan & Pembukuan",
+    summary:
+      "Pengelola kas harian, pembayaran wali santri, serta pembukuan dan pelaporan keuangan operasional RTQ.",
+    tugas: [
       "Mencatat transaksi kas masuk dan keluar operasional RTQ setiap hari.",
       "Mengelola pembayaran/iuran wali santri, menerbitkan kwitansi, serta memantau tunggakan.",
       "Melakukan opname kas dan serah terima kas secara berkala untuk menjaga keakuratan saldo.",
@@ -1322,20 +1467,21 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menyiapkan rekonsiliasi kas dan dokumen pendukung transaksi (kwitansi, nota, bukti transfer).",
       "Menyampaikan laporan keuangan RTQ kepada Bendahara Yayasan sesuai jadwal.",
       "Mengingatkan wali santri terkait tunggakan pembayaran sesuai kebijakan lembaga.",
-      "Menjaga keamanan dan kerapian dokumen bukti transaksi keuangan."
+      "Menjaga keamanan dan kerapian dokumen bukti transaksi keuangan.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengelolaan kas harian & pembukuan operasional.",
       "Pengelolaan pembayaran wali santri.",
       "Pelaporan keuangan operasional ke Bendahara Yayasan.",
-      "Penjamin ketertiban & akurasi administrasi keuangan."
-    ]
+      "Penjamin ketertiban & akurasi administrasi keuangan.",
+    ],
   },
   "Koordinator Halaqah": {
-    "role": "Koordinator",
-    "title": "Koordinator Halaqah",
-    "summary": "Pengatur pembagian halaqah, jadwal setoran, dan kontrol capaian tiap kelompok.",
-    "tugas": [
+    role: "Koordinator",
+    title: "Koordinator Halaqah",
+    summary:
+      "Pengatur pembagian halaqah, jadwal setoran, dan kontrol capaian tiap kelompok.",
+    tugas: [
       "Membagi santri ke dalam halaqah sesuai capaian dan kemampuan hafalan.",
       "Menyusun jadwal setoran (ziyadah) dan muroja'ah harian/pekanan.",
       "Memantau dan mengevaluasi capaian hafalan tiap halaqah secara berkala.",
@@ -1343,20 +1489,21 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Melaporkan progres dan kendala halaqah ke Bidang Akademik & Tahfidz.",
       "Menyelenggarakan pertemuan koordinasi rutin dengan para muhaffizh/muhaffizhah.",
       "Mengelola data capaian hafalan santri per halaqah sebagai bahan evaluasi.",
-      "Menindaklanjuti santri dengan capaian di bawah target bersama muhaffizh terkait."
+      "Menindaklanjuti santri dengan capaian di bawah target bersama muhaffizh terkait.",
     ],
-    "fungsi": [
+    fungsi: [
       "Koordinasi pelaksanaan halaqah.",
       "Kontrol capaian kelompok.",
       "Penghubung muhaffizh – akademik.",
-      "Pengelola data capaian hafalan per halaqah."
-    ]
+      "Pengelola data capaian hafalan per halaqah.",
+    ],
   },
   "Koordinator Kurikulum": {
-    "role": "Koordinator",
-    "title": "Koordinator Kurikulum",
-    "summary": "Penanggung jawab penyusunan, penyelarasan, dan pengembangan kurikulum tahfidz serta mata pelajaran umum di RTQ.",
-    "tugas": [
+    role: "Koordinator",
+    title: "Koordinator Kurikulum",
+    summary:
+      "Penanggung jawab penyusunan, penyelarasan, dan pengembangan kurikulum tahfidz serta mata pelajaran umum di RTQ.",
+    tugas: [
       "Menyusun dan memperbarui kurikulum, silabus, serta target hafalan per marhalah.",
       "Menyelaraskan kurikulum tahfidz dengan mata pelajaran umum/penunjang agar tidak tumpang tindih.",
       "Menyusun kalender akademik bersama Bidang Akademik & Tahfidz.",
@@ -1365,21 +1512,22 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menyesuaikan kurikulum dengan regulasi pendidikan yang berlaku (mis. Kurikulum Merdeka/ketentuan Kemenag).",
       "Melatih dan mendampingi muhaffizh/guru dalam implementasi kurikulum baru.",
       "Menyusun dokumentasi kurikulum (KOSP, ATP, modul ajar) sebagai arsip mutu lembaga.",
-      "Melaporkan perkembangan dan hasil evaluasi kurikulum kepada Bidang Akademik & Tahfidz."
+      "Melaporkan perkembangan dan hasil evaluasi kurikulum kepada Bidang Akademik & Tahfidz.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengembangan & penyelarasan kurikulum.",
       "Penyusunan perangkat pembelajaran.",
       "Evaluasi & pembaruan kurikulum.",
       "Pendamping implementasi kurikulum bagi pendidik.",
-      "Penjaga kesesuaian kurikulum dengan regulasi pendidikan."
-    ]
+      "Penjaga kesesuaian kurikulum dengan regulasi pendidikan.",
+    ],
   },
   "Muhaffizh / Muhaffizhah": {
-    "role": "Pelaksana Tahfidz",
-    "title": "Muhaffizh / Muhaffizhah",
-    "summary": "Pengampu halaqah yang membimbing setoran, tahsin, dan muroja'ah santri secara langsung.",
-    "tugas": [
+    role: "Pelaksana Tahfidz",
+    title: "Muhaffizh / Muhaffizhah",
+    summary:
+      "Pengampu halaqah yang membimbing setoran, tahsin, dan muroja'ah santri secara langsung.",
+    tugas: [
       "Menerima setoran hafalan baru (ziyadah) santri sesuai target marhalah.",
       "Membimbing muroja'ah dan perbaikan bacaan (tahsin) secara rutin.",
       "Mencatat capaian dan kendala hafalan tiap santri dalam buku/sistem monitoring.",
@@ -1387,20 +1535,21 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Menjaga agar target hafalan sesuai marhalah tercapai tepat waktu.",
       "Melaporkan perkembangan santri kepada Koordinator Halaqah secara berkala.",
       "Mengidentifikasi santri yang memerlukan bimbingan khusus/tambahan.",
-      "Menjadi teladan bacaan dan akhlak Qur'ani bagi santri binaan."
+      "Menjadi teladan bacaan dan akhlak Qur'ani bagi santri binaan.",
     ],
-    "fungsi": [
+    fungsi: [
       "Bimbingan tahfidz langsung.",
       "Perbaikan bacaan (tahsin).",
       "Pembinaan adab santri.",
-      "Pemantau & pelapor capaian individu santri."
-    ]
+      "Pemantau & pelapor capaian individu santri.",
+    ],
   },
-  "Guru": {
-    "role": "Pelaksana Tahfidz",
-    "title": "Guru",
-    "summary": "Pengajar mata pelajaran umum dan penunjang yang melengkapi program tahfidz, di bawah koordinasi Bidang Akademik & Tahfidz.",
-    "tugas": [
+  Guru: {
+    role: "Pelaksana Tahfidz",
+    title: "Guru",
+    summary:
+      "Pengajar mata pelajaran umum dan penunjang yang melengkapi program tahfidz, di bawah koordinasi Bidang Akademik & Tahfidz.",
+    tugas: [
       "Menyusun dan melaksanakan rencana pembelajaran mata pelajaran umum/penunjang.",
       "Mengajar sesuai jadwal dan kurikulum yang ditetapkan Bidang Akademik & Tahfidz.",
       "Menilai dan melaporkan capaian belajar santri secara berkala.",
@@ -1408,18 +1557,17 @@ const STRUKTUR_TUP: Record<string, TupItem> = {
       "Berkoordinasi dengan Koordinator Halaqah agar jadwal mapel tidak bentrok dengan setoran tahfidz.",
       "Melaporkan perkembangan dan kendala pembelajaran ke Bidang Akademik & Tahfidz.",
       "Menggunakan perangkat pembelajaran yang disusun Koordinator Kurikulum secara konsisten.",
-      "Memberikan umpan balik kepada Koordinator Kurikulum untuk penyempurnaan modul ajar."
+      "Memberikan umpan balik kepada Koordinator Kurikulum untuk penyempurnaan modul ajar.",
     ],
-    "fungsi": [
+    fungsi: [
       "Pengajaran mata pelajaran umum/penunjang.",
       "Penilaian capaian belajar santri.",
       "Pembinaan adab di kelas.",
       "Koordinasi jadwal dengan program tahfidz.",
-      "Pemberi umpan balik pengembangan kurikulum."
-    ]
-  }
+      "Pemberi umpan balik pengembangan kurikulum.",
+    ],
+  },
 };
-
 
 function StrukturOrganisasiSection() {
   const [mobileMode, setMobileMode] = useState<"bagan" | "daftar">("bagan");
@@ -1447,9 +1595,11 @@ function StrukturOrganisasiSection() {
   }, [selectedJabatan]);
 
   return (
-    <section id="struktur" className="py-16 sm:py-24 px-3 sm:px-6 bg-[#FAF8F4] relative border-b border-neutral-200/80">
+    <section
+      id="struktur"
+      className="py-16 sm:py-24 px-3 sm:px-6 bg-[#FAF8F4] relative border-b border-neutral-200/80"
+    >
       <div className="max-w-7xl mx-auto">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] text-[#9B7B3B] uppercase mb-2">
@@ -1467,7 +1617,10 @@ function StrukturOrganisasiSection() {
 
           {/* Interactive Hint */}
           <div className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs sm:text-[13px] text-emerald-800 shadow-2xs">
-            <span>💡</span> Klik tiap kotak jabatan untuk melihat <b className="font-semibold text-[#0c3624]">Tugas Pokok &amp; Fungsi</b>
+            <span>💡</span> Klik tiap kotak jabatan untuk melihat{" "}
+            <b className="font-semibold text-[#0c3624]">
+              Tugas Pokok &amp; Fungsi
+            </b>
           </div>
 
           {/* Mobile View Toggle */}
@@ -1500,17 +1653,19 @@ function StrukturOrganisasiSection() {
         {/* ════════════════════════════════════════════════════════
             1. BAGAN LENGKAP (Diagram Hierarki Sesuai Foto)
            ════════════════════════════════════════════════════════ */}
-        <div className={`${mobileMode === "daftar" ? "hidden lg:block" : "block"}`}>
+        <div
+          className={`${mobileMode === "daftar" ? "hidden lg:block" : "block"}`}
+        >
           {/* Mobile Swipe Hint */}
           <div className="lg:hidden text-center mb-4">
             <span className="inline-flex items-center gap-1.5 text-[11px] text-neutral-600 bg-white border border-neutral-200/90 px-3.5 py-1 rounded-full shadow-xs">
-              <span>👉</span> Geser ke samping untuk melihat seluruh bagan <span>👈</span>
+              <span>👉</span> Geser ke samping untuk melihat seluruh bagan{" "}
+              <span>👈</span>
             </span>
           </div>
 
           <div className="overflow-x-auto pb-8 pt-2 -mx-3 px-3 sm:mx-0 sm:px-0">
             <div className="min-w-[1040px] max-w-[1040px] mx-auto flex flex-col items-center">
-
               {/* 1. TOP NODE: RTQ Abdurrahman bin Auf */}
               <div className="bg-[#0c3624] text-white text-xs font-bold px-5 py-1.5 rounded-full shadow-xs">
                 RTQ Abdurrahman bin Auf
@@ -1520,12 +1675,16 @@ function StrukturOrganisasiSection() {
               <div className="w-[1.75px] h-5 bg-[#5A8270]" />
 
               {/* 2. PIMPINAN: Mudir / Kepala RTQ */}
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Mudir / Kepala RTQ"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(STRUKTUR_TUP["Mudir / Kepala RTQ"])
+                }
                 className="bg-[#0c3624] text-white rounded-xl px-7 py-2.5 text-center shadow-md min-w-[260px] max-w-[300px] cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-95 group relative border border-white/20"
                 title="Klik untuk melihat Tugas Pokok & Fungsi Mudir"
               >
-                <span className="absolute top-1.5 right-2.5 text-[11px] text-[#F1D9A6] opacity-75 group-hover:opacity-100 font-bold">ⓘ</span>
+                <span className="absolute top-1.5 right-2.5 text-[11px] text-[#F1D9A6] opacity-75 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
                 <div className="text-[10px] font-bold text-[#DEAB3E] tracking-widest uppercase mb-0.5">
                   PIMPINAN
                 </div>
@@ -1538,30 +1697,65 @@ function StrukturOrganisasiSection() {
               </div>
 
               {/* Main Tree Connector SVG: Splits from Mudir to 5 Columns */}
-              <svg className="w-[1040px] h-9 block" viewBox="0 0 1040 36" fill="none">
-                <path d="M 520 0 L 520 18" stroke="#5A8270" strokeWidth="1.75" />
-                <path d="M 150 18 L 890 18" stroke="#5A8270" strokeWidth="1.75" />
-                <path d="M 150 18 L 150 36" stroke="#5A8270" strokeWidth="1.75" />
-                <path d="M 382.5 18 L 382.5 36" stroke="#5A8270" strokeWidth="1.75" />
-                <path d="M 520 18 L 520 36" stroke="#5A8270" strokeWidth="1.75" />
-                <path d="M 657.5 18 L 657.5 36" stroke="#5A8270" strokeWidth="1.75" />
-                <path d="M 890 18 L 890 36" stroke="#5A8270" strokeWidth="1.75" />
+              <svg
+                className="w-[1040px] h-9 block"
+                viewBox="0 0 1040 36"
+                fill="none"
+              >
+                <path
+                  d="M 520 0 L 520 18"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
+                <path
+                  d="M 150 18 L 890 18"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
+                <path
+                  d="M 150 18 L 150 36"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
+                <path
+                  d="M 382.5 18 L 382.5 36"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
+                <path
+                  d="M 520 18 L 520 36"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
+                <path
+                  d="M 657.5 18 L 657.5 36"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
+                <path
+                  d="M 890 18 L 890 36"
+                  stroke="#5A8270"
+                  strokeWidth="1.75"
+                />
               </svg>
 
               {/* 3. ROW OF 5 MAIN SECTIONS */}
               <div className="flex items-start justify-between w-[1040px]">
-
                 {/* ──────────────────────────────────────────
                     COLUMN 1: Akademik & Tahfidz (300px)
                     ────────────────────────────────────────── */}
                 <div className="w-[300px] flex flex-col items-center">
                   {/* Level 2 Card: Akademik & Tahfidz */}
-                  <div 
-                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Akademik & Tahfidz"])}
+                  <div
+                    onClick={() =>
+                      setSelectedJabatan(STRUKTUR_TUP["Akademik & Tahfidz"])
+                    }
                     className="w-[160px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2.5 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                     title="Klik untuk melihat Tugas Pokok & Fungsi Akademik & Tahfidz"
                   >
-                    <span className="absolute top-1.5 right-2 text-[10px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                    <span className="absolute top-1.5 right-2 text-[10px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                      ⓘ
+                    </span>
                     <div className="text-[9px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -1569,30 +1763,60 @@ function StrukturOrganisasiSection() {
                       Akademik &amp; Tahfidz
                     </h4>
                     <p className="text-[9px] text-[#555555] leading-tight">
-                      Target hafalan, marhalah, talaqqi &amp; muroja&apos;ah, evaluasi
+                      Target hafalan, marhalah, talaqqi &amp; muroja&apos;ah,
+                      evaluasi
                     </p>
                   </div>
 
                   {/* Sub-tree Connector SVG under Akademik & Tahfidz */}
-                  <svg className="w-[300px] h-8 block" viewBox="0 0 300 32" fill="none">
-                    <path d="M 150 0 L 150 16" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 47 16 L 253 16" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 47 16 L 47 32" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 150 16 L 150 32" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 253 16 L 253 32" stroke="#5A8270" strokeWidth="1.75" />
+                  <svg
+                    className="w-[300px] h-8 block"
+                    viewBox="0 0 300 32"
+                    fill="none"
+                  >
+                    <path
+                      d="M 150 0 L 150 16"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 47 16 L 253 16"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 47 16 L 47 32"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 150 16 L 150 32"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 253 16 L 253 32"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
                   </svg>
 
                   {/* 3 Sub-columns under Akademik */}
                   <div className="flex items-start gap-[9px] w-[300px]">
-                    
                     {/* Sub-col 1: Koordinator Halaqah + Pelaksana Muhaffizh */}
                     <div className="w-[94px] flex flex-col items-center">
-                      <div 
-                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Halaqah"])}
+                      <div
+                        onClick={() =>
+                          setSelectedJabatan(
+                            STRUKTUR_TUP["Koordinator Halaqah"],
+                          )
+                        }
                         className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                         title="Klik untuk melihat Tugas Pokok & Fungsi Koordinator Halaqah"
                       >
-                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                          ⓘ
+                        </span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           KOORDINATOR
                         </div>
@@ -1607,12 +1831,18 @@ function StrukturOrganisasiSection() {
                       {/* Connector line down to Muhaffizh */}
                       <div className="w-[1.75px] h-4 bg-[#5A8270]" />
 
-                      <div 
-                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Muhaffizh / Muhaffizhah"])}
+                      <div
+                        onClick={() =>
+                          setSelectedJabatan(
+                            STRUKTUR_TUP["Muhaffizh / Muhaffizhah"],
+                          )
+                        }
                         className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                         title="Klik untuk melihat Tugas Pokok & Fungsi Muhaffizh / Muhaffizhah"
                       >
-                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                          ⓘ
+                        </span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           PELAKSANA
                         </div>
@@ -1627,12 +1857,18 @@ function StrukturOrganisasiSection() {
 
                     {/* Sub-col 2: Koordinator Kurikulum */}
                     <div className="w-[94px] flex flex-col items-center">
-                      <div 
-                        onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Kurikulum"])}
+                      <div
+                        onClick={() =>
+                          setSelectedJabatan(
+                            STRUKTUR_TUP["Koordinator Kurikulum"],
+                          )
+                        }
                         className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                         title="Klik untuk melihat Tugas Pokok & Fungsi Koordinator Kurikulum"
                       >
-                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                          ⓘ
+                        </span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           KOORDINATOR
                         </div>
@@ -1640,19 +1876,22 @@ function StrukturOrganisasiSection() {
                           Koordinator Kurikulum
                         </h5>
                         <p className="text-[8px] text-[#555555] leading-tight">
-                          Penyusunan &amp; penyelarasan kurikulum tahfidz &amp; mapel umum
+                          Penyusunan &amp; penyelarasan kurikulum tahfidz &amp;
+                          mapel umum
                         </p>
                       </div>
                     </div>
 
                     {/* Sub-col 3: Guru */}
                     <div className="w-[94px] flex flex-col items-center">
-                      <div 
+                      <div
                         onClick={() => setSelectedJabatan(STRUKTUR_TUP["Guru"])}
                         className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                         title="Klik untuk melihat Tugas Pokok & Fungsi Guru"
                       >
-                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                        <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                          ⓘ
+                        </span>
                         <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                           PELAKSANA
                         </div>
@@ -1664,7 +1903,6 @@ function StrukturOrganisasiSection() {
                         </p>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
@@ -1672,12 +1910,18 @@ function StrukturOrganisasiSection() {
                     COLUMN 2: Kesantrian & Pengasuhan (110px)
                     ────────────────────────────────────────── */}
                 <div className="w-[110px] flex flex-col items-center">
-                  <div 
-                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Kesantrian & Pengasuhan"])}
+                  <div
+                    onClick={() =>
+                      setSelectedJabatan(
+                        STRUKTUR_TUP["Kesantrian & Pengasuhan"],
+                      )
+                    }
                     className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                     title="Klik untuk melihat Tugas Pokok & Fungsi Kesantrian & Pengasuhan"
                   >
-                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                      ⓘ
+                    </span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -1694,12 +1938,16 @@ function StrukturOrganisasiSection() {
                     COLUMN 3: Sarpras & Umum (110px)
                     ────────────────────────────────────────── */}
                 <div className="w-[110px] flex flex-col items-center">
-                  <div 
-                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Sarpras & Umum"])}
+                  <div
+                    onClick={() =>
+                      setSelectedJabatan(STRUKTUR_TUP["Sarpras & Umum"])
+                    }
                     className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                     title="Klik untuk melihat Tugas Pokok & Fungsi Sarpras & Umum"
                   >
-                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                      ⓘ
+                    </span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -1716,12 +1964,16 @@ function StrukturOrganisasiSection() {
                     COLUMN 4: Humas & Kerja Sama (110px)
                     ────────────────────────────────────────── */}
                 <div className="w-[110px] flex flex-col items-center">
-                  <div 
-                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Humas & Kerja Sama"])}
+                  <div
+                    onClick={() =>
+                      setSelectedJabatan(STRUKTUR_TUP["Humas & Kerja Sama"])
+                    }
                     className="w-[110px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                     title="Klik untuk melihat Tugas Pokok & Fungsi Humas & Kerja Sama"
                   >
-                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                    <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                      ⓘ
+                    </span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       BIDANG
                     </div>
@@ -1739,12 +1991,16 @@ function StrukturOrganisasiSection() {
                     ────────────────────────────────────────── */}
                 <div className="w-[300px] flex flex-col items-center">
                   {/* Level 2 Card: Koordinator Tata Usaha */}
-                  <div 
-                    onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Tata Usaha"])}
+                  <div
+                    onClick={() =>
+                      setSelectedJabatan(STRUKTUR_TUP["Koordinator Tata Usaha"])
+                    }
                     className="w-[160px] min-h-[96px] bg-white border-[1.5px] border-[#0c3624] rounded-xl p-2.5 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                     title="Klik untuk melihat Tugas Pokok & Fungsi Koordinator Tata Usaha"
                   >
-                    <span className="absolute top-1.5 right-2 text-[10px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                    <span className="absolute top-1.5 right-2 text-[10px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                      ⓘ
+                    </span>
                     <div className="text-[9px] font-bold text-[#9B7B3B] uppercase tracking-wider mb-0.5">
                       PENDUKUNG
                     </div>
@@ -1757,24 +2013,53 @@ function StrukturOrganisasiSection() {
                   </div>
 
                   {/* Sub-tree Connector SVG under Tata Usaha */}
-                  <svg className="w-[300px] h-8 block" viewBox="0 0 300 32" fill="none">
-                    <path d="M 150 0 L 150 16" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 47 16 L 253 16" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 47 16 L 47 32" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 150 16 L 150 32" stroke="#5A8270" strokeWidth="1.75" />
-                    <path d="M 253 16 L 253 32" stroke="#5A8270" strokeWidth="1.75" />
+                  <svg
+                    className="w-[300px] h-8 block"
+                    viewBox="0 0 300 32"
+                    fill="none"
+                  >
+                    <path
+                      d="M 150 0 L 150 16"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 47 16 L 253 16"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 47 16 L 47 32"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 150 16 L 150 32"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
+                    <path
+                      d="M 253 16 L 253 32"
+                      stroke="#5A8270"
+                      strokeWidth="1.75"
+                    />
                   </svg>
 
                   {/* 3 Sub-columns under Tata Usaha */}
                   <div className="flex items-start gap-[9px] w-[300px]">
-                    
                     {/* Sub-col 1: Staf Administrasi & Kesantrian */}
-                    <div 
-                      onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Administrasi & Kesantrian"])}
+                    <div
+                      onClick={() =>
+                        setSelectedJabatan(
+                          STRUKTUR_TUP["Staf Administrasi & Kesantrian"],
+                        )
+                      }
                       className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                       title="Klik untuk melihat Tugas Pokok & Fungsi Staf Administrasi & Kesantrian"
                     >
-                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                        ⓘ
+                      </span>
                       <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                         STAF TU
                       </div>
@@ -1787,12 +2072,18 @@ function StrukturOrganisasiSection() {
                     </div>
 
                     {/* Sub-col 2: Staf Presensi & Kepegawaian */}
-                    <div 
-                      onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Presensi & Kepegawaian"])}
+                    <div
+                      onClick={() =>
+                        setSelectedJabatan(
+                          STRUKTUR_TUP["Staf Presensi & Kepegawaian"],
+                        )
+                      }
                       className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                       title="Klik untuk melihat Tugas Pokok & Fungsi Staf Presensi & Kepegawaian"
                     >
-                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                        ⓘ
+                      </span>
                       <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                         STAF TU
                       </div>
@@ -1805,12 +2096,18 @@ function StrukturOrganisasiSection() {
                     </div>
 
                     {/* Sub-col 3: Staf Pengelolaan Keuangan & Pembukuan */}
-                    <div 
-                      onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Pengelolaan Keuangan & Pembukuan"])}
+                    <div
+                      onClick={() =>
+                        setSelectedJabatan(
+                          STRUKTUR_TUP["Staf Pengelolaan Keuangan & Pembukuan"],
+                        )
+                      }
                       className="w-[94px] min-h-[96px] bg-[#FFFDF7] border-[1.5px] border-[#9B7B3B] rounded-xl p-2 text-center shadow-xs flex flex-col justify-center cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95 group relative"
                       title="Klik untuk melihat Tugas Pokok & Fungsi Staf Pengelolaan Keuangan & Pembukuan"
                     >
-                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">ⓘ</span>
+                      <span className="absolute top-1 right-1.5 text-[9px] text-[#B08436] opacity-65 group-hover:opacity-100 font-bold">
+                        ⓘ
+                      </span>
                       <div className="text-[8.5px] font-bold text-[#0c3624] uppercase tracking-wider mb-0.5">
                         STAF TU
                       </div>
@@ -1821,12 +2118,9 @@ function StrukturOrganisasiSection() {
                         Kas harian, pembayaran wali santri, pelaporan
                       </p>
                     </div>
-
                   </div>
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>
@@ -1834,119 +2128,190 @@ function StrukturOrganisasiSection() {
         {/* ════════════════════════════════════════════════════════
             2. DAFTAR HIERARKI (Alternatif Tampilan Mobile / Rapi)
            ════════════════════════════════════════════════════════ */}
-        <div className={`space-y-4 max-w-md mx-auto ${mobileMode === "daftar" ? "block" : "hidden"}`}>
+        <div
+          className={`space-y-4 max-w-md mx-auto ${mobileMode === "daftar" ? "block" : "hidden"}`}
+        >
           {/* Mudir Card */}
-          <div 
-            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Mudir / Kepala RTQ"])}
+          <div
+            onClick={() =>
+              setSelectedJabatan(STRUKTUR_TUP["Mudir / Kepala RTQ"])
+            }
             className="bg-[#0c3624] text-white rounded-2xl p-4 text-center shadow-md cursor-pointer transition-all hover:shadow-lg active:scale-98 group relative"
           >
-            <span className="absolute top-3 right-3 text-xs text-[#DEAB3E] opacity-75 group-hover:opacity-100 font-bold">ⓘ</span>
+            <span className="absolute top-3 right-3 text-xs text-[#DEAB3E] opacity-75 group-hover:opacity-100 font-bold">
+              ⓘ
+            </span>
             <span className="text-[10px] font-bold text-[#DEAB3E] tracking-widest uppercase block mb-1">
               PIMPINAN
             </span>
-            <h4 className="font-bold text-base text-white">Mudir / Kepala RTQ</h4>
-            <p className="text-xs text-white/80 mt-1">Penanggung jawab tertinggi operasional</p>
+            <h4 className="font-bold text-base text-white">
+              Mudir / Kepala RTQ
+            </h4>
+            <p className="text-xs text-white/80 mt-1">
+              Penanggung jawab tertinggi operasional
+            </p>
           </div>
 
           {/* 1. Bidang Akademik & Tahfidz */}
           <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
-            <div 
-              onClick={() => setSelectedJabatan(STRUKTUR_TUP["Akademik & Tahfidz"])}
+            <div
+              onClick={() =>
+                setSelectedJabatan(STRUKTUR_TUP["Akademik & Tahfidz"])
+              }
               className="cursor-pointer group relative mb-3 pb-2 border-b border-neutral-100"
             >
-              <span className="absolute top-0 right-0 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+              <span className="absolute top-0 right-0 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">
+                ⓘ
+              </span>
               <span className="text-[10px] font-bold text-[#0c3624] uppercase tracking-wider block mb-1">
                 BIDANG
               </span>
-              <h4 className="font-bold text-sm text-[#0c3624] group-hover:text-[#9B7B3B] transition-colors">Akademik &amp; Tahfidz</h4>
+              <h4 className="font-bold text-sm text-[#0c3624] group-hover:text-[#9B7B3B] transition-colors">
+                Akademik &amp; Tahfidz
+              </h4>
               <p className="text-xs text-neutral-600">
                 Target hafalan, marhalah, talaqqi &amp; muroja&apos;ah, evaluasi
               </p>
             </div>
 
             <div className="space-y-2 pl-3 border-l-2 border-[#9B7B3B]/40">
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Halaqah"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(STRUKTUR_TUP["Koordinator Halaqah"])
+                }
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">KOORDINATOR</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Koordinator Halaqah</span>
-                <span className="text-[10px] text-neutral-600 block">Pembagian halaqah &amp; jadwal setoran</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  KOORDINATOR
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Koordinator Halaqah
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Pembagian halaqah &amp; jadwal setoran
+                </span>
               </div>
 
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Muhaffizh / Muhaffizhah"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(STRUKTUR_TUP["Muhaffizh / Muhaffizhah"])
+                }
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">PELAKSANA</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Muhaffizh / Muhaffizhah</span>
-                <span className="text-[10px] text-neutral-600 block">Pengampu halaqah &amp; bimbingan setoran</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  PELAKSANA
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Muhaffizh / Muhaffizhah
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Pengampu halaqah &amp; bimbingan setoran
+                </span>
               </div>
 
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Kurikulum"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(STRUKTUR_TUP["Koordinator Kurikulum"])
+                }
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">KOORDINATOR</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Koordinator Kurikulum</span>
-                <span className="text-[10px] text-neutral-600 block">Penyusunan &amp; penyelarasan kurikulum tahfidz &amp; mapel umum</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  KOORDINATOR
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Koordinator Kurikulum
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Penyusunan &amp; penyelarasan kurikulum tahfidz &amp; mapel
+                  umum
+                </span>
               </div>
 
-              <div 
+              <div
                 onClick={() => setSelectedJabatan(STRUKTUR_TUP["Guru"])}
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">PELAKSANA</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Guru</span>
-                <span className="text-[10px] text-neutral-600 block">Pengajar mata pelajaran umum &amp; penunjang</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  PELAKSANA
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Guru
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Pengajar mata pelajaran umum &amp; penunjang
+                </span>
               </div>
             </div>
           </div>
 
           {/* 2. Bidang Kesantrian & Pengasuhan */}
-          <div 
-            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Kesantrian & Pengasuhan"])}
+          <div
+            onClick={() =>
+              setSelectedJabatan(STRUKTUR_TUP["Kesantrian & Pengasuhan"])
+            }
             className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs cursor-pointer hover:border-[#9B7B3B] transition-all group relative"
           >
-            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">
+              ⓘ
+            </span>
             <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
               BIDANG
             </span>
-            <h4 className="font-bold text-sm text-[#0c3624]">Kesantrian &amp; Pengasuhan</h4>
+            <h4 className="font-bold text-sm text-[#0c3624]">
+              Kesantrian &amp; Pengasuhan
+            </h4>
             <p className="text-xs text-neutral-600">
               Akhlak, kedisiplinan &amp; pembinaan karakter
             </p>
           </div>
 
           {/* 3. Bidang Sarpras & Umum */}
-          <div 
+          <div
             onClick={() => setSelectedJabatan(STRUKTUR_TUP["Sarpras & Umum"])}
             className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs cursor-pointer hover:border-[#9B7B3B] transition-all group relative"
           >
-            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">
+              ⓘ
+            </span>
             <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
               BIDANG
             </span>
-            <h4 className="font-bold text-sm text-[#0c3624]">Sarpras &amp; Umum</h4>
+            <h4 className="font-bold text-sm text-[#0c3624]">
+              Sarpras &amp; Umum
+            </h4>
             <p className="text-xs text-neutral-600">
               Fasilitas, logistik &amp; kerumahtanggaan
             </p>
           </div>
 
           {/* 4. Bidang Humas & Kerja Sama */}
-          <div 
-            onClick={() => setSelectedJabatan(STRUKTUR_TUP["Humas & Kerja Sama"])}
+          <div
+            onClick={() =>
+              setSelectedJabatan(STRUKTUR_TUP["Humas & Kerja Sama"])
+            }
             className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs cursor-pointer hover:border-[#9B7B3B] transition-all group relative"
           >
-            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+            <span className="absolute top-3 right-3 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">
+              ⓘ
+            </span>
             <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
               BIDANG
             </span>
-            <h4 className="font-bold text-sm text-[#0c3624]">Humas &amp; Kerja Sama</h4>
+            <h4 className="font-bold text-sm text-[#0c3624]">
+              Humas &amp; Kerja Sama
+            </h4>
             <p className="text-xs text-neutral-600">
               Walisantri, donatur &amp; kemitraan
             </p>
@@ -1954,49 +2319,91 @@ function StrukturOrganisasiSection() {
 
           {/* 5. Koordinator Tata Usaha */}
           <div className="bg-white border-2 border-[#0c3624] rounded-2xl p-4 shadow-xs">
-            <div 
-              onClick={() => setSelectedJabatan(STRUKTUR_TUP["Koordinator Tata Usaha"])}
+            <div
+              onClick={() =>
+                setSelectedJabatan(STRUKTUR_TUP["Koordinator Tata Usaha"])
+              }
               className="cursor-pointer group relative mb-3 pb-2 border-b border-neutral-100"
             >
-              <span className="absolute top-0 right-0 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">ⓘ</span>
+              <span className="absolute top-0 right-0 text-xs text-[#B08436] opacity-70 group-hover:opacity-100 font-bold">
+                ⓘ
+              </span>
               <span className="text-[10px] font-bold text-[#9B7B3B] uppercase tracking-wider block mb-1">
                 PENDUKUNG
               </span>
-              <h4 className="font-bold text-sm text-[#0c3624] group-hover:text-[#9B7B3B] transition-colors">Koordinator Tata Usaha</h4>
+              <h4 className="font-bold text-sm text-[#0c3624] group-hover:text-[#9B7B3B] transition-colors">
+                Koordinator Tata Usaha
+              </h4>
               <p className="text-xs text-neutral-600">
                 Memimpin &amp; mengoordinasikan seluruh administrasi RTQ
               </p>
             </div>
 
             <div className="space-y-2 pl-3 border-l-2 border-[#9B7B3B]/40">
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Administrasi & Kesantrian"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(
+                    STRUKTUR_TUP["Staf Administrasi & Kesantrian"],
+                  )
+                }
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">STAF TU</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Staf Administrasi &amp; Kesantrian</span>
-                <span className="text-[10px] text-neutral-600 block">Data santri, surat-menyurat, arsip dokumen</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  STAF TU
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Staf Administrasi &amp; Kesantrian
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Data santri, surat-menyurat, arsip dokumen
+                </span>
               </div>
 
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Presensi & Kepegawaian"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(
+                    STRUKTUR_TUP["Staf Presensi & Kepegawaian"],
+                  )
+                }
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">STAF TU</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Staf Presensi &amp; Kepegawaian</span>
-                <span className="text-[10px] text-neutral-600 block">Operasional RTQ Absensi &amp; data kepegawaian</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  STAF TU
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Staf Presensi &amp; Kepegawaian
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Operasional RTQ Absensi &amp; data kepegawaian
+                </span>
               </div>
 
-              <div 
-                onClick={() => setSelectedJabatan(STRUKTUR_TUP["Staf Pengelolaan Keuangan & Pembukuan"])}
+              <div
+                onClick={() =>
+                  setSelectedJabatan(
+                    STRUKTUR_TUP["Staf Pengelolaan Keuangan & Pembukuan"],
+                  )
+                }
                 className="bg-[#FAF8F4] p-2.5 rounded-xl border border-[#9B7B3B]/30 cursor-pointer hover:border-[#9B7B3B] transition-colors group relative"
               >
-                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">ⓘ</span>
-                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">STAF TU</span>
-                <span className="text-xs font-bold text-[#0c3624] block">Staf Pengelolaan Keuangan &amp; Pembukuan</span>
-                <span className="text-[10px] text-neutral-600 block">Kas harian, pembayaran wali santri, pelaporan</span>
+                <span className="absolute top-2 right-2 text-[10px] text-[#B08436] opacity-60 group-hover:opacity-100 font-bold">
+                  ⓘ
+                </span>
+                <span className="text-[9px] font-bold text-[#0c3624] uppercase block">
+                  STAF TU
+                </span>
+                <span className="text-xs font-bold text-[#0c3624] block">
+                  Staf Pengelolaan Keuangan &amp; Pembukuan
+                </span>
+                <span className="text-[10px] text-neutral-600 block">
+                  Kas harian, pembayaran wali santri, pelaporan
+                </span>
               </div>
             </div>
           </div>
@@ -2021,23 +2428,26 @@ function StrukturOrganisasiSection() {
         </div>
 
         <p className="text-center text-xs text-[#7a8a83] leading-relaxed mt-4 max-w-2xl mx-auto">
-          Jalur akademik: <b className="text-[#0c3624]">Mudir → Akademik &amp; Tahfidz → Koordinator Halaqah → Muhaffizh.</b><br className="hidden sm:inline" />
-          {" "}Jalur keuangan RTQ tetap melapor ke <b className="text-[#0c3624]">Bendahara Yayasan</b>.
+          Jalur akademik:{" "}
+          <b className="text-[#0c3624]">
+            Mudir → Akademik &amp; Tahfidz → Koordinator Halaqah → Muhaffizh.
+          </b>
+          <br className="hidden sm:inline" /> Jalur keuangan RTQ tetap melapor
+          ke <b className="text-[#0c3624]">Bendahara Yayasan</b>.
         </p>
-
       </div>
 
       {/* ════════════════════════════════════════════════════════
           4. MODAL TUPOKSI (POPUP DETAIL TUGAS POKOK & FUNGSI)
          ════════════════════════════════════════════════════════ */}
       {selectedJabatan && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#09281f]/60 backdrop-blur-xs animate-in fade-in duration-200"
           onClick={() => setSelectedJabatan(null)}
           role="dialog"
           aria-modal="true"
         >
-          <div 
+          <div
             className="bg-[#FCFAF4] text-[#1b2b27] max-w-xl w-full max-h-[88vh] overflow-y-auto rounded-2xl border border-[#E1D8C4] shadow-2xl animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
@@ -2078,7 +2488,10 @@ function StrukturOrganisasiSection() {
                 </h4>
                 <ul className="space-y-2">
                   {selectedJabatan.tugas.map((t, idx) => (
-                    <li key={idx} className="relative pl-5 text-xs sm:text-[13.5px] text-[#33403a] leading-relaxed">
+                    <li
+                      key={idx}
+                      className="relative pl-5 text-xs sm:text-[13.5px] text-[#33403a] leading-relaxed"
+                    >
                       <span className="absolute left-1 top-2 w-1.5 h-1.5 rounded-[1px] bg-[#B08436] rotate-45" />
                       {t}
                     </li>
@@ -2094,7 +2507,10 @@ function StrukturOrganisasiSection() {
                 </h4>
                 <ul className="space-y-2">
                   {selectedJabatan.fungsi.map((f, idx) => (
-                    <li key={idx} className="relative pl-5 text-xs sm:text-[13.5px] text-[#33403a] leading-relaxed">
+                    <li
+                      key={idx}
+                      className="relative pl-5 text-xs sm:text-[13.5px] text-[#33403a] leading-relaxed"
+                    >
                       <span className="absolute left-1 top-2 w-1.5 h-1.5 rounded-[1px] bg-[#B08436] rotate-45" />
                       {f}
                     </li>
@@ -2112,7 +2528,6 @@ function StrukturOrganisasiSection() {
           </div>
         </div>
       )}
-
     </section>
   );
 }
@@ -2122,7 +2537,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-8 h-8 fill-current text-white" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
         </svg>
       ),
       title: "Tahsin",
@@ -2132,8 +2547,11 @@ function ProgramsSection() {
     },
     {
       icon: (
-        <svg className="w-8 h-8 fill-current text-rtq-green-950" viewBox="0 0 24 24">
-          <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+        <svg
+          className="w-8 h-8 fill-current text-rtq-green-950"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
         </svg>
       ),
       title: "Tahfidz",
@@ -2144,7 +2562,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-8 h-8 fill-current text-white" viewBox="0 0 24 24">
-          <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+          <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z" />
         </svg>
       ),
       title: "Murajaah",
@@ -2155,7 +2573,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-8 h-8 fill-current text-white" viewBox="0 0 24 24">
-          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
         </svg>
       ),
       title: "BTQ",
@@ -2169,7 +2587,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
         </svg>
       ),
       title: "Kalam Islami",
@@ -2178,7 +2596,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
         </svg>
       ),
       title: "Doa Harian",
@@ -2187,7 +2605,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+          <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" />
         </svg>
       ),
       title: "Bahasa Arab",
@@ -2196,7 +2614,7 @@ function ProgramsSection() {
     {
       icon: (
         <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
         </svg>
       ),
       title: "Hafalan Hadist",
@@ -2216,7 +2634,8 @@ function ProgramsSection() {
           </h2>
           <div className="w-16 h-1 bg-rtq-gold-400 rounded-full mx-auto mb-4" />
           <p className="text-sm sm:text-base text-neutral-600">
-            Kurikulum terintegrasi untuk membangun santri yang fasih membaca, kuat menghafal, dan berakhlak mulia.
+            Kurikulum terintegrasi untuk membangun santri yang fasih membaca,
+            kuat menghafal, dan berakhlak mulia.
           </p>
         </div>
 
@@ -2252,8 +2671,12 @@ function ProgramsSection() {
                   {t.icon}
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-rtq-green-950">{t.title}</h4>
-                  <p className="text-xs text-neutral-500 leading-snug">{t.desc}</p>
+                  <h4 className="font-bold text-sm text-rtq-green-950">
+                    {t.title}
+                  </h4>
+                  <p className="text-xs text-neutral-500 leading-snug">
+                    {t.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -2285,15 +2708,1795 @@ type RamadhanDayItemType = {
   "KELAS 5": string;
 };
 
-const JADWAL_MASTER: any = {"PRA SEKOLAH": {"name": "PRA SEKOLAH", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - PRA SEKOLAH", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Membaca", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Menulis", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Berhitung", "guru": "Pak Ukasyah"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Membaca", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Bu Dian & Bu Reza"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": "Bu Septi & Bu Reza"}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Menggambar", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Snack Time", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "Praktek Ibadah", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "10.10 - 11.10", "kegiatan": "Prakarya", "guru": "Bu Septi & Bu Reza"}]}}, "KELAS 1": {"name": "KELAS 1", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 1", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Aqidah", "guru": "Pak Ukasyah"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Al - Qur'an Hadist", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Fiqih", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Bahasa Inggris", "guru": "Bu Reza"}, {"jam": "II", "waktu": "08.40 - 09.15", "kegiatan": "Coding & AI", "guru": "Bu Reza"}, {"jam": "III", "waktu": "09.15 - 09.50", "kegiatan": "Prakarya", "guru": "Bu Septi"}, {"jam": "", "waktu": "09.50 - 10.10", "kegiatan": "Snack Time", "guru": ""}, {"jam": "IV", "waktu": "10.10 - 10.45", "kegiatan": "Praktek Ibadah", "guru": "Pak Ukasyah"}, {"jam": "V", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 2": {"name": "KELAS 2", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 2", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Al - Qur'an Hadist", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Matematika", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Aqidah", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Umar & Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Inggris", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Fiqih", "guru": "Pak Ukasyah"}, {"jam": "II", "waktu": "08.40 - 09.15", "kegiatan": "Coding & AI", "guru": "Bu Reza"}, {"jam": "III", "waktu": "09.15 - 09.50", "kegiatan": "Prakarya", "guru": "Bu Septi"}, {"jam": "", "waktu": "09.50 - 10.10", "kegiatan": "Snack Time", "guru": ""}, {"jam": "IV", "waktu": "10.10 - 10.45", "kegiatan": "Praktek Ibadah", "guru": "Pak Ukasyah"}, {"jam": "V", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 3": {"name": "KELAS 3", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 3", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Fiqih", "guru": "Pak Ukasyah"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Aqidah", "guru": "Bu Septi"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Bu Husna"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Bu Husna"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Inggris", "guru": "Bu Dian"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Al - Qur'an Hadist", "guru": "Pak Umar"}, {"jam": "II", "waktu": "08.40 - 09.15", "kegiatan": "Coding & AI", "guru": "Bu Reza"}, {"jam": "III", "waktu": "09.15 - 09.50", "kegiatan": "Prakarya", "guru": "Bu Septi"}, {"jam": "", "waktu": "09.50 - 10.10", "kegiatan": "Istirahat", "guru": ""}, {"jam": "IV", "waktu": "10.10 - 10.45", "kegiatan": "IPAS", "guru": "Bu Reza"}, {"jam": "V", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 5": {"name": "KELAS 5", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 5", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Fiqih", "guru": "Bu Husna"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.00", "kegiatan": "Coding & AI", "guru": "Pak Umar"}, {"jam": "III", "waktu": "10.00 - 10.35", "kegiatan": "SKI", "guru": "Pak Umar"}, {"jam": "IV", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "V", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "IPAS", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Aqidah", "guru": "Bu Husna"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Dian"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Reza"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Bahasa Inggris", "guru": "Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "III", "waktu": "10.10 - 10.45", "kegiatan": "Al -Qur'an Hadist", "guru": "Bu Husna"}, {"jam": "IV", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "KELAS 6": {"name": "KELAS 6", "title": "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 6", "semester": "Semester Ganjil 2026/2027", "days": {"Senin": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Selasa": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Fiqih", "guru": "Bu Husna"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "Matematika", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Rabu": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.35", "kegiatan": "Aqidah", "guru": "Pak Umar"}, {"jam": "III", "waktu": "10.35 - 11.45", "kegiatan": "Tahsin", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "IV", "waktu": "13.25 - 14.35", "kegiatan": "IPAS", "guru": "Bu Titin"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Kamis": [{"jam": "", "waktu": "07.30 - 07.45", "kegiatan": "Bina Karakter", "guru": ""}, {"jam": "I", "waktu": "07.45 - 08.55", "kegiatan": "Tahfidz", "guru": "Pak Ukasyah"}, {"jam": "", "waktu": "08.55 - 09.25", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.25 - 10.00", "kegiatan": "Coding & AI", "guru": "Pak Umar"}, {"jam": "III", "waktu": "10.00 - 10.35", "kegiatan": "SKI", "guru": "Pak Umar"}, {"jam": "IV", "waktu": "10.35 - 11.45", "kegiatan": "Bahasa Arab", "guru": "Bu Septi"}, {"jam": "", "waktu": "11.45 - 12.00", "kegiatan": "Makan Siang", "guru": ""}, {"jam": "", "waktu": "12.00 - 12.25", "kegiatan": "Wudhu + Sholat + Dzikir", "guru": ""}, {"jam": "", "waktu": "12.25 -13.25", "kegiatan": "Tidur Siang", "guru": ""}, {"jam": "V", "waktu": "13.25 - 14.35", "kegiatan": "Al - Qur'an Hadist", "guru": "Bu Husna"}, {"jam": "", "waktu": "14.35 -14.55", "kegiatan": "Piket Bersama", "guru": ""}, {"jam": "", "waktu": "14.55 - 15.10", "kegiatan": "Persiapan Sholat + pulang", "guru": ""}], "Jum'at": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "PJOK", "guru": "Pak Ukasyah & Bu Dian"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "PKBM (Bahasa Daerah)", "guru": ""}], "Sabtu": [{"jam": "I", "waktu": "07.30 - 08.40", "kegiatan": "Bahasa Inggris", "guru": "Bu Septi"}, {"jam": "", "waktu": "08.40 - 09.00", "kegiatan": "Istirahat", "guru": ""}, {"jam": "II", "waktu": "09.00 - 10.10", "kegiatan": "Pendidikan Pancasila", "guru": "Bu Dian"}, {"jam": "III", "waktu": "10.10 - 10.45", "kegiatan": "Bahasa Indonesia", "guru": "Bu Dian"}, {"jam": "IV", "waktu": "10.45 - 11.20", "kegiatan": "Pramuka", "guru": ""}, {"jam": "", "waktu": "Banyuwangi, ………………………….. 2026", "kegiatan": "", "guru": ""}]}}, "JADWAL RAMADHAN": {"name": "JADWAL RAMADHAN", "title": "Jadwal Pelajaran Khusus Bulan Ramadhan 1447 H", "semester": "Bulan Ramadhan 1447 H", "classes": ["PRA SEKOLAH", "KELAS 1", "KELAS 2", "KELAS 4", "KELAS 5"], "days": {"Senin": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Membaca", "KELAS 1": "Matematika", "KELAS 2": "Fiqih", "KELAS 4": "Al - Qur'an Hadist", "KELAS 5": "Matematika"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Tahsin", "KELAS 5": "Tahsin"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "Fiqih", "KELAS 2": "Matematika", "KELAS 4": "Matematika", "KELAS 5": "Al - Qur'an Hadist"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Selasa": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Menulis", "KELAS 1": "Bahasa Indonesia", "KELAS 2": "Aqidah", "KELAS 4": "IPAS", "KELAS 5": "Fiqih"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Tahsin", "KELAS 5": "Tahsin"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "Aqidah", "KELAS 2": "Bahasa Indonesia", "KELAS 4": "Fiqih", "KELAS 5": "IPAS"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Rabu": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Berhitung", "KELAS 1": "Bahasa Arab", "KELAS 2": "PKN", "KELAS 4": "Matematika", "KELAS 5": "Aqidah"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Tahsin", "KELAS 5": "Tahsin"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "PKN", "KELAS 2": "Bahasa Arab", "KELAS 4": "Aqidah", "KELAS 5": "Matematika"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Kamis": [{"jam": "1", "waktu": "07.30 - 07.45", "PRA SEKOLAH": "BK/Dzikir Pagi", "KELAS 1": "BK/Dzikir Pagi", "KELAS 2": "BK/Dzikir Pagi", "KELAS 4": "BK/Dzikir Pagi", "KELAS 5": "BK/Dzikir Pagi"}, {"jam": "2", "waktu": "07.45 - 08.30", "PRA SEKOLAH": "Tahfidz", "KELAS 1": "Tahfidz", "KELAS 2": "Tahfidz", "KELAS 4": "Tahfidz", "KELAS 5": "Tahfidz"}, {"jam": "3", "waktu": "08.30 - 09.15", "PRA SEKOLAH": "Membaca", "KELAS 1": "Bahasa Indonesia", "KELAS 2": "Al - Qur'an Hadist", "KELAS 4": "SKI", "KELAS 5": "Bahasa Arab"}, {"jam": "4", "waktu": "09.15 - 09.30", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "5", "waktu": "09.30 - 10.15", "PRA SEKOLAH": "Tahsin", "KELAS 1": "Tahsin", "KELAS 2": "Tahsin", "KELAS 4": "Bahasa Arab", "KELAS 5": "PKN"}, {"jam": "6", "waktu": "10.15 - 11.00", "PRA SEKOLAH": "Pulang", "KELAS 1": "Al - Qur'an Hadist", "KELAS 2": "Bahasa Indonesia", "KELAS 4": "PKN", "KELAS 5": "SKI"}, {"jam": "7", "waktu": "11.00 - Pulang", "PRA SEKOLAH": "", "KELAS 1": "Pulang", "KELAS 2": "Pulang", "KELAS 4": "Pulang", "KELAS 5": "Pulang"}], "Jum'at": [{"jam": "1", "waktu": "07.30 - 08.00", "PRA SEKOLAH": "BK/Dzikir/Sholat", "KELAS 1": "BK/Dzikir/Sholat", "KELAS 2": "BK/Dzikir/Sholat", "KELAS 4": "BK/Dzikir/Sholat", "KELAS 5": "BK/Dzikir/Sholat"}, {"jam": "2", "waktu": "08.00 - 08.45", "PRA SEKOLAH": "Praktek Ibadah", "KELAS 1": "Praktek Ibadah", "KELAS 2": "Praktek Ibadah", "KELAS 4": "Bahasa Indonesia", "KELAS 5": "Bahasa Arab"}, {"jam": "3", "waktu": "08.45 - 09.15", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "4", "waktu": "09.15 - 10.00", "PRA SEKOLAH": "", "KELAS 1": "Bahasa Inggris", "KELAS 2": "Bahasa Inggris", "KELAS 4": "Bahasa Arab", "KELAS 5": "Bahasa Indonesia"}], "Sabtu": [{"jam": "1", "waktu": "07.30 - 08.00", "PRA SEKOLAH": "Prakarya", "KELAS 1": "Prakarya", "KELAS 2": "Prakarya", "KELAS 4": "Prakarya", "KELAS 5": "Prakarya"}, {"jam": "2", "waktu": "08.00 - 08.45", "PRA SEKOLAH": "Prakarya", "KELAS 1": "Prakarya", "KELAS 2": "Prakarya", "KELAS 4": "Prakarya", "KELAS 5": "Prakarya"}, {"jam": "3", "waktu": "08.45 - 09.15", "PRA SEKOLAH": "Istirahat", "KELAS 1": "Istirahat", "KELAS 2": "Istirahat", "KELAS 4": "Istirahat", "KELAS 5": "Istirahat"}, {"jam": "4", "waktu": "09.15 - 10.30", "PRA SEKOLAH": "PKBM/Menggambar", "KELAS 1": "PKBM/Bhs.Indo", "KELAS 2": "PKBM/Bhs.Indo", "KELAS 4": "PKBM/MTK", "KELAS 5": "PKBM/MTK"}]}}};
+const JADWAL_MASTER: any = {
+  "PRA SEKOLAH": {
+    name: "PRA SEKOLAH",
+    title: "Jadwal Pelajaran RTQ Abdurrahman bin Auf - PRA SEKOLAH",
+    semester: "Semester Ganjil 2026/2027",
+    days: {
+      Senin: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Membaca",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Menulis",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Berhitung",
+          guru: "Pak Ukasyah",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Membaca",
+          guru: "Bu Septi",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "PJOK",
+          guru: "Bu Dian & Bu Reza",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "PKBM (Bahasa Daerah)",
+          guru: "Bu Septi & Bu Reza",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "Menggambar",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Snack Time", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "Praktek Ibadah",
+          guru: "Pak Ukasyah",
+        },
+        {
+          jam: "",
+          waktu: "10.10 - 11.10",
+          kegiatan: "Prakarya",
+          guru: "Bu Septi & Bu Reza",
+        },
+      ],
+    },
+  },
+  "KELAS 1": {
+    name: "KELAS 1",
+    title: "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 1",
+    semester: "Semester Ganjil 2026/2027",
+    days: {
+      Senin: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Bahasa Arab",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Pendidikan Pancasila",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Matematika",
+          guru: "Bu Dian",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Aqidah",
+          guru: "Pak Ukasyah",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Reza",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Al - Qur'an Hadist",
+          guru: "Bu Septi",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Fiqih",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "PJOK",
+          guru: "Pak Ukasyah & Bu Dian",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "PKBM (Bahasa Daerah)",
+          guru: "",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "Bahasa Inggris",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "II",
+          waktu: "08.40 - 09.15",
+          kegiatan: "Coding & AI",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "09.15 - 09.50",
+          kegiatan: "Prakarya",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "09.50 - 10.10", kegiatan: "Snack Time", guru: "" },
+        {
+          jam: "IV",
+          waktu: "10.10 - 10.45",
+          kegiatan: "Praktek Ibadah",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "V", waktu: "10.45 - 11.20", kegiatan: "Pramuka", guru: "" },
+        {
+          jam: "",
+          waktu: "Banyuwangi, ………………………….. 2026",
+          kegiatan: "",
+          guru: "",
+        },
+      ],
+    },
+  },
+  "KELAS 2": {
+    name: "KELAS 2",
+    title: "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 2",
+    semester: "Semester Ganjil 2026/2027",
+    days: {
+      Senin: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Al - Qur'an Hadist",
+          guru: "Bu Septi",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Reza",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Arab",
+          guru: "Bu Septi",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Pendidikan Pancasila",
+          guru: "Bu Reza",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Matematika",
+          guru: "Bu Dian",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Aqidah",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Umar & Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Bahasa Inggris",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "PJOK",
+          guru: "Pak Ukasyah & Bu Dian",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "PKBM (Bahasa Daerah)",
+          guru: "",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "Fiqih",
+          guru: "Pak Ukasyah",
+        },
+        {
+          jam: "II",
+          waktu: "08.40 - 09.15",
+          kegiatan: "Coding & AI",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "09.15 - 09.50",
+          kegiatan: "Prakarya",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "09.50 - 10.10", kegiatan: "Snack Time", guru: "" },
+        {
+          jam: "IV",
+          waktu: "10.10 - 10.45",
+          kegiatan: "Praktek Ibadah",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "V", waktu: "10.45 - 11.20", kegiatan: "Pramuka", guru: "" },
+        {
+          jam: "",
+          waktu: "Banyuwangi, ………………………….. 2026",
+          kegiatan: "",
+          guru: "",
+        },
+      ],
+    },
+  },
+  "KELAS 3": {
+    name: "KELAS 3",
+    title: "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 3",
+    semester: "Semester Ganjil 2026/2027",
+    days: {
+      Senin: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Fiqih",
+          guru: "Pak Ukasyah",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Matematika",
+          guru: "Bu Dian",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Dian",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Aqidah",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Arab",
+          guru: "Bu Septi",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Pendidikan Pancasila",
+          guru: "Bu Dian",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Dian",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Bahasa Inggris",
+          guru: "Bu Dian",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "PJOK",
+          guru: "Pak Ukasyah & Bu Dian",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "PKBM (Bahasa Daerah)",
+          guru: "",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "Al - Qur'an Hadist",
+          guru: "Pak Umar",
+        },
+        {
+          jam: "II",
+          waktu: "08.40 - 09.15",
+          kegiatan: "Coding & AI",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "09.15 - 09.50",
+          kegiatan: "Prakarya",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "09.50 - 10.10", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "IV",
+          waktu: "10.10 - 10.45",
+          kegiatan: "IPAS",
+          guru: "Bu Reza",
+        },
+        { jam: "V", waktu: "10.45 - 11.20", kegiatan: "Pramuka", guru: "" },
+        {
+          jam: "",
+          waktu: "Banyuwangi, ………………………….. 2026",
+          kegiatan: "",
+          guru: "",
+        },
+      ],
+    },
+  },
+  "KELAS 5": {
+    name: "KELAS 5",
+    title: "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 5",
+    semester: "Semester Ganjil 2026/2027",
+    days: {
+      Senin: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Fiqih",
+          guru: "Bu Husna",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Matematika",
+          guru: "Bu Titin",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.00",
+          kegiatan: "Coding & AI",
+          guru: "Pak Umar",
+        },
+        {
+          jam: "III",
+          waktu: "10.00 - 10.35",
+          kegiatan: "SKI",
+          guru: "Pak Umar",
+        },
+        {
+          jam: "IV",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "V",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Matematika",
+          guru: "Bu Titin",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Reza",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "IPAS",
+          guru: "Bu Titin",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Aqidah",
+          guru: "Bu Husna",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Pendidikan Pancasila",
+          guru: "Bu Dian",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Reza",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "PJOK",
+          guru: "Pak Ukasyah & Bu Dian",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "PKBM (Bahasa Daerah)",
+          guru: "",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "Bahasa Inggris",
+          guru: "Bu Dian",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "Bahasa Arab",
+          guru: "Bu Septi",
+        },
+        {
+          jam: "III",
+          waktu: "10.10 - 10.45",
+          kegiatan: "Al -Qur'an Hadist",
+          guru: "Bu Husna",
+        },
+        { jam: "IV", waktu: "10.45 - 11.20", kegiatan: "Pramuka", guru: "" },
+        {
+          jam: "",
+          waktu: "Banyuwangi, ………………………….. 2026",
+          kegiatan: "",
+          guru: "",
+        },
+      ],
+    },
+  },
+  "KELAS 6": {
+    name: "KELAS 6",
+    title: "Jadwal Pelajaran RTQ Abdurrahman bin Auf - KELAS 6",
+    semester: "Semester Ganjil 2026/2027",
+    days: {
+      Senin: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Dian",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Matematika",
+          guru: "Bu Titin",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Fiqih",
+          guru: "Bu Husna",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Matematika",
+          guru: "Bu Titin",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.35",
+          kegiatan: "Aqidah",
+          guru: "Pak Umar",
+        },
+        {
+          jam: "III",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Tahsin",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "IV",
+          waktu: "13.25 - 14.35",
+          kegiatan: "IPAS",
+          guru: "Bu Titin",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "",
+          waktu: "07.30 - 07.45",
+          kegiatan: "Bina Karakter",
+          guru: "",
+        },
+        {
+          jam: "I",
+          waktu: "07.45 - 08.55",
+          kegiatan: "Tahfidz",
+          guru: "Pak Ukasyah",
+        },
+        { jam: "", waktu: "08.55 - 09.25", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.25 - 10.00",
+          kegiatan: "Coding & AI",
+          guru: "Pak Umar",
+        },
+        {
+          jam: "III",
+          waktu: "10.00 - 10.35",
+          kegiatan: "SKI",
+          guru: "Pak Umar",
+        },
+        {
+          jam: "IV",
+          waktu: "10.35 - 11.45",
+          kegiatan: "Bahasa Arab",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "11.45 - 12.00", kegiatan: "Makan Siang", guru: "" },
+        {
+          jam: "",
+          waktu: "12.00 - 12.25",
+          kegiatan: "Wudhu + Sholat + Dzikir",
+          guru: "",
+        },
+        { jam: "", waktu: "12.25 -13.25", kegiatan: "Tidur Siang", guru: "" },
+        {
+          jam: "V",
+          waktu: "13.25 - 14.35",
+          kegiatan: "Al - Qur'an Hadist",
+          guru: "Bu Husna",
+        },
+        { jam: "", waktu: "14.35 -14.55", kegiatan: "Piket Bersama", guru: "" },
+        {
+          jam: "",
+          waktu: "14.55 - 15.10",
+          kegiatan: "Persiapan Sholat + pulang",
+          guru: "",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "PJOK",
+          guru: "Pak Ukasyah & Bu Dian",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "PKBM (Bahasa Daerah)",
+          guru: "",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "I",
+          waktu: "07.30 - 08.40",
+          kegiatan: "Bahasa Inggris",
+          guru: "Bu Septi",
+        },
+        { jam: "", waktu: "08.40 - 09.00", kegiatan: "Istirahat", guru: "" },
+        {
+          jam: "II",
+          waktu: "09.00 - 10.10",
+          kegiatan: "Pendidikan Pancasila",
+          guru: "Bu Dian",
+        },
+        {
+          jam: "III",
+          waktu: "10.10 - 10.45",
+          kegiatan: "Bahasa Indonesia",
+          guru: "Bu Dian",
+        },
+        { jam: "IV", waktu: "10.45 - 11.20", kegiatan: "Pramuka", guru: "" },
+        {
+          jam: "",
+          waktu: "Banyuwangi, ………………………….. 2026",
+          kegiatan: "",
+          guru: "",
+        },
+      ],
+    },
+  },
+  "JADWAL RAMADHAN": {
+    name: "JADWAL RAMADHAN",
+    title: "Jadwal Pelajaran Khusus Bulan Ramadhan 1447 H",
+    semester: "Bulan Ramadhan 1447 H",
+    classes: ["PRA SEKOLAH", "KELAS 1", "KELAS 2", "KELAS 4", "KELAS 5"],
+    days: {
+      Senin: [
+        {
+          jam: "1",
+          waktu: "07.30 - 07.45",
+          "PRA SEKOLAH": "BK/Dzikir Pagi",
+          "KELAS 1": "BK/Dzikir Pagi",
+          "KELAS 2": "BK/Dzikir Pagi",
+          "KELAS 4": "BK/Dzikir Pagi",
+          "KELAS 5": "BK/Dzikir Pagi",
+        },
+        {
+          jam: "2",
+          waktu: "07.45 - 08.30",
+          "PRA SEKOLAH": "Tahfidz",
+          "KELAS 1": "Tahfidz",
+          "KELAS 2": "Tahfidz",
+          "KELAS 4": "Tahfidz",
+          "KELAS 5": "Tahfidz",
+        },
+        {
+          jam: "3",
+          waktu: "08.30 - 09.15",
+          "PRA SEKOLAH": "Membaca",
+          "KELAS 1": "Matematika",
+          "KELAS 2": "Fiqih",
+          "KELAS 4": "Al - Qur'an Hadist",
+          "KELAS 5": "Matematika",
+        },
+        {
+          jam: "4",
+          waktu: "09.15 - 09.30",
+          "PRA SEKOLAH": "Istirahat",
+          "KELAS 1": "Istirahat",
+          "KELAS 2": "Istirahat",
+          "KELAS 4": "Istirahat",
+          "KELAS 5": "Istirahat",
+        },
+        {
+          jam: "5",
+          waktu: "09.30 - 10.15",
+          "PRA SEKOLAH": "Tahsin",
+          "KELAS 1": "Tahsin",
+          "KELAS 2": "Tahsin",
+          "KELAS 4": "Tahsin",
+          "KELAS 5": "Tahsin",
+        },
+        {
+          jam: "6",
+          waktu: "10.15 - 11.00",
+          "PRA SEKOLAH": "Pulang",
+          "KELAS 1": "Fiqih",
+          "KELAS 2": "Matematika",
+          "KELAS 4": "Matematika",
+          "KELAS 5": "Al - Qur'an Hadist",
+        },
+        {
+          jam: "7",
+          waktu: "11.00 - Pulang",
+          "PRA SEKOLAH": "",
+          "KELAS 1": "Pulang",
+          "KELAS 2": "Pulang",
+          "KELAS 4": "Pulang",
+          "KELAS 5": "Pulang",
+        },
+      ],
+      Selasa: [
+        {
+          jam: "1",
+          waktu: "07.30 - 07.45",
+          "PRA SEKOLAH": "BK/Dzikir Pagi",
+          "KELAS 1": "BK/Dzikir Pagi",
+          "KELAS 2": "BK/Dzikir Pagi",
+          "KELAS 4": "BK/Dzikir Pagi",
+          "KELAS 5": "BK/Dzikir Pagi",
+        },
+        {
+          jam: "2",
+          waktu: "07.45 - 08.30",
+          "PRA SEKOLAH": "Tahfidz",
+          "KELAS 1": "Tahfidz",
+          "KELAS 2": "Tahfidz",
+          "KELAS 4": "Tahfidz",
+          "KELAS 5": "Tahfidz",
+        },
+        {
+          jam: "3",
+          waktu: "08.30 - 09.15",
+          "PRA SEKOLAH": "Menulis",
+          "KELAS 1": "Bahasa Indonesia",
+          "KELAS 2": "Aqidah",
+          "KELAS 4": "IPAS",
+          "KELAS 5": "Fiqih",
+        },
+        {
+          jam: "4",
+          waktu: "09.15 - 09.30",
+          "PRA SEKOLAH": "Istirahat",
+          "KELAS 1": "Istirahat",
+          "KELAS 2": "Istirahat",
+          "KELAS 4": "Istirahat",
+          "KELAS 5": "Istirahat",
+        },
+        {
+          jam: "5",
+          waktu: "09.30 - 10.15",
+          "PRA SEKOLAH": "Tahsin",
+          "KELAS 1": "Tahsin",
+          "KELAS 2": "Tahsin",
+          "KELAS 4": "Tahsin",
+          "KELAS 5": "Tahsin",
+        },
+        {
+          jam: "6",
+          waktu: "10.15 - 11.00",
+          "PRA SEKOLAH": "Pulang",
+          "KELAS 1": "Aqidah",
+          "KELAS 2": "Bahasa Indonesia",
+          "KELAS 4": "Fiqih",
+          "KELAS 5": "IPAS",
+        },
+        {
+          jam: "7",
+          waktu: "11.00 - Pulang",
+          "PRA SEKOLAH": "",
+          "KELAS 1": "Pulang",
+          "KELAS 2": "Pulang",
+          "KELAS 4": "Pulang",
+          "KELAS 5": "Pulang",
+        },
+      ],
+      Rabu: [
+        {
+          jam: "1",
+          waktu: "07.30 - 07.45",
+          "PRA SEKOLAH": "BK/Dzikir Pagi",
+          "KELAS 1": "BK/Dzikir Pagi",
+          "KELAS 2": "BK/Dzikir Pagi",
+          "KELAS 4": "BK/Dzikir Pagi",
+          "KELAS 5": "BK/Dzikir Pagi",
+        },
+        {
+          jam: "2",
+          waktu: "07.45 - 08.30",
+          "PRA SEKOLAH": "Tahfidz",
+          "KELAS 1": "Tahfidz",
+          "KELAS 2": "Tahfidz",
+          "KELAS 4": "Tahfidz",
+          "KELAS 5": "Tahfidz",
+        },
+        {
+          jam: "3",
+          waktu: "08.30 - 09.15",
+          "PRA SEKOLAH": "Berhitung",
+          "KELAS 1": "Bahasa Arab",
+          "KELAS 2": "PKN",
+          "KELAS 4": "Matematika",
+          "KELAS 5": "Aqidah",
+        },
+        {
+          jam: "4",
+          waktu: "09.15 - 09.30",
+          "PRA SEKOLAH": "Istirahat",
+          "KELAS 1": "Istirahat",
+          "KELAS 2": "Istirahat",
+          "KELAS 4": "Istirahat",
+          "KELAS 5": "Istirahat",
+        },
+        {
+          jam: "5",
+          waktu: "09.30 - 10.15",
+          "PRA SEKOLAH": "Tahsin",
+          "KELAS 1": "Tahsin",
+          "KELAS 2": "Tahsin",
+          "KELAS 4": "Tahsin",
+          "KELAS 5": "Tahsin",
+        },
+        {
+          jam: "6",
+          waktu: "10.15 - 11.00",
+          "PRA SEKOLAH": "Pulang",
+          "KELAS 1": "PKN",
+          "KELAS 2": "Bahasa Arab",
+          "KELAS 4": "Aqidah",
+          "KELAS 5": "Matematika",
+        },
+        {
+          jam: "7",
+          waktu: "11.00 - Pulang",
+          "PRA SEKOLAH": "",
+          "KELAS 1": "Pulang",
+          "KELAS 2": "Pulang",
+          "KELAS 4": "Pulang",
+          "KELAS 5": "Pulang",
+        },
+      ],
+      Kamis: [
+        {
+          jam: "1",
+          waktu: "07.30 - 07.45",
+          "PRA SEKOLAH": "BK/Dzikir Pagi",
+          "KELAS 1": "BK/Dzikir Pagi",
+          "KELAS 2": "BK/Dzikir Pagi",
+          "KELAS 4": "BK/Dzikir Pagi",
+          "KELAS 5": "BK/Dzikir Pagi",
+        },
+        {
+          jam: "2",
+          waktu: "07.45 - 08.30",
+          "PRA SEKOLAH": "Tahfidz",
+          "KELAS 1": "Tahfidz",
+          "KELAS 2": "Tahfidz",
+          "KELAS 4": "Tahfidz",
+          "KELAS 5": "Tahfidz",
+        },
+        {
+          jam: "3",
+          waktu: "08.30 - 09.15",
+          "PRA SEKOLAH": "Membaca",
+          "KELAS 1": "Bahasa Indonesia",
+          "KELAS 2": "Al - Qur'an Hadist",
+          "KELAS 4": "SKI",
+          "KELAS 5": "Bahasa Arab",
+        },
+        {
+          jam: "4",
+          waktu: "09.15 - 09.30",
+          "PRA SEKOLAH": "Istirahat",
+          "KELAS 1": "Istirahat",
+          "KELAS 2": "Istirahat",
+          "KELAS 4": "Istirahat",
+          "KELAS 5": "Istirahat",
+        },
+        {
+          jam: "5",
+          waktu: "09.30 - 10.15",
+          "PRA SEKOLAH": "Tahsin",
+          "KELAS 1": "Tahsin",
+          "KELAS 2": "Tahsin",
+          "KELAS 4": "Bahasa Arab",
+          "KELAS 5": "PKN",
+        },
+        {
+          jam: "6",
+          waktu: "10.15 - 11.00",
+          "PRA SEKOLAH": "Pulang",
+          "KELAS 1": "Al - Qur'an Hadist",
+          "KELAS 2": "Bahasa Indonesia",
+          "KELAS 4": "PKN",
+          "KELAS 5": "SKI",
+        },
+        {
+          jam: "7",
+          waktu: "11.00 - Pulang",
+          "PRA SEKOLAH": "",
+          "KELAS 1": "Pulang",
+          "KELAS 2": "Pulang",
+          "KELAS 4": "Pulang",
+          "KELAS 5": "Pulang",
+        },
+      ],
+      "Jum'at": [
+        {
+          jam: "1",
+          waktu: "07.30 - 08.00",
+          "PRA SEKOLAH": "BK/Dzikir/Sholat",
+          "KELAS 1": "BK/Dzikir/Sholat",
+          "KELAS 2": "BK/Dzikir/Sholat",
+          "KELAS 4": "BK/Dzikir/Sholat",
+          "KELAS 5": "BK/Dzikir/Sholat",
+        },
+        {
+          jam: "2",
+          waktu: "08.00 - 08.45",
+          "PRA SEKOLAH": "Praktek Ibadah",
+          "KELAS 1": "Praktek Ibadah",
+          "KELAS 2": "Praktek Ibadah",
+          "KELAS 4": "Bahasa Indonesia",
+          "KELAS 5": "Bahasa Arab",
+        },
+        {
+          jam: "3",
+          waktu: "08.45 - 09.15",
+          "PRA SEKOLAH": "Istirahat",
+          "KELAS 1": "Istirahat",
+          "KELAS 2": "Istirahat",
+          "KELAS 4": "Istirahat",
+          "KELAS 5": "Istirahat",
+        },
+        {
+          jam: "4",
+          waktu: "09.15 - 10.00",
+          "PRA SEKOLAH": "",
+          "KELAS 1": "Bahasa Inggris",
+          "KELAS 2": "Bahasa Inggris",
+          "KELAS 4": "Bahasa Arab",
+          "KELAS 5": "Bahasa Indonesia",
+        },
+      ],
+      Sabtu: [
+        {
+          jam: "1",
+          waktu: "07.30 - 08.00",
+          "PRA SEKOLAH": "Prakarya",
+          "KELAS 1": "Prakarya",
+          "KELAS 2": "Prakarya",
+          "KELAS 4": "Prakarya",
+          "KELAS 5": "Prakarya",
+        },
+        {
+          jam: "2",
+          waktu: "08.00 - 08.45",
+          "PRA SEKOLAH": "Prakarya",
+          "KELAS 1": "Prakarya",
+          "KELAS 2": "Prakarya",
+          "KELAS 4": "Prakarya",
+          "KELAS 5": "Prakarya",
+        },
+        {
+          jam: "3",
+          waktu: "08.45 - 09.15",
+          "PRA SEKOLAH": "Istirahat",
+          "KELAS 1": "Istirahat",
+          "KELAS 2": "Istirahat",
+          "KELAS 4": "Istirahat",
+          "KELAS 5": "Istirahat",
+        },
+        {
+          jam: "4",
+          waktu: "09.15 - 10.30",
+          "PRA SEKOLAH": "PKBM/Menggambar",
+          "KELAS 1": "PKBM/Bhs.Indo",
+          "KELAS 2": "PKBM/Bhs.Indo",
+          "KELAS 4": "PKBM/MTK",
+          "KELAS 5": "PKBM/MTK",
+        },
+      ],
+    },
+  },
+};
 
 const GURU_LIST = [
-  { kode: 1, nama: "Pak Ukasyah", mapel: "Praktek Ibadah, Fiqih, Berhitung, PJOK" },
-  { kode: 2, nama: "Pak Umar", mapel: "Tahfidz, Tahsin, Menggambar, Bina Karakter" },
-  { kode: 3, nama: "Bu Septi", mapel: "Al-Qur'an Hadits, Bahasa Arab, Prakarya" },
+  {
+    kode: 1,
+    nama: "Pak Ukasyah",
+    mapel: "Praktek Ibadah, Fiqih, Berhitung, PJOK",
+  },
+  {
+    kode: 2,
+    nama: "Pak Umar",
+    mapel: "Tahfidz, Tahsin, Menggambar, Bina Karakter",
+  },
+  {
+    kode: 3,
+    nama: "Bu Septi",
+    mapel: "Al-Qur'an Hadits, Bahasa Arab, Prakarya",
+  },
   { kode: 4, nama: "Bu Husna", mapel: "Tahfidz, Tahsin, Fiqih, Aqidah" },
   { kode: 5, nama: "Bu Dian", mapel: "Matematika, Pendidikan Pancasila, PJOK" },
-  { kode: 6, nama: "Bu Reza", mapel: "Bahasa Indonesia, Coding & AI, Bahasa Inggris, IPAS" },
+  {
+    kode: 6,
+    nama: "Bu Reza",
+    mapel: "Bahasa Indonesia, Coding & AI, Bahasa Inggris, IPAS",
+  },
   { kode: 7, nama: "Bu Titin", mapel: "Matematika & Pendamping" },
 ];
 
@@ -2318,9 +4521,11 @@ function JadwalBiayaSection() {
   const currentClassData = JADWAL_MASTER[selectedClass];
 
   return (
-    <section id="jadwal" className="py-16 sm:py-24 px-4 sm:px-6 bg-[#FAF8F4] border-b border-neutral-200/80">
+    <section
+      id="jadwal"
+      className="py-16 sm:py-24 px-4 sm:px-6 bg-[#FAF8F4] border-b border-neutral-200/80"
+    >
       <div className="max-w-6xl mx-auto">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <span className="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3 shadow-2xs">
@@ -2331,7 +4536,9 @@ function JadwalBiayaSection() {
           </h2>
           <div className="w-16 h-1 bg-[#DEAB3E] rounded-full mx-auto mb-4" />
           <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-            Jadwal operasional pembelajaran terpadu (Tahfidz, Tahsin, Diniyah, Karakter &amp; Mapel Umum) serta transparansi rincian biaya pendidikan RTQ Abdurrahman bin Auf.
+            Jadwal operasional pembelajaran terpadu (Tahfidz, Tahsin, Diniyah,
+            Karakter &amp; Mapel Umum) serta transparansi rincian biaya
+            pendidikan RTQ Abdurrahman bin Auf.
           </p>
         </div>
 
@@ -2351,8 +4558,8 @@ function JadwalBiayaSection() {
                         ? "bg-amber-600 text-white shadow-md scale-102"
                         : "bg-[#0c3624] text-white shadow-md scale-102"
                       : isSpecial
-                      ? "bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100"
-                      : "bg-white text-neutral-600 border border-neutral-200/90 hover:border-[#0c3624] hover:text-[#0c3624]"
+                        ? "bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100"
+                        : "bg-white text-neutral-600 border border-neutral-200/90 hover:border-[#0c3624] hover:text-[#0c3624]"
                   }`}
                 >
                   {c.label}
@@ -2363,7 +4570,6 @@ function JadwalBiayaSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
           {/* ════════════════════════════════════════════════════════
               KOLOM KIRI (7 SPAN): TABEL JADWAL PELAJARAN
              ════════════════════════════════════════════════════════ */}
@@ -2376,17 +4582,31 @@ function JadwalBiayaSection() {
                     {isRamadhan ? "Edisi Spesial" : "Jadwal Pelajaran"}
                   </div>
                   <h3 className="font-bold text-lg sm:text-xl text-[#0c3624] flex items-center gap-2">
-                    <span>{isRamadhan ? "Jadwal Khusus Bulan Ramadhan 1447 H" : `Jadwal Pelajaran — ${classList.find(c => c.id === selectedClass)?.label}`}</span>
+                    <span>
+                      {isRamadhan
+                        ? "Jadwal Khusus Bulan Ramadhan 1447 H"
+                        : `Jadwal Pelajaran — ${classList.find((c) => c.id === selectedClass)?.label}`}
+                    </span>
                   </h3>
                   <p className="text-xs text-neutral-500 mt-0.5">
-                    {isRamadhan ? "Penyesuaian jam belajar & ibadah selama bulan Ramadhan" : "Semester Ganjil · Tahun Ajaran 2026/2027"}
+                    {isRamadhan
+                      ? "Penyesuaian jam belajar & ibadah selama bulan Ramadhan"
+                      : "Semester Ganjil · Tahun Ajaran 2026/2027"}
                   </p>
                 </div>
 
                 {/* Badge Waktu Pulang */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200/60 text-emerald-800 text-[11px] font-semibold self-start sm:self-auto">
                   <span>⏱️</span>
-                  <span>{isRamadhan ? "07.30 - 11.00 WIB" : selectedDay === "Jum'at" ? "Pulang: 10.10 WIB" : selectedDay === "Sabtu" ? "Pulang: 11.20 WIB" : "Pulang: 15.10 WIB"}</span>
+                  <span>
+                    {isRamadhan
+                      ? "07.30 - 11.00 WIB"
+                      : selectedDay === "Jum'at"
+                        ? "Pulang: 10.10 WIB"
+                        : selectedDay === "Sabtu"
+                          ? "Pulang: 11.20 WIB"
+                          : "Pulang: 15.10 WIB"}
+                  </span>
                 </div>
               </div>
 
@@ -2417,70 +4637,93 @@ function JadwalBiayaSection() {
                   <table className="table w-full text-xs sm:text-sm">
                     <thead>
                       <tr className="bg-[#0c3624] text-[#F1D9A6]">
-                        <th className="rounded-l-xl py-2.5 px-3 text-center w-14">Jam</th>
+                        <th className="rounded-l-xl py-2.5 px-3 text-center w-14">
+                          Jam
+                        </th>
                         <th className="py-2.5 px-3 w-28">Waktu</th>
                         <th className="py-2.5 px-3">Materi / Kegiatan</th>
-                        <th className="rounded-r-xl py-2.5 px-3 text-right">Pengampu</th>
+                        <th className="rounded-r-xl py-2.5 px-3 text-right">
+                          Pengampu
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-neutral-100 text-neutral-700">
-                      {(currentClassData?.days?.[selectedDay] || []).map((item: JadwalItemType, idx: number) => {
-                        const isTahfidz = item.kegiatan.toLowerCase().includes("tahfidz") || item.kegiatan.toLowerCase().includes("tahsin");
-                        const isRest = item.kegiatan.toLowerCase().includes("istirahat") || item.kegiatan.toLowerCase().includes("makan") || item.kegiatan.toLowerCase().includes("tidur") || item.kegiatan.toLowerCase().includes("piket") || item.kegiatan.toLowerCase().includes("sholat");
-                        const isKarakter = item.kegiatan.toLowerCase().includes("bina karakter") || item.kegiatan.toLowerCase().includes("ibadah");
-                        const isCoding = item.kegiatan.toLowerCase().includes("coding") || item.kegiatan.toLowerCase().includes("ai");
+                      {(currentClassData?.days?.[selectedDay] || []).map(
+                        (item: JadwalItemType, idx: number) => {
+                          const isTahfidz =
+                            item.kegiatan.toLowerCase().includes("tahfidz") ||
+                            item.kegiatan.toLowerCase().includes("tahsin");
+                          const isRest =
+                            item.kegiatan.toLowerCase().includes("istirahat") ||
+                            item.kegiatan.toLowerCase().includes("makan") ||
+                            item.kegiatan.toLowerCase().includes("tidur") ||
+                            item.kegiatan.toLowerCase().includes("piket") ||
+                            item.kegiatan.toLowerCase().includes("sholat");
+                          const isKarakter =
+                            item.kegiatan
+                              .toLowerCase()
+                              .includes("bina karakter") ||
+                            item.kegiatan.toLowerCase().includes("ibadah");
+                          const isCoding =
+                            item.kegiatan.toLowerCase().includes("coding") ||
+                            item.kegiatan.toLowerCase().includes("ai");
 
-                        return (
-                          <tr
-                            key={idx}
-                            className={`transition-colors ${
-                              isTahfidz
-                                ? "bg-emerald-50/70 hover:bg-emerald-100/60 font-medium"
-                                : isRest
-                                ? "bg-neutral-50/60 hover:bg-neutral-100/50 text-neutral-500"
-                                : "hover:bg-neutral-50"
-                            }`}
-                          >
-                            <td className="py-2.5 px-3 text-center font-bold text-neutral-600 text-xs">
-                              {item.jam || "—"}
-                            </td>
-                            <td className="py-2.5 px-3 font-semibold text-neutral-800 text-xs whitespace-nowrap">
-                              {item.waktu}
-                            </td>
-                            <td className="py-2.5 px-3">
-                              <div className="flex items-center gap-1.5 flex-wrap">
-                                <span className={`font-semibold ${isTahfidz ? "text-[#0c3624]" : "text-neutral-800"}`}>
-                                  {item.kegiatan}
-                                </span>
-                                {isTahfidz && (
-                                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-600 text-white">
-                                    Tahfidz
+                          return (
+                            <tr
+                              key={idx}
+                              className={`transition-colors ${
+                                isTahfidz
+                                  ? "bg-emerald-50/70 hover:bg-emerald-100/60 font-medium"
+                                  : isRest
+                                    ? "bg-neutral-50/60 hover:bg-neutral-100/50 text-neutral-500"
+                                    : "hover:bg-neutral-50"
+                              }`}
+                            >
+                              <td className="py-2.5 px-3 text-center font-bold text-neutral-600 text-xs">
+                                {item.jam || "—"}
+                              </td>
+                              <td className="py-2.5 px-3 font-semibold text-neutral-800 text-xs whitespace-nowrap">
+                                {item.waktu}
+                              </td>
+                              <td className="py-2.5 px-3">
+                                <div className="flex items-center gap-1.5 flex-wrap">
+                                  <span
+                                    className={`font-semibold ${isTahfidz ? "text-[#0c3624]" : "text-neutral-800"}`}
+                                  >
+                                    {item.kegiatan}
+                                  </span>
+                                  {isTahfidz && (
+                                    <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-600 text-white">
+                                      Tahfidz
+                                    </span>
+                                  )}
+                                  {isCoding && (
+                                    <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-600 text-white">
+                                      Digital
+                                    </span>
+                                  )}
+                                  {isKarakter && (
+                                    <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#9B7B3B] text-white">
+                                      Karakter
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-3 text-right text-xs">
+                                {item.guru ? (
+                                  <span className="font-medium text-[#0c3624] bg-neutral-100 px-2 py-0.5 rounded-full inline-block">
+                                    {item.guru}
+                                  </span>
+                                ) : (
+                                  <span className="text-neutral-400 text-[11px]">
+                                    —
                                   </span>
                                 )}
-                                {isCoding && (
-                                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-600 text-white">
-                                    Digital
-                                  </span>
-                                )}
-                                {isKarakter && (
-                                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#9B7B3B] text-white">
-                                    Karakter
-                                  </span>
-                                )}
-                              </div>
-                            </td>
-                            <td className="py-2.5 px-3 text-right text-xs">
-                              {item.guru ? (
-                                <span className="font-medium text-[#0c3624] bg-neutral-100 px-2 py-0.5 rounded-full inline-block">
-                                  {item.guru}
-                                </span>
-                              ) : (
-                                <span className="text-neutral-400 text-[11px]">—</span>
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      })}
+                              </td>
+                            </tr>
+                          );
+                        },
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -2490,7 +4733,9 @@ function JadwalBiayaSection() {
                   <table className="table w-full text-xs">
                     <thead>
                       <tr className="bg-[#0c3624] text-[#F1D9A6]">
-                        <th className="rounded-l-xl py-2.5 px-2 text-center w-10">Jam</th>
+                        <th className="rounded-l-xl py-2.5 px-2 text-center w-10">
+                          Jam
+                        </th>
                         <th className="py-2.5 px-2 w-24">Waktu</th>
                         <th className="py-2.5 px-2">Pra-Sekolah</th>
                         <th className="py-2.5 px-2">Kelas 1</th>
@@ -2500,21 +4745,36 @@ function JadwalBiayaSection() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-neutral-100 text-neutral-700">
-                      {(currentClassData?.days?.[selectedDay] || []).map((row: RamadhanDayItemType, idx: number) => (
-                        <tr key={idx} className="hover:bg-amber-50/50 transition">
-                          <td className="py-2 px-2 text-center font-bold text-neutral-500">
-                            {row.jam}
-                          </td>
-                          <td className="py-2 px-2 font-bold text-neutral-800 whitespace-nowrap">
-                            {row.waktu}
-                          </td>
-                          <td className="py-2 px-2 text-neutral-700">{row["PRA SEKOLAH"] || "—"}</td>
-                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 1"] || "—"}</td>
-                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 2"] || "—"}</td>
-                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 4"] || "—"}</td>
-                          <td className="py-2 px-2 text-neutral-700">{row["KELAS 5"] || "—"}</td>
-                        </tr>
-                      ))}
+                      {(currentClassData?.days?.[selectedDay] || []).map(
+                        (row: RamadhanDayItemType, idx: number) => (
+                          <tr
+                            key={idx}
+                            className="hover:bg-amber-50/50 transition"
+                          >
+                            <td className="py-2 px-2 text-center font-bold text-neutral-500">
+                              {row.jam}
+                            </td>
+                            <td className="py-2 px-2 font-bold text-neutral-800 whitespace-nowrap">
+                              {row.waktu}
+                            </td>
+                            <td className="py-2 px-2 text-neutral-700">
+                              {row["PRA SEKOLAH"] || "—"}
+                            </td>
+                            <td className="py-2 px-2 text-neutral-700">
+                              {row["KELAS 1"] || "—"}
+                            </td>
+                            <td className="py-2 px-2 text-neutral-700">
+                              {row["KELAS 2"] || "—"}
+                            </td>
+                            <td className="py-2 px-2 text-neutral-700">
+                              {row["KELAS 4"] || "—"}
+                            </td>
+                            <td className="py-2 px-2 text-neutral-700">
+                              {row["KELAS 5"] || "—"}
+                            </td>
+                          </tr>
+                        ),
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -2524,7 +4784,10 @@ function JadwalBiayaSection() {
               <div className="mt-4 pt-3 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-neutral-500 gap-2">
                 <span className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span>Materi Tahfidz &amp; Tahsin dilaksanakan intensif setiap pagi.</span>
+                  <span>
+                    Materi Tahfidz &amp; Tahsin dilaksanakan intensif setiap
+                    pagi.
+                  </span>
                 </span>
                 <span className="text-[11px] text-neutral-400">
                   RTQ Abdurrahman bin Auf · Banyuwangi
@@ -2534,27 +4797,31 @@ function JadwalBiayaSection() {
 
             {/* Quote Hadits dari Dokumen Excel */}
             <div className="mt-6 p-4 rounded-2xl bg-[#F0ECE0] border-l-4 border-[#9B7B3B] text-neutral-700">
-              <div className="font-serif text-right text-sm text-[#0c3624] font-bold mb-1 leading-relaxed" dir="rtl">
-                اِحْـرِصْ عَـلَـى مَا يَـنْـفَـعُـكَ وَاسْتَعِنْ بِاللهِ وَلَا تَـعْجَـزْ
+              <div
+                className="font-serif text-right text-sm text-[#0c3624] font-bold mb-1 leading-relaxed"
+                dir="rtl"
+              >
+                اِحْـرِصْ عَـلَـى مَا يَـنْـفَـعُـكَ وَاسْتَعِنْ بِاللهِ وَلَا
+                تَـعْجَـزْ
               </div>
               <p className="text-xs italic text-neutral-600 leading-snug">
-                &ldquo;Bersungguh-sungguhlah untuk mendapatkan apa yang bermanfaat bagimu, dan mintalah pertolongan kepada Allah serta janganlah sekali-kali engkau merasa lemah.&rdquo;
+                &ldquo;Bersungguh-sungguhlah untuk mendapatkan apa yang
+                bermanfaat bagimu, dan mintalah pertolongan kepada Allah serta
+                janganlah sekali-kali engkau merasa lemah.&rdquo;
               </p>
               <div className="text-[10px] text-neutral-500 font-semibold mt-1">
-                (HR. Muslim) · Pengesahan: Dava Firdaus S.R., S.Pd (Ketua) &amp; Septia Zuhrotul L., S.Pd (PJ)
+                (HR. Muslim) · Pengesahan: Dava Firdaus S.R., S.Pd (Ketua) &amp;
+                Septia Zuhrotul L., S.Pd (PJ)
               </div>
             </div>
-
           </div>
 
           {/* ════════════════════════════════════════════════════════
               KOLOM KANAN (5 SPAN): RINCIAN BIAYA PENDIDIKAN
              ════════════════════════════════════════════════════════ */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            
             {/* Kartu Rincian Biaya Pendidikan & Pendaftaran (Sesuai Dokumen BIAYA PENDAFTARAN.docx) */}
             <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-neutral-200">
-              
               {/* Header Card */}
               <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-neutral-100">
                 <div>
@@ -2563,7 +4830,7 @@ function JadwalBiayaSection() {
                   </div>
                   <h3 className="font-bold text-lg sm:text-xl text-[#0c3624] flex items-center gap-2 mt-0.5">
                     <svg className="w-5 h-5 fill-[#DEAB3E]" viewBox="0 0 24 24">
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
                     <span>Biaya Pendaftaran</span>
                   </h3>
@@ -2585,7 +4852,9 @@ function JadwalBiayaSection() {
                   }`}
                 >
                   <div>GELOMBANG 1</div>
-                  <div className="text-[10px] font-normal opacity-85">01 Nov 25 – 31 Jan 26</div>
+                  <div className="text-[10px] font-normal opacity-85">
+                    01 Nov 25 – 31 Jan 26
+                  </div>
                 </button>
                 <button
                   type="button"
@@ -2597,7 +4866,9 @@ function JadwalBiayaSection() {
                   }`}
                 >
                   <div>GELOMBANG 2</div>
-                  <div className="text-[10px] font-normal opacity-85">01 Feb 26 – 30 Jun 26*</div>
+                  <div className="text-[10px] font-normal opacity-85">
+                    01 Feb 26 – 30 Jun 26*
+                  </div>
                 </button>
               </div>
 
@@ -2606,55 +4877,90 @@ function JadwalBiayaSection() {
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="bg-[#0c3624] text-white">
-                      <th className="py-2.5 px-3 text-left font-bold">DAFTAR</th>
-                      <th className="py-2.5 px-3 text-right font-bold text-[#F1D9A6]">LAKI - LAKI</th>
-                      <th className="py-2.5 px-3 text-right font-bold text-[#F1D9A6]">PEREMPUAN</th>
+                      <th className="py-2.5 px-3 text-left font-bold">
+                        DAFTAR
+                      </th>
+                      <th className="py-2.5 px-3 text-right font-bold text-[#F1D9A6]">
+                        LAKI - LAKI
+                      </th>
+                      <th className="py-2.5 px-3 text-right font-bold text-[#F1D9A6]">
+                        PEREMPUAN
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-neutral-100 text-neutral-800">
                     <tr className="hover:bg-amber-50/50 transition">
                       <td className="py-2.5 px-3 font-semibold">Pendaftaran</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 100,000.00</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 100,000.00</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        Rp 100,000.00
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        Rp 100,000.00
+                      </td>
                     </tr>
                     <tr className="hover:bg-amber-50/50 transition">
                       <td className="py-2.5 px-3 font-semibold">Seragam</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 500,000.00</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 700,000.00</td>
-                    </tr>
-                    <tr className="hover:bg-amber-50/50 transition">
-                      <td className="py-2.5 px-3 font-semibold">
-                        Buku <span className="text-[#9B7B3B] font-bold">***</span>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        Rp 500,000.00
                       </td>
                       <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
-                        {gelombangTab === "gel1" ? "Rp 330,000.00" : "Rp 280,000.00"}
-                      </td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
-                        {gelombangTab === "gel1" ? "Rp 330,000.00" : "Rp 280,000.00"}
+                        Rp 700,000.00
                       </td>
                     </tr>
                     <tr className="hover:bg-amber-50/50 transition">
                       <td className="py-2.5 px-3 font-semibold">
-                        Uang Kegiatan <span className="text-[#9B7B3B] font-bold">***</span>
+                        Buku{" "}
+                        <span className="text-[#9B7B3B] font-bold">***</span>
                       </td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 350,000.00</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 350,000.00</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1"
+                          ? "Rp 330,000.00"
+                          : "Rp 280,000.00"}
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1"
+                          ? "Rp 330,000.00"
+                          : "Rp 280,000.00"}
+                      </td>
                     </tr>
                     <tr className="hover:bg-amber-50/50 transition">
                       <td className="py-2.5 px-3 font-semibold">
-                        Gedung &amp; Sarana <span className="text-[#9B7B3B] font-bold">**</span>
+                        Uang Kegiatan{" "}
+                        <span className="text-[#9B7B3B] font-bold">***</span>
                       </td>
                       <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
-                        {gelombangTab === "gel1" ? "Rp 1,500,000.00" : "Rp 1,750,000.00"}
+                        Rp 350,000.00
                       </td>
                       <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
-                        {gelombangTab === "gel1" ? "Rp 1,500,000.00" : "Rp 1,750,000.00"}
+                        Rp 350,000.00
                       </td>
                     </tr>
                     <tr className="hover:bg-amber-50/50 transition">
-                      <td className="py-2.5 px-3 font-semibold">Raport &amp; Foto</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 120,000.00</td>
-                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">Rp 120,000.00</td>
+                      <td className="py-2.5 px-3 font-semibold">
+                        Gedung &amp; Sarana{" "}
+                        <span className="text-[#9B7B3B] font-bold">**</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1"
+                          ? "Rp 1,500,000.00"
+                          : "Rp 1,750,000.00"}
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        {gelombangTab === "gel1"
+                          ? "Rp 1,500,000.00"
+                          : "Rp 1,750,000.00"}
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-amber-50/50 transition">
+                      <td className="py-2.5 px-3 font-semibold">
+                        Raport &amp; Foto
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        Rp 120,000.00
+                      </td>
+                      <td className="py-2.5 px-3 text-right font-mono text-neutral-700">
+                        Rp 120,000.00
+                      </td>
                     </tr>
                   </tbody>
                   <tfoot>
@@ -2662,14 +4968,20 @@ function JadwalBiayaSection() {
                       <td className="py-3 px-3">
                         <div>TOTAL MASUK</div>
                         <div className="text-[10px] font-normal text-neutral-500">
-                          {gelombangTab === "gel1" ? "Gelombang 1" : "Gelombang 2"}
+                          {gelombangTab === "gel1"
+                            ? "Gelombang 1"
+                            : "Gelombang 2"}
                         </div>
                       </td>
                       <td className="py-3 px-3 text-right font-mono text-sm text-[#0c3624]">
-                        {gelombangTab === "gel1" ? "Rp 2.900.000" : "Rp 3.100.000"}
+                        {gelombangTab === "gel1"
+                          ? "Rp 2.900.000"
+                          : "Rp 3.100.000"}
                       </td>
                       <td className="py-3 px-3 text-right font-mono text-sm text-[#0c3624]">
-                        {gelombangTab === "gel1" ? "Rp 3.100.000" : "Rp 3.300.000"}
+                        {gelombangTab === "gel1"
+                          ? "Rp 3.100.000"
+                          : "Rp 3.300.000"}
                       </td>
                     </tr>
                   </tfoot>
@@ -2688,23 +5000,42 @@ function JadwalBiayaSection() {
                   </span>
                 </div>
                 <p className="text-[11px] text-neutral-500 mb-2.5">
-                  Besaran SPP bulanan dipilih sesuai kerelaan &amp; kemampuan wali santri:
+                  Besaran SPP bulanan dipilih sesuai kerelaan &amp; kemampuan
+                  wali santri:
                 </p>
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <div className="bg-white p-2 rounded-xl border border-neutral-200 shadow-2xs hover:border-[#0c3624] transition">
-                    <span className="text-[10px] font-semibold text-neutral-400 block">Opsi 1</span>
-                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">Rp 100.000</span>
-                    <span className="text-[9px] text-neutral-400 block">/ bulan</span>
+                    <span className="text-[10px] font-semibold text-neutral-400 block">
+                      Opsi 1
+                    </span>
+                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">
+                      Rp 100.000
+                    </span>
+                    <span className="text-[9px] text-neutral-400 block">
+                      / bulan
+                    </span>
                   </div>
                   <div className="bg-white p-2 rounded-xl border border-neutral-200 shadow-2xs hover:border-[#0c3624] transition">
-                    <span className="text-[10px] font-semibold text-neutral-400 block">Opsi 2</span>
-                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">Rp 125.000</span>
-                    <span className="text-[9px] text-neutral-400 block">/ bulan</span>
+                    <span className="text-[10px] font-semibold text-neutral-400 block">
+                      Opsi 2
+                    </span>
+                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">
+                      Rp 125.000
+                    </span>
+                    <span className="text-[9px] text-neutral-400 block">
+                      / bulan
+                    </span>
                   </div>
                   <div className="bg-[#FFFDF7] p-2 rounded-xl border-2 border-[#DEAB3E] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#9B7B3B] block">Opsi 3</span>
-                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">Rp 150.000</span>
-                    <span className="text-[9px] text-[#9B7B3B] block font-semibold">/ bulan</span>
+                    <span className="text-[10px] font-bold text-[#9B7B3B] block">
+                      Opsi 3
+                    </span>
+                    <span className="font-black text-xs sm:text-sm text-[#0c3624]">
+                      Rp 150.000
+                    </span>
+                    <span className="text-[9px] text-[#9B7B3B] block font-semibold">
+                      / bulan
+                    </span>
                   </div>
                 </div>
               </div>
@@ -2721,15 +5052,24 @@ function JadwalBiayaSection() {
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="font-bold text-[#9B7B3B] mt-0.5">**</span>
-                  <span>Uang Gedung &amp; sarana bisa dicicil selama 1 tahun ajaran</span>
+                  <span>
+                    Uang Gedung &amp; sarana bisa dicicil selama 1 tahun ajaran
+                  </span>
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="font-bold text-[#9B7B3B] mt-0.5">***</span>
-                  <span>Uang buku &amp; uang kegiatan sekolah untuk 1 tahun ajaran</span>
+                  <span>
+                    Uang buku &amp; uang kegiatan sekolah untuk 1 tahun ajaran
+                  </span>
                 </div>
                 <div className="flex items-start gap-1.5 pt-1 border-t border-neutral-200/60 text-neutral-500">
                   <span className="text-[#DEAB3E] font-bold">ℹ️</span>
-                  <span><em>Gelombang 2 tidak dibuka jika kuota (15 santri) sudah terpenuhi pada Gelombang 1.</em></span>
+                  <span>
+                    <em>
+                      Gelombang 2 tidak dibuka jika kuota (15 santri) sudah
+                      terpenuhi pada Gelombang 1.
+                    </em>
+                  </span>
                 </div>
               </div>
 
@@ -2743,7 +5083,6 @@ function JadwalBiayaSection() {
                 <span>💬 Konsultasi Biaya via WhatsApp (0852-1218-5139)</span>
                 <span>↗</span>
               </a>
-
             </div>
 
             {/* Tim Pengajar & Guru Pengampu */}
@@ -2754,9 +5093,19 @@ function JadwalBiayaSection() {
               </h4>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {GURU_LIST.map((g) => (
-                  <div key={g.kode} className="p-2 rounded-xl bg-neutral-50 border border-neutral-100 flex flex-col">
-                    <span className="font-bold text-[#0c3624] text-[11.5px]">{g.nama}</span>
-                    <span className="text-[10px] text-neutral-500 truncate" title={g.mapel}>{g.mapel}</span>
+                  <div
+                    key={g.kode}
+                    className="p-2 rounded-xl bg-neutral-50 border border-neutral-100 flex flex-col"
+                  >
+                    <span className="font-bold text-[#0c3624] text-[11.5px]">
+                      {g.nama}
+                    </span>
+                    <span
+                      className="text-[10px] text-neutral-500 truncate"
+                      title={g.mapel}
+                    >
+                      {g.mapel}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -2766,20 +5115,21 @@ function JadwalBiayaSection() {
             <div className="bg-[#FAF4E6] border border-[#e8dfcf] rounded-3xl p-6">
               <h4 className="font-bold text-sm text-[#0c3624] mb-2 flex items-center gap-2">
                 <svg className="w-5 h-5 fill-[#0c3624]" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                  <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
                 </svg>
                 <span>Metode Pembayaran:</span>
               </h4>
               <p className="text-xs text-neutral-700 leading-relaxed mb-3">
-                Pembayaran infaq &amp; pendaftaran dapat ditransfer melalui <b>Bank Syariah Indonesia (BSI)</b>, e-Wallet (GoPay, OVO, Dana), maupun tunai langsung di kantor Tata Usaha RTQ.
+                Pembayaran infaq &amp; pendaftaran dapat ditransfer melalui{" "}
+                <b>Bank Syariah Indonesia (BSI)</b>, e-Wallet (GoPay, OVO,
+                Dana), maupun tunai langsung di kantor Tata Usaha RTQ.
               </p>
               <div className="text-[11px] text-[#7A5B20] font-medium bg-amber-100/70 px-3 py-1.5 rounded-lg inline-block">
-                Konfirmasi pembayaran ke Staf Keuangan TU RTQ Abdurrahman bin Auf.
+                Konfirmasi pembayaran ke Staf Keuangan TU RTQ Abdurrahman bin
+                Auf.
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>
@@ -2799,43 +5149,46 @@ function BrosurSpmbSection() {
     downloadName: "Brosur-PPDB-2026-RTQ-ABA.jpg",
     address: "Jl. Hasanudin No 81 Banyuwangi",
     phone: "0852-1218-5139",
-    waUrl: "https://wa.me/6285212185139?text=Assalamu'alaikum%20Panitia%20PPDB%20RTQ%20Abdurrahman%20bin%20Auf,%20saya%20ingin%20konsultasi%20mengenai%20brosur%20resmi%20PPDB%202026/2027.",
+    waUrl:
+      "https://wa.me/6285212185139?text=Assalamu'alaikum%20Panitia%20PPDB%20RTQ%20Abdurrahman%20bin%20Auf,%20saya%20ingin%20konsultasi%20mengenai%20brosur%20resmi%20PPDB%202026/2027.",
     programs: [
       {
         icon: "📖",
         title: "Tahsin 8 JP",
         sub: "Tahsin Al-Qur'an Intensif",
-        desc: "Pembinaan tajwid, makharijul huruf, dan talaqqi intensif agar bacaan santri fasih, tartil, dan ber-sanad."
+        desc: "Pembinaan tajwid, makharijul huruf, dan talaqqi intensif agar bacaan santri fasih, tartil, dan ber-sanad.",
       },
       {
         icon: "📋",
         title: "11 Mapel Lengkap",
         sub: "Kurikulum Lengkap Berstandar",
-        desc: "Integrasi mata pelajaran Diniyah (Fiqih, Aqidah, Hadits, Bahasa Arab) serta pelajaran umum kesetaraan SD/MI."
+        desc: "Integrasi mata pelajaran Diniyah (Fiqih, Aqidah, Hadits, Bahasa Arab) serta pelajaran umum kesetaraan SD/MI.",
       },
       {
         icon: "🧠",
         title: "Deep Learning STEM",
         sub: "Sains Teknologi Inovasi",
-        desc: "Pendekatan belajar modern berbasis sains, eksplorasi teknologi, logika matematika, serta dasar coding & AI."
+        desc: "Pendekatan belajar modern berbasis sains, eksplorasi teknologi, logika matematika, serta dasar coding & AI.",
       },
       {
         icon: "📈",
         title: "Kurva S Monitoring",
         sub: "Pemantauan Perkembangan Santri",
-        desc: "Evaluasi terukur dan pelaporan berkala grafik capaian hafalan, pemahaman materi, serta adab harian santri."
-      }
-    ]
+        desc: "Evaluasi terukur dan pelaporan berkala grafik capaian hafalan, pemahaman materi, serta adab harian santri.",
+      },
+    ],
   };
 
   return (
-    <section id="brosur" className="py-16 sm:py-24 bg-gradient-to-b from-[#F5EFE6] via-[#FAF8F4] to-[#F5EFE6] relative overflow-hidden">
+    <section
+      id="brosur"
+      className="py-16 sm:py-24 bg-gradient-to-b from-[#F5EFE6] via-[#FAF8F4] to-[#F5EFE6] relative overflow-hidden"
+    >
       {/* Background Ornaments */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#0c3624]/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DEAB3E]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0c3624]/10 text-[#0c3624] text-xs font-bold uppercase tracking-wider mb-3 border border-[#0c3624]/20 shadow-xs">
@@ -2847,14 +5200,16 @@ function BrosurSpmbSection() {
           </h2>
           <div className="w-16 h-1 bg-[#DEAB3E] rounded-full mx-auto mb-4"></div>
           <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-            Informasi resmi Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Rumah Tahfidz Qur&apos;an Abdurrahman bin Auf. Anda dapat melihat dalam resolusi tinggi atau mengunduh berkas poster di bawah ini.
+            Informasi resmi Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran
+            2026/2027 Rumah Tahfidz Qur&apos;an Abdurrahman bin Auf. Anda dapat
+            melihat dalam resolusi tinggi atau mengunduh berkas poster di bawah
+            ini.
           </p>
         </div>
 
         {/* 2-Column Showcase Card */}
         <div className="bg-white rounded-3xl border border-[#e8dfcf] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-            
             {/* LEFT COLUMN (5 SPAN): THE POSTER DISPLAY */}
             <div className="lg:col-span-5 bg-gradient-to-b from-[#0c3624] to-[#072418] p-5 sm:p-7 flex flex-col items-center justify-between text-white relative">
               {/* Badge Poster */}
@@ -2869,7 +5224,7 @@ function BrosurSpmbSection() {
               </div>
 
               {/* Poster Image Container with Zoom Overlay */}
-              <div 
+              <div
                 className="relative w-full max-w-[360px] mx-auto rounded-2xl overflow-hidden shadow-2xl border-2 border-[#DEAB3E]/40 cursor-pointer group transition-transform duration-300 hover:scale-[1.01]"
                 onClick={() => setShowLightbox(true)}
               >
@@ -2878,12 +5233,22 @@ function BrosurSpmbSection() {
                   alt={posterData.title}
                   className="w-full h-auto object-contain block bg-neutral-900"
                 />
-                
+
                 {/* Hover overlay with Zoom hint */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white">
                   <span className="inline-flex items-center justify-center gap-2 bg-[#DEAB3E] text-[#0c3624] font-bold text-xs px-3.5 py-2 rounded-xl shadow-lg mb-1">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                      />
                     </svg>
                     <span>Klik untuk Memperbesar Resolusi Penuh</span>
                   </span>
@@ -2900,8 +5265,18 @@ function BrosurSpmbSection() {
                   onClick={() => setShowLightbox(true)}
                   className="flex-1 py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 border border-white/20"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                    />
                   </svg>
                   <span>Perbesar</span>
                 </button>
@@ -2911,8 +5286,18 @@ function BrosurSpmbSection() {
                   className="flex-1 py-2.5 px-3 rounded-xl bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] font-black text-xs transition flex items-center justify-center gap-1.5 shadow"
                   title="Unduh file gambar poster"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
                   </svg>
                   <span>Unduh Poster</span>
                 </a>
@@ -2929,7 +5314,9 @@ function BrosurSpmbSection() {
                   Rumah Tahfidz Qur&apos;an Abdurrahman bin Auf
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
-                  Mencetak generasi santri penghafal Al-Qur&apos;an yang fasih membaca, tartil menghafal, berakhlak karimah, serta siap menghadapi era modern melalui sains dan teknologi inovasi.
+                  Mencetak generasi santri penghafal Al-Qur&apos;an yang fasih
+                  membaca, tartil menghafal, berakhlak karimah, serta siap
+                  menghadapi era modern melalui sains dan teknologi inovasi.
                 </p>
 
                 {/* 4 Program Unggulan Grid (Matching the Poster) */}
@@ -2975,7 +5362,9 @@ function BrosurSpmbSection() {
                     </div>
                     <div className="font-medium text-emerald-800 flex items-center gap-1.5">
                       <span>📱</span>
-                      <span>WhatsApp Panitia: <strong>{posterData.phone}</strong></span>
+                      <span>
+                        WhatsApp Panitia: <strong>{posterData.phone}</strong>
+                      </span>
                     </div>
                   </div>
                   <div className="px-3 py-1.5 rounded-xl bg-emerald-700 text-white font-bold text-[11px] whitespace-nowrap shadow-xs">
@@ -2989,7 +5378,9 @@ function BrosurSpmbSection() {
                 <button
                   type="button"
                   onClick={() => {
-                    document.getElementById("pendaftaran")?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .getElementById("pendaftaran")
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="flex-1 min-w-[170px] py-3.5 px-5 rounded-2xl bg-[#0c3624] hover:bg-[#134932] text-[#F1D9A6] font-extrabold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
                 >
@@ -3004,25 +5395,23 @@ function BrosurSpmbSection() {
                   className="py-3.5 px-5 rounded-2xl bg-[#E8B54D] hover:bg-[#cf9e33] text-[#0c3624] font-bold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
                 >
                   <svg className="w-4 h-4 fill-[#0c3624]" viewBox="0 0 24 24">
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
                   </svg>
                   <span>Konsultasi Panitia</span>
                 </a>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
 
       {/* Lightbox Modal for High-Resolution View */}
       {showLightbox && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn"
           onClick={() => setShowLightbox(false)}
         >
-          <div 
+          <div
             className="relative max-w-4xl w-full max-h-[95vh] bg-[#1a231f] rounded-2xl sm:rounded-3xl border border-[#DEAB3E]/40 overflow-hidden flex flex-col shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -3043,8 +5432,18 @@ function BrosurSpmbSection() {
                   className="px-3.5 py-1.5 rounded-lg bg-[#DEAB3E] hover:bg-[#cf9e33] text-[#0c3624] text-xs font-bold transition-all flex items-center gap-1.5 shadow"
                   title="Unduh Gambar"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
                   </svg>
                   <span>Unduh</span>
                 </a>
@@ -3072,7 +5471,8 @@ function BrosurSpmbSection() {
             <div className="px-5 py-3 bg-[#0c3624]/90 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-neutral-300">
               <span className="flex items-center gap-1.5 text-neutral-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                Gunakan scroll atau cubit layar untuk memperbesar tampilan teks pada poster.
+                Gunakan scroll atau cubit layar untuk memperbesar tampilan teks
+                pada poster.
               </span>
               <div className="flex items-center gap-3">
                 <a
@@ -3154,7 +5554,10 @@ function GallerySection() {
     },
   ];
 
-  const categories = ["Semua", ...Array.from(new Set(allGalleries.map((item) => item.category)))];
+  const categories = [
+    "Semua",
+    ...Array.from(new Set(allGalleries.map((item) => item.category))),
+  ];
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
 
@@ -3179,23 +5582,29 @@ function GallerySection() {
 
   const prevImage = () => {
     if (activeModalIndex !== null) {
-      setActiveModalIndex((activeModalIndex - 1 + filtered.length) % filtered.length);
+      setActiveModalIndex(
+        (activeModalIndex - 1 + filtered.length) % filtered.length,
+      );
     }
   };
 
-  const currentItem = activeModalIndex !== null ? filtered[activeModalIndex] : null;
+  const currentItem =
+    activeModalIndex !== null ? filtered[activeModalIndex] : null;
 
   return (
-    <section id="galeri" className="py-14 sm:py-20 px-4 sm:px-6 bg-[#FAF8F4] relative">
+    <section
+      id="galeri"
+      className="py-14 sm:py-20 px-4 sm:px-6 bg-[#FAF8F4] relative"
+    >
       <div className="max-w-6xl mx-auto">
-        
         {/* Header */}
         <div className="mb-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0c3624] tracking-tight mb-2">
             Galeri Kegiatan
           </h2>
           <p className="text-xs sm:text-sm text-neutral-600 font-medium">
-            Dokumentasi kegiatan belajar dan kegiatan santri RTQ Abdurrahman bin Auf
+            Dokumentasi kegiatan belajar dan kegiatan santri RTQ Abdurrahman bin
+            Auf
           </p>
         </div>
 
@@ -3223,7 +5632,9 @@ function GallerySection() {
 
           {/* Right Info */}
           <div className="text-xs text-neutral-500 font-medium flex items-center gap-1.5">
-            <span>Menampilkan {filtered.length} dari {allGalleries.length} kegiatan</span>
+            <span>
+              Menampilkan {filtered.length} dari {allGalleries.length} kegiatan
+            </span>
             <span>•</span>
             <span className="cursor-pointer hover:text-[#0c3624] flex items-center gap-0.5">
               Diurutkan: Terbaru <span className="text-[10px]">∨</span>
@@ -3265,7 +5676,6 @@ function GallerySection() {
             </div>
           ))}
         </div>
-
       </div>
 
       {/* Lightbox Modal (Matching Mockup Screenshot) */}
@@ -3363,9 +5773,7 @@ function GallerySection() {
                   </button>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
       )}
@@ -3406,14 +5814,14 @@ function PendaftaranSection() {
   const isFilesUploaded = Boolean(filePendaftaran && fileKesantrian);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (
     type: "pendaftaran" | "kesantrian",
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = e.target.files?.[0] || null;
     if (type === "pendaftaran") {
@@ -3426,7 +5834,9 @@ function PendaftaranSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!filePendaftaran || !fileKesantrian) {
-      alert("Mohon unggah kedua berkas formulir (Form Pendaftaran & Paket Formulir Kesantrian) terlebih dahulu!");
+      alert(
+        "Mohon unggah kedua berkas formulir (Form Pendaftaran & Paket Formulir Kesantrian) terlebih dahulu!",
+      );
       return;
     }
 
@@ -3449,19 +5859,24 @@ function PendaftaranSection() {
 
       // Deteksi endpoint upload yang fleksibel (mendukung root domain, subfolder XAMPP, dan node server)
       const currentPath = window.location.pathname;
-      const folderPath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-      
-      const candidateEndpoints = Array.from(new Set([
-        `${folderPath}upload.php`,
-        `${folderPath}api/upload`,
-        `${folderPath}api/upload.php`,
-        "/upload.php",
-        "/api/upload",
-        "/api/upload.php",
-        "/landingpageRTQ/upload.php",
-        "/landingpageRTQ/rtq-aba/public/upload.php",
-        "upload.php",
-      ]));
+      const folderPath = currentPath.substring(
+        0,
+        currentPath.lastIndexOf("/") + 1,
+      );
+
+      const candidateEndpoints = Array.from(
+        new Set([
+          `${folderPath}upload.php`,
+          `${folderPath}api/upload`,
+          `${folderPath}api/upload.php`,
+          "/upload.php",
+          "/api/upload",
+          "/api/upload.php",
+          "/landingpageRTQ/upload.php",
+          "/landingpageRTQ/rtq-aba/public/upload.php",
+          "upload.php",
+        ]),
+      );
 
       let resultData: any = null;
       let lastErrorMessage = "";
@@ -3472,7 +5887,7 @@ function PendaftaranSection() {
             method: "POST",
             body: dataToSend,
           });
-          
+
           const rawText = await res.text();
           let parsed: any = null;
           try {
@@ -3482,7 +5897,12 @@ function PendaftaranSection() {
             continue;
           }
 
-          if (parsed && parsed.success && parsed.filePendaftaran?.url && parsed.fileKesantrian?.url) {
+          if (
+            parsed &&
+            parsed.success &&
+            parsed.filePendaftaran?.url &&
+            parsed.fileKesantrian?.url
+          ) {
             resultData = parsed;
             break;
           } else if (parsed && parsed.message) {
@@ -3494,7 +5914,10 @@ function PendaftaranSection() {
       }
 
       if (!resultData || !resultData.success) {
-        throw new Error(lastErrorMessage || "Server penyimpanan berkas belum merespons. Pastikan web server PHP (Apache/Nginx) atau node server.js aktif.");
+        throw new Error(
+          lastErrorMessage ||
+            "Server penyimpanan berkas belum merespons. Pastikan web server PHP (Apache/Nginx) atau node server.js aktif.",
+        );
       }
 
       // Berhasil diunggah ke server: susun pesan WA dengan link dokumen valid per santri
@@ -3540,13 +5963,18 @@ function PendaftaranSection() {
       window.open(waUrl, "_blank");
     } catch (err: any) {
       console.warn("Upload server notice:", err);
-      
+
       // Fallback jika dibuka di mode static dev tanpa backend PHP aktif
-      const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
-      const fallbackRegId = `REG-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${randomHex}`;
-      
-      alert(`Catatan Penyimpanan:\n${err.message || 'Gagal menyimpan ke server'}\n\nFormulir tetap dapat diteruskan ke WhatsApp Panitia.`);
-      
+      const randomHex = Math.random()
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
+      const fallbackRegId = `REG-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${randomHex}`;
+
+      alert(
+        `Catatan Penyimpanan:\n${err.message || "Gagal menyimpan ke server"}\n\nFormulir tetap dapat diteruskan ke WhatsApp Panitia.`,
+      );
+
       const fallbackMsg = [
         "Assalamu'alaikum Admin Panitia SPMB RTQ Abdurrahman bin Auf,",
         "",
@@ -3612,7 +6040,7 @@ function PendaftaranSection() {
       num: 1,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+          <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
         </svg>
       ),
       title: "Ambil Formulir",
@@ -3622,7 +6050,7 @@ function PendaftaranSection() {
       num: 2,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
         </svg>
       ),
       title: "Isi & Lengkapi",
@@ -3632,7 +6060,7 @@ function PendaftaranSection() {
       num: 3,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
         </svg>
       ),
       title: "Kumpulkan Berkas",
@@ -3642,7 +6070,7 @@ function PendaftaranSection() {
       num: 4,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
         </svg>
       ),
       title: "Biaya Pendaftaran",
@@ -3652,7 +6080,7 @@ function PendaftaranSection() {
       num: 5,
       icon: (
         <svg className="w-6 h-6 fill-[#0c3624]" viewBox="0 0 24 24">
-          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
         </svg>
       ),
       title: "Daftar Ulang",
@@ -3667,7 +6095,6 @@ function PendaftaranSection() {
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          
           {/* LEFT COLUMN: Informasi & 4 Langkah Pendaftaran */}
           <div className="lg:col-span-7 flex flex-col">
             {/* Pill Badge */}
@@ -3697,12 +6124,20 @@ function PendaftaranSection() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div className="bg-white/10 p-2.5 rounded-xl border border-white/15">
-                  <div className="text-[#DEAB3E] font-bold text-[10.5px] uppercase tracking-wide">GELOMBANG 1 :</div>
-                  <div className="font-extrabold text-white text-sm mt-0.5">01 NOV 25 – 31 JAN 26</div>
+                  <div className="text-[#DEAB3E] font-bold text-[10.5px] uppercase tracking-wide">
+                    GELOMBANG 1 :
+                  </div>
+                  <div className="font-extrabold text-white text-sm mt-0.5">
+                    01 NOV 25 – 31 JAN 26
+                  </div>
                 </div>
                 <div className="bg-white/10 p-2.5 rounded-xl border border-white/15">
-                  <div className="text-[#DEAB3E] font-bold text-[10.5px] uppercase tracking-wide">GELOMBANG 2 :</div>
-                  <div className="font-extrabold text-white text-sm mt-0.5">01 FEB 26 – 30 JUNI 26*</div>
+                  <div className="text-[#DEAB3E] font-bold text-[10.5px] uppercase tracking-wide">
+                    GELOMBANG 2 :
+                  </div>
+                  <div className="font-extrabold text-white text-sm mt-0.5">
+                    01 FEB 26 – 30 JUNI 26*
+                  </div>
                 </div>
               </div>
               <p className="text-[10px] text-white/70 italic mt-2">
@@ -3717,7 +6152,10 @@ function PendaftaranSection() {
               </h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {requirements.map((req) => (
-                  <li key={req} className="flex items-start gap-2.5 p-2 rounded-xl bg-white border border-neutral-200/80 shadow-2xs">
+                  <li
+                    key={req}
+                    className="flex items-start gap-2.5 p-2 rounded-xl bg-white border border-neutral-200/80 shadow-2xs"
+                  >
                     <span className="w-5 h-5 rounded-full bg-[#E8B54D] text-[#0c3624] flex items-center justify-center font-black text-xs flex-shrink-0 mt-0.5 shadow-xs">
                       ✓
                     </span>
@@ -3760,7 +6198,7 @@ function PendaftaranSection() {
             {/* Box Unduh Template Formulir & Arahan Pendaftaran */}
             <div className="mt-8 p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#0c3624] via-[#10432e] to-[#0c3624] text-white shadow-lg border border-[#DEAB3E]/40 relative overflow-hidden">
               <div className="absolute right-0 top-0 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none -mr-16 -mt-16"></div>
-              
+
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DEAB3E]/20 text-[#DEAB3E] text-[11px] font-bold uppercase tracking-wider mb-2.5 border border-[#DEAB3E]/30">
                   <span>📥</span> Unduh Template Berkas Resmi
@@ -3769,7 +6207,10 @@ function PendaftaranSection() {
                   Berkas Formulir Pendaftaran (Wajib Diisi)
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed mb-4">
-                  Sebelum mengirim pendaftaran online, calon wali santri <strong>wajib mengunduh 2 berkas template</strong> di bawah ini, melengkapinya, lalu mengunggahnya kembali pada formulir online di samping.
+                  Sebelum mengirim pendaftaran online, calon wali santri{" "}
+                  <strong>wajib mengunduh 2 berkas template</strong> di bawah
+                  ini, melengkapinya, lalu mengunggahnya kembali pada formulir
+                  online di samping.
                 </p>
 
                 {/* 2 Download Buttons */}
@@ -3825,21 +6266,40 @@ function PendaftaranSection() {
                     <span>💡</span> Arahan &amp; Petunjuk Pengisian:
                   </div>
                   <ol className="space-y-1.5 text-neutral-200 text-[11.5px] list-decimal list-inside leading-relaxed">
-                    <li><strong>Unduh Template:</strong> Klik kedua tombol di atas untuk mengunduh file <em>Form pendaftaran.docx</em> dan <em>Paket Formulir Kesantrian.docx</em>.</li>
-                    <li><strong>Isi &amp; Lengkapi:</strong> Buka berkas di Microsoft Word (laptop/HP) atau cetak (print) lalu isi tulisan tangan secara lengkap.</li>
-                    <li><strong>Simpan Berkas:</strong> Simpan file yang telah diisi (format <em>.docx / .pdf</em>), atau foto/scan dokumen jika ditulis tangan.</li>
-                    <li><strong>Unggah pada Formulir:</strong> Isi biodata singkat di formulir online (sebelah kanan), lalu <strong>wajib unggah kedua berkas</strong> pada kolom upload.</li>
-                    <li><strong>Kirim Pendaftaran:</strong> Setelah kedua berkas terunggah, tombol <strong>Kirim Pendaftaran</strong> akan aktif untuk menyelesaikan pendaftaran.</li>
+                    <li>
+                      <strong>Unduh Template:</strong> Klik kedua tombol di atas
+                      untuk mengunduh file <em>Form pendaftaran.docx</em> dan{" "}
+                      <em>Paket Formulir Kesantrian.docx</em>.
+                    </li>
+                    <li>
+                      <strong>Isi &amp; Lengkapi:</strong> Buka berkas di
+                      Microsoft Word (laptop/HP) atau cetak (print) lalu isi
+                      tulisan tangan secara lengkap.
+                    </li>
+                    <li>
+                      <strong>Simpan Berkas:</strong> Simpan file yang telah
+                      diisi (format <em>.docx / .pdf</em>), atau foto/scan
+                      dokumen jika ditulis tangan.
+                    </li>
+                    <li>
+                      <strong>Unggah pada Formulir:</strong> Isi biodata singkat
+                      di formulir online (sebelah kanan), lalu{" "}
+                      <strong>wajib unggah kedua berkas</strong> pada kolom
+                      upload.
+                    </li>
+                    <li>
+                      <strong>Kirim Pendaftaran:</strong> Setelah kedua berkas
+                      terunggah, tombol <strong>Kirim Pendaftaran</strong> akan
+                      aktif untuk menyelesaikan pendaftaran.
+                    </li>
                   </ol>
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* RIGHT COLUMN: Formulir Pendaftaran Online + Kontak Kami Box */}
           <div className="lg:col-span-5 flex flex-col gap-4">
-            
             {/* Form Card */}
             <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-neutral-200/80">
               {/* Header inside Form Card */}
@@ -3848,7 +6308,7 @@ function PendaftaranSection() {
                   Formulir Pendaftaran Online
                 </span>
                 <svg className="w-5 h-5 fill-[#E8B54D]" viewBox="0 0 24 24">
-                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
                 </svg>
               </div>
 
@@ -3966,8 +6426,11 @@ function PendaftaranSection() {
                       onChange={handleChange}
                       className="w-full px-3.5 py-2 rounded-xl text-xs sm:text-sm bg-[#F8F9FA] border border-neutral-200 focus:border-[#0c3624] focus:outline-none transition pr-10"
                     />
-                    <svg className="w-4 h-4 fill-[#25D366] absolute right-3" viewBox="0 0 24 24">
-                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                    <svg
+                      className="w-4 h-4 fill-[#25D366] absolute right-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
                     </svg>
                   </div>
                 </div>
@@ -4024,16 +6487,19 @@ function PendaftaranSection() {
                     </span>
                   </div>
                   <p className="text-[11px] text-neutral-500 mb-3">
-                    Unggah berkas yang telah Anda isi (.docx, .pdf, atau foto scan dokumen maks. 10MB per file).
+                    Unggah berkas yang telah Anda isi (.docx, .pdf, atau foto
+                    scan dokumen maks. 10MB per file).
                   </p>
 
                   <div className="space-y-3">
                     {/* File 1: Form pendaftaran.docx */}
-                    <div className={`p-3 rounded-2xl border transition-all ${
-                      filePendaftaran
-                        ? "bg-emerald-50/80 border-emerald-300"
-                        : "bg-[#F8F9FA] border-dashed border-neutral-300 hover:border-[#0c3624]"
-                    }`}>
+                    <div
+                      className={`p-3 rounded-2xl border transition-all ${
+                        filePendaftaran
+                          ? "bg-emerald-50/80 border-emerald-300"
+                          : "bg-[#F8F9FA] border-dashed border-neutral-300 hover:border-[#0c3624]"
+                      }`}
+                    >
                       <div className="flex items-center justify-between gap-2 mb-1.5">
                         <div className="text-[11px] font-bold text-[#0c3624] flex items-center gap-1">
                           <span>1.</span>
@@ -4056,7 +6522,9 @@ function PendaftaranSection() {
                           <div className="flex items-center gap-2 min-w-0">
                             <span className="text-lg">📄</span>
                             <div className="truncate">
-                              <div className="font-bold text-[#0c3624] truncate">{filePendaftaran.name}</div>
+                              <div className="font-bold text-[#0c3624] truncate">
+                                {filePendaftaran.name}
+                              </div>
                               <div className="text-[10px] text-neutral-400">
                                 {(filePendaftaran.size / 1024).toFixed(1)} KB
                               </div>
@@ -4078,7 +6546,9 @@ function PendaftaranSection() {
                             onChange={(e) => handleFileChange("pendaftaran", e)}
                             className="hidden"
                           />
-                          <span className="text-xl mb-0.5 group-hover:scale-110 transition-transform">📄</span>
+                          <span className="text-xl mb-0.5 group-hover:scale-110 transition-transform">
+                            📄
+                          </span>
                           <span className="text-xs font-bold text-[#0c3624] group-hover:underline">
                             Pilih Berkas Form Pendaftaran
                           </span>
@@ -4090,11 +6560,13 @@ function PendaftaranSection() {
                     </div>
 
                     {/* File 2: Paket Formulir Kesantrian.docx */}
-                    <div className={`p-3 rounded-2xl border transition-all ${
-                      fileKesantrian
-                        ? "bg-emerald-50/80 border-emerald-300"
-                        : "bg-[#F8F9FA] border-dashed border-neutral-300 hover:border-[#0c3624]"
-                    }`}>
+                    <div
+                      className={`p-3 rounded-2xl border transition-all ${
+                        fileKesantrian
+                          ? "bg-emerald-50/80 border-emerald-300"
+                          : "bg-[#F8F9FA] border-dashed border-neutral-300 hover:border-[#0c3624]"
+                      }`}
+                    >
                       <div className="flex items-center justify-between gap-2 mb-1.5">
                         <div className="text-[11px] font-bold text-[#0c3624] flex items-center gap-1">
                           <span>2.</span>
@@ -4117,7 +6589,9 @@ function PendaftaranSection() {
                           <div className="flex items-center gap-2 min-w-0">
                             <span className="text-lg">📑</span>
                             <div className="truncate">
-                              <div className="font-bold text-[#0c3624] truncate">{fileKesantrian.name}</div>
+                              <div className="font-bold text-[#0c3624] truncate">
+                                {fileKesantrian.name}
+                              </div>
                               <div className="text-[10px] text-neutral-400">
                                 {(fileKesantrian.size / 1024).toFixed(1)} KB
                               </div>
@@ -4139,7 +6613,9 @@ function PendaftaranSection() {
                             onChange={(e) => handleFileChange("kesantrian", e)}
                             className="hidden"
                           />
-                          <span className="text-xl mb-0.5 group-hover:scale-110 transition-transform">📑</span>
+                          <span className="text-xl mb-0.5 group-hover:scale-110 transition-transform">
+                            📑
+                          </span>
                           <span className="text-xs font-bold text-[#0c3624] group-hover:underline">
                             Pilih Berkas Formulir Kesantrian
                           </span>
@@ -4157,9 +6633,13 @@ function PendaftaranSection() {
                   <div className="p-3 bg-amber-50 border border-amber-300 rounded-2xl text-xs text-amber-900 flex items-start gap-2.5 shadow-2xs">
                     <span className="text-lg mt-0.5">⚠️</span>
                     <div>
-                      <div className="font-bold">Kedua Berkas Formulir Wajib Diunggah</div>
+                      <div className="font-bold">
+                        Kedua Berkas Formulir Wajib Diunggah
+                      </div>
                       <div className="text-[11px] text-amber-800 leading-snug">
-                        Tombol kirim pendaftaran dinonaktifkan sampai Anda mengunggah <strong>Form pendaftaran</strong> dan <strong>Paket Formulir Kesantrian</strong>.
+                        Tombol kirim pendaftaran dinonaktifkan sampai Anda
+                        mengunggah <strong>Form pendaftaran</strong> dan{" "}
+                        <strong>Paket Formulir Kesantrian</strong>.
                       </div>
                     </div>
                   </div>
@@ -4167,9 +6647,12 @@ function PendaftaranSection() {
                   <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-2xl text-xs text-emerald-900 flex items-start gap-2.5 shadow-2xs">
                     <span className="text-lg mt-0.5">✅</span>
                     <div>
-                      <div className="font-bold">Kedua Berkas Lengkap &amp; Siap Dikirim!</div>
+                      <div className="font-bold">
+                        Kedua Berkas Lengkap &amp; Siap Dikirim!
+                      </div>
                       <div className="text-[11px] text-emerald-800 leading-snug">
-                        Formulir telah dipilih. Klik tombol di bawah untuk mengirim data pendaftaran ke Panitia SPMB.
+                        Formulir telah dipilih. Klik tombol di bawah untuk
+                        mengirim data pendaftaran ke Panitia SPMB.
                       </div>
                     </div>
                   </div>
@@ -4183,30 +6666,49 @@ function PendaftaranSection() {
                     isUploading
                       ? "bg-amber-400 text-[#0c3624] cursor-wait"
                       : isFilesUploaded
-                      ? "bg-[#E8B54D] hover:bg-[#d9a338] text-[#0c3624] transform hover:-translate-y-0.5 cursor-pointer shadow-gold"
-                      : "bg-neutral-200 text-neutral-400 border border-neutral-300 cursor-not-allowed"
+                        ? "bg-[#E8B54D] hover:bg-[#d9a338] text-[#0c3624] transform hover:-translate-y-0.5 cursor-pointer shadow-gold"
+                        : "bg-neutral-200 text-neutral-400 border border-neutral-300 cursor-not-allowed"
                   }`}
                 >
                   {isUploading ? (
                     <>
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#0c3624]" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#0c3624]"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8H4z"
+                        ></path>
                       </svg>
-                      <span>{uploadStatusText || "MENYIMPAN BERKAS KE SERVER..."}</span>
+                      <span>
+                        {uploadStatusText || "MENYIMPAN BERKAS KE SERVER..."}
+                      </span>
                     </>
                   ) : (
                     <>
                       <span>KIRIM PENDAFTARAN</span>
-                      <span>{isFilesUploaded ? "🚀" : "🔒 (Upload 2 Formulir Dahulu)"}</span>
+                      <span>
+                        {isFilesUploaded
+                          ? "🚀"
+                          : "🔒 (Upload 2 Formulir Dahulu)"}
+                      </span>
                     </>
                   )}
                 </button>
               </form>
             </div>
-
           </div>
-
         </div>
       </div>
 
@@ -4217,7 +6719,7 @@ function PendaftaranSection() {
             <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-3xl mx-auto mb-3 shadow-inner">
               🎉
             </div>
-            
+
             {/* Nomor Registrasi Unik */}
             {uploadedResult?.registrationId && (
               <div className="inline-block bg-[#0c3624] text-[#E8B54D] font-mono font-bold text-xs px-3 py-1 rounded-full mb-2 tracking-wider">
@@ -4229,7 +6731,11 @@ function PendaftaranSection() {
               Pendaftaran &amp; Berkas Berhasil Disimpan!
             </h3>
             <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
-              Data santri atas nama <strong>{uploadedResult?.studentName || formData.namaSantri}</strong> dan 2 berkas formulir telah tersimpan aman di server RTQ.
+              Data santri atas nama{" "}
+              <strong>
+                {uploadedResult?.studentName || formData.namaSantri}
+              </strong>{" "}
+              dan 2 berkas formulir telah tersimpan aman di server RTQ.
             </p>
 
             {/* Kotak Link Dokumen di Server */}
@@ -4251,7 +6757,8 @@ function PendaftaranSection() {
                   <span className="truncate">Form Pendaftaran:</span>
                 </div>
                 <div className="text-[11px] text-neutral-500 truncate mb-1.5 font-mono">
-                  {uploadedResult?.filePendaftaran.name || filePendaftaran?.name}
+                  {uploadedResult?.filePendaftaran.name ||
+                    filePendaftaran?.name}
                 </div>
                 {uploadedResult?.filePendaftaran.url ? (
                   <a
@@ -4264,7 +6771,9 @@ function PendaftaranSection() {
                     <span>↗</span>
                   </a>
                 ) : (
-                  <span className="text-[10px] text-neutral-400 italic">Tersimpan lokal</span>
+                  <span className="text-[10px] text-neutral-400 italic">
+                    Tersimpan lokal
+                  </span>
                 )}
               </div>
 
@@ -4288,12 +6797,15 @@ function PendaftaranSection() {
                     <span>↗</span>
                   </a>
                 ) : (
-                  <span className="text-[10px] text-neutral-400 italic">Tersimpan lokal</span>
+                  <span className="text-[10px] text-neutral-400 italic">
+                    Tersimpan lokal
+                  </span>
                 )}
               </div>
 
               <div className="text-[11px] text-neutral-500 leading-snug pt-1 border-t border-neutral-200/70">
-                ℹ️ Berkas tersimpan dalam direktori terisolasi khusus santri ini sehingga tidak akan tertukar dengan berkas pendaftar lainnya.
+                ℹ️ Berkas tersimpan dalam direktori terisolasi khusus santri ini
+                sehingga tidak akan tertukar dengan berkas pendaftar lainnya.
               </div>
             </div>
 
@@ -4307,12 +6819,12 @@ function PendaftaranSection() {
                   className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow flex items-center justify-center gap-2"
                 >
                   <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
                   </svg>
                   <span>Kirim Ulang Pesan ke WhatsApp Panitia</span>
                 </a>
               )}
-              
+
               <button
                 type="button"
                 onClick={() => setShowSuccessModal(false)}
@@ -4341,7 +6853,7 @@ function ContactSection() {
   });
 
   const handleMsgChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setMsgForm({ ...msgForm, [e.target.name]: e.target.value });
   };
@@ -4357,7 +6869,10 @@ function ContactSection() {
       `- Email: ${msgForm.email}`,
       `- Pesan: ${msgForm.pesan}`,
     ].join("\n");
-    window.open(`https://wa.me/6285212185139?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(
+      `https://wa.me/6285212185139?text=${encodeURIComponent(text)}`,
+      "_blank",
+    );
   };
 
   const socials = [
@@ -4368,7 +6883,7 @@ function ContactSection() {
       url: "https://www.instagram.com/rtq_abdurrahman.bin.auf?stkn=MWF4eHVlMWEwejI4ZA==",
       icon: (
         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
         </svg>
       ),
     },
@@ -4379,7 +6894,7 @@ function ContactSection() {
       url: "https://youtube.com/@rtqaba?si=44HZXzRYXZkE945Z",
       icon: (
         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
         </svg>
       ),
     },
@@ -4390,16 +6905,18 @@ function ContactSection() {
       url: "https://www.facebook.com/share/19WhBPAtBU/",
       icon: (
         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
         </svg>
       ),
     },
   ];
 
   return (
-    <section id="kontak" className="py-14 sm:py-20 px-4 sm:px-6 bg-[#FAF8F4] relative">
+    <section
+      id="kontak"
+      className="py-14 sm:py-20 px-4 sm:px-6 bg-[#FAF8F4] relative"
+    >
       <div className="max-w-6xl mx-auto">
-        
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="mb-2">
@@ -4411,13 +6928,13 @@ function ContactSection() {
             Kontak Kami
           </h2>
           <p className="text-xs sm:text-sm text-neutral-600 font-medium">
-            Kami siap membantu Anda. Hubungi RTQ untuk informasi pendaftaran, program, atau pertanyaan seputar pembelajaran Al-Qur&apos;an.
+            Kami siap membantu Anda. Hubungi RTQ untuk informasi pendaftaran,
+            program, atau pertanyaan seputar pembelajaran Al-Qur&apos;an.
           </p>
         </div>
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          
           {/* LEFT COLUMN: Informasi Kontak Card */}
           <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-neutral-200/80 flex flex-col justify-between">
             <div>
@@ -4430,7 +6947,7 @@ function ContactSection() {
                 <div className="flex items-start gap-3.5">
                   <div className="w-10 h-10 rounded-full bg-[#0c3624] text-[#E8B54D] flex items-center justify-center flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 fill-[#E8B54D]" viewBox="0 0 24 24">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                     </svg>
                   </div>
                   <div>
@@ -4438,7 +6955,8 @@ function ContactSection() {
                       Alamat:
                     </h4>
                     <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">
-                      Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng, Kabupaten Banyuwangi, Jawa Timur 68465
+                      Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng,
+                      Kabupaten Banyuwangi, Jawa Timur 68465
                     </p>
                   </div>
                 </div>
@@ -4447,7 +6965,7 @@ function ContactSection() {
                 <div className="flex items-start gap-3.5">
                   <div className="w-10 h-10 rounded-full bg-[#0c3624] text-[#E8B54D] flex items-center justify-center flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 fill-[#25D366]" viewBox="0 0 24 24">
-                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
                     </svg>
                   </div>
                   <div>
@@ -4469,7 +6987,7 @@ function ContactSection() {
                 <div className="flex items-start gap-3.5">
                   <div className="w-10 h-10 rounded-full bg-[#0c3624] text-[#E8B54D] flex items-center justify-center flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 fill-[#E8B54D]" viewBox="0 0 24 24">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                     </svg>
                   </div>
                   <div>
@@ -4497,7 +7015,7 @@ function ContactSection() {
                 <div className="flex items-start gap-3.5">
                   <div className="w-10 h-10 rounded-full bg-[#0c3624] text-[#E8B54D] flex items-center justify-center flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 fill-[#E8B54D]" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                   </div>
                   <div>
@@ -4519,7 +7037,7 @@ function ContactSection() {
                 <div className="flex items-start gap-3.5">
                   <div className="w-10 h-10 rounded-full bg-[#0c3624] text-[#E8B54D] flex items-center justify-center flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 fill-[#E8B54D]" viewBox="0 0 24 24">
-                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
                     </svg>
                   </div>
                   <div>
@@ -4527,13 +7045,14 @@ function ContactSection() {
                       Jam Operasional:
                     </h4>
                     <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">
-                      Senin – Jumat: 08.00 – 16.00 WIB<br />
-                      Sabtu: 08.00 – 12.00 WIB<br />
+                      Senin – Jumat: 08.00 – 16.00 WIB
+                      <br />
+                      Sabtu: 08.00 – 12.00 WIB
+                      <br />
                       Minggu &amp; Hari Libur: Tutup
                     </p>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -4549,12 +7068,10 @@ function ContactSection() {
                 — RTQ Islamic Quran School —
               </span>
             </div>
-
           </div>
 
           {/* RIGHT COLUMN: Kirim Pesan + Lokasi Kami + Media Sosial */}
           <div className="lg:col-span-7 flex flex-col gap-5">
-            
             {/* 1. Kirim Pesan Card */}
             <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-neutral-200/80">
               <h3 className="font-black text-xl text-[#0c3624] mb-4">
@@ -4677,10 +7194,10 @@ function ContactSection() {
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                       priority
                     />
-                    
+
                     {/* Hover Overlay Button to Open Google Maps Navigation */}
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi"
+                      href="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="absolute inset-0 z-10 flex items-center justify-center bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -4694,11 +7211,15 @@ function ContactSection() {
                   {/* Address info footer bar */}
                   <div className="p-3 bg-[#FAF8F4] border-t border-neutral-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
                     <div className="flex items-center gap-1.5 text-neutral-800 font-medium">
-                      <span className="text-[#DEAB3E] font-bold text-sm">📍</span>
-                      <span className="line-clamp-1">Jl. Hasanudin No. 81, Kembiritan, Genteng, Banyuwangi</span>
+                      <span className="text-[#DEAB3E] font-bold text-sm">
+                        📍
+                      </span>
+                      <span className="line-clamp-1">
+                        Jl. Hasanudin No. 81, Kembiritan, Genteng, Banyuwangi
+                      </span>
                     </div>
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi"
+                      href="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0c3624] hover:text-[#DEAB3E] hover:underline whitespace-nowrap self-end sm:self-auto"
@@ -4713,7 +7234,7 @@ function ContactSection() {
                   <div className="w-full h-[180px] sm:h-[220px]">
                     <iframe
                       title="Peta Lokasi RTQ Abdurrahman bin Auf"
-                      src="https://maps.google.com/maps?q=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                      src="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
                       className="w-full h-full border-0"
                       loading="lazy"
                       allowFullScreen
@@ -4724,7 +7245,7 @@ function ContactSection() {
                       Jl. Hasanudin No. 81, Kembiritan, Kec. Genteng
                     </span>
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=Jl.+Hasanudin+No.81,+Kembiritan,+Genteng,+Banyuwangi"
+                      href="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[11px] font-bold text-[#0c3624] hover:underline whitespace-nowrap ml-2"
@@ -4767,9 +7288,7 @@ function ContactSection() {
                 ))}
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>
@@ -4788,7 +7307,6 @@ function Footer() {
     <footer className="bg-[#082217] text-white pt-14 pb-8 px-4 sm:px-6 border-t-4 border-[#E8B54D]">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
@@ -4809,9 +7327,10 @@ function Footer() {
               </div>
             </div>
             <p className="text-xs text-white/75 leading-relaxed mt-1">
-              Mencetak generasi Qur&apos;ani yang berakhlak mulia, berilmu, dan mandiri berlandaskan Al-Qur&apos;an dan Sunnah.
+              Mencetak generasi Qur&apos;ani yang berakhlak mulia, berilmu, dan
+              mandiri berlandaskan Al-Qur&apos;an dan Sunnah.
             </p>
-            
+
             {/* Social Icons with Crisp SVGs */}
             <div className="flex items-center gap-2.5 mt-2">
               <a
@@ -4822,7 +7341,7 @@ function Footer() {
                 aria-label="Instagram RTQ"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                 </svg>
               </a>
 
@@ -4834,7 +7353,7 @@ function Footer() {
                 aria-label="YouTube RTQ"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
               </a>
 
@@ -4846,7 +7365,7 @@ function Footer() {
                 aria-label="Facebook RTQ"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
 
@@ -4858,7 +7377,7 @@ function Footer() {
                 aria-label="WhatsApp RTQ"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.771.79 2.796.791h.005c3.18 0 5.767-2.586 5.767-5.766.001-3.187-2.575-5.77-5.772-5.771zm3.374 8.232c-.144.405-.837.774-1.17.824-.312.045-.634.075-1.026.075-1.42 0-2.85-.758-3.791-1.7-.94-.94-1.7-2.37-1.7-3.79 0-.392.03-.714.075-1.026.05-.333.419-1.026.824-1.17.405-.144.757.067.892.405l.593 1.48c.135.337.045.697-.18 1.034l-.36.54c.315.54.765.99 1.305 1.305l.54-.36c.337-.225.697-.315 1.034-.18l1.48.593c.338.135.549.487.405.892z"/>
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.771.79 2.796.791h.005c3.18 0 5.767-2.586 5.767-5.766.001-3.187-2.575-5.77-5.772-5.771zm3.374 8.232c-.144.405-.837.774-1.17.824-.312.045-.634.075-1.026.075-1.42 0-2.85-.758-3.791-1.7-.94-.94-1.7-2.37-1.7-3.79 0-.392.03-.714.075-1.026.05-.333.419-1.026.824-1.17.405-.144.757.067.892.405l.593 1.48c.135.337.045.697-.18 1.034l-.36.54c.315.54.765.99 1.305 1.305l.54-.36c.337-.225.697-.315 1.034-.18l1.48.593c.338.135.549.487.405.892z" />
                 </svg>
               </a>
             </div>
@@ -4883,7 +7402,8 @@ function Footer() {
                   onClick={() => scrollTo("profil")}
                   className="hover:text-[#F3CD67] transition flex items-center gap-1.5"
                 >
-                  <span className="text-[10px] text-[#E8B54D]">›</span> Profil Lembaga
+                  <span className="text-[10px] text-[#E8B54D]">›</span> Profil
+                  Lembaga
                 </button>
               </li>
               <li>
@@ -4891,7 +7411,8 @@ function Footer() {
                   onClick={() => scrollTo("program")}
                   className="hover:text-[#F3CD67] transition flex items-center gap-1.5"
                 >
-                  <span className="text-[10px] text-[#E8B54D]">›</span> Program Pendidikan
+                  <span className="text-[10px] text-[#E8B54D]">›</span> Program
+                  Pendidikan
                 </button>
               </li>
               <li>
@@ -4899,7 +7420,8 @@ function Footer() {
                   onClick={() => scrollTo("jadwal")}
                   className="hover:text-[#F3CD67] transition flex items-center gap-1.5"
                 >
-                  <span className="text-[10px] text-[#E8B54D]">›</span> Jadwal &amp; Biaya
+                  <span className="text-[10px] text-[#E8B54D]">›</span> Jadwal
+                  &amp; Biaya
                 </button>
               </li>
               <li>
@@ -4907,7 +7429,8 @@ function Footer() {
                   onClick={() => scrollTo("galeri")}
                   className="hover:text-[#F3CD67] transition flex items-center gap-1.5"
                 >
-                  <span className="text-[10px] text-[#E8B54D]">›</span> Galeri Santri
+                  <span className="text-[10px] text-[#E8B54D]">›</span> Galeri
+                  Santri
                 </button>
               </li>
               <li>
@@ -4915,7 +7438,8 @@ function Footer() {
                   onClick={() => scrollTo("pendaftaran")}
                   className="hover:text-[#F3CD67] transition flex items-center gap-1.5"
                 >
-                  <span className="text-[10px] text-[#E8B54D]">›</span> Pendaftaran PPDB
+                  <span className="text-[10px] text-[#E8B54D]">›</span>{" "}
+                  Pendaftaran PPDB
                 </button>
               </li>
             </ul>
@@ -4928,19 +7452,24 @@ function Footer() {
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li className="flex items-center gap-1.5">
-                <span className="text-[10px] text-[#E8B54D]">✔</span> Tahfidz Al-Qur&apos;an 30 Juz
+                <span className="text-[10px] text-[#E8B54D]">✔</span> Tahfidz
+                Al-Qur&apos;an 30 Juz
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-[10px] text-[#E8B54D]">✔</span> Tahsin &amp; Makharijul Huruf
+                <span className="text-[10px] text-[#E8B54D]">✔</span> Tahsin
+                &amp; Makharijul Huruf
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-[10px] text-[#E8B54D]">✔</span> Murajaah Terjadwal
+                <span className="text-[10px] text-[#E8B54D]">✔</span> Murajaah
+                Terjadwal
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-[10px] text-[#E8B54D]">✔</span> Baca Tulis Al-Qur&apos;an (BTQ)
+                <span className="text-[10px] text-[#E8B54D]">✔</span> Baca Tulis
+                Al-Qur&apos;an (BTQ)
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="text-[10px] text-[#E8B54D]">✔</span> Adab &amp; Karakter Islami
+                <span className="text-[10px] text-[#E8B54D]">✔</span> Adab &amp;
+                Karakter Islami
               </li>
             </ul>
           </div>
@@ -4952,14 +7481,23 @@ function Footer() {
             </h4>
             <div className="space-y-2.5 text-xs text-white/80 leading-relaxed">
               <p className="flex items-start gap-2">
-                <svg className="w-4 h-4 fill-[#E8B54D] flex-shrink-0 mt-0.5" viewBox="0 0 24 24">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                <svg
+                  className="w-4 h-4 fill-[#E8B54D] flex-shrink-0 mt-0.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
-                <span>Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng, Banyuwangi, Jawa Timur 68465</span>
+                <span>
+                  Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng,
+                  Banyuwangi, Jawa Timur 68465
+                </span>
               </p>
               <p className="flex items-center gap-2">
-                <svg className="w-4 h-4 fill-[#25D366] flex-shrink-0" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                <svg
+                  className="w-4 h-4 fill-[#25D366] flex-shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
                 </svg>
                 <a
                   href="https://wa.me/6285212185139"
@@ -4971,8 +7509,11 @@ function Footer() {
                 </a>
               </p>
               <p className="flex items-center gap-2">
-                <svg className="w-4 h-4 fill-[#E8B54D] flex-shrink-0" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                <svg
+                  className="w-4 h-4 fill-[#E8B54D] flex-shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
                 <a
                   href="mailto:rtqaba@gmail.com"
@@ -4982,8 +7523,11 @@ function Footer() {
                 </a>
               </p>
               <p className="flex items-center gap-2">
-                <svg className="w-4 h-4 fill-[#E8B54D] flex-shrink-0" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                <svg
+                  className="w-4 h-4 fill-[#E8B54D] flex-shrink-0"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
                 <a
                   href="mailto:kesejahteraanumat01@gmail.com"
@@ -4994,11 +7538,13 @@ function Footer() {
               </p>
             </div>
           </div>
-
         </div>
 
         <div className="pt-6 border-t border-white/10 text-center text-xs text-white/60">
-          <p>© 2026 <strong>RTQ Abdurrahman bin Auf</strong>. Seluruh Hak Cipta Dilindungi.</p>
+          <p>
+            © 2026 <strong>RTQ Abdurrahman bin Auf</strong>. Seluruh Hak Cipta
+            Dilindungi.
+          </p>
         </div>
       </div>
     </footer>
@@ -5033,7 +7579,7 @@ function FloatingElements() {
             className="w-7 h-7 sm:w-8 sm:h-8 fill-white transform group-hover:scale-105 transition-transform"
             viewBox="0 0 24 24"
           >
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
           </svg>
         </a>
       </div>
