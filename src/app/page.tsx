@@ -6954,10 +6954,14 @@ function ContactSection() {
                     <h4 className="font-bold text-xs sm:text-sm text-[#0c3624]">
                       Alamat:
                     </h4>
-                    <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">
-                      Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng,
-                      Kabupaten Banyuwangi, Jawa Timur 68465
-                    </p>
+                    <a
+                      href="https://www.google.com/maps/place/Majelis+Ilmu,+Rumah+Dr+Agung/data=!4m7!3m6!1s0x2dd1550060d0d5dd:0x23edca627d2a6e9c!8m2!3d-8.3698127!4d114.1738439!16s%2Fg%2F11vx8qb6rh!19sChIJ3dXQYABV0S0RnG4qfWLK7SM?entry=tts&g_ep=EgoyMDI2MDkyOS4wIPu8ASoASAFQAw%3D%3D&skid=bcb338d8-80e4-4717-8d0b-d02cbd09fb82"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neutral-600 hover:text-[#0c3624] hover:underline text-xs leading-relaxed mt-0.5 block"
+                    >
+                      Majelis Ilmu, Rumah Dr Agung • Jl. Hasanudin No. 81 Krajan I, Kembiritan, Kec. Genteng, Kabupaten Banyuwangi, Jawa Timur 68465 ↗
+                    </a>
                   </div>
                 </div>
 
@@ -7197,7 +7201,7 @@ function ContactSection() {
 
                     {/* Hover Overlay Button to Open Google Maps Navigation */}
                     <a
-                      href="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
+                      href="https://www.google.com/maps/place/Majelis+Ilmu,+Rumah+Dr+Agung/data=!4m7!3m6!1s0x2dd1550060d0d5dd:0x23edca627d2a6e9c!8m2!3d-8.3698127!4d114.1738439!16s%2Fg%2F11vx8qb6rh!19sChIJ3dXQYABV0S0RnG4qfWLK7SM?entry=tts&g_ep=EgoyMDI2MDkyOS4wIPu8ASoASAFQAw%3D%3D&skid=bcb338d8-80e4-4717-8d0b-d02cbd09fb82"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="absolute inset-0 z-10 flex items-center justify-center bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -7215,11 +7219,11 @@ function ContactSection() {
                         📍
                       </span>
                       <span className="line-clamp-1">
-                        Jl. Hasanudin No. 81, Kembiritan, Genteng, Banyuwangi
+                        Majelis Ilmu, Rumah Dr Agung • Jl. Hasanudin No. 81, Genteng, Banyuwangi
                       </span>
                     </div>
                     <a
-                      href="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
+                      href="https://www.google.com/maps/place/Majelis+Ilmu,+Rumah+Dr+Agung/data=!4m7!3m6!1s0x2dd1550060d0d5dd:0x23edca627d2a6e9c!8m2!3d-8.3698127!4d114.1738439!16s%2Fg%2F11vx8qb6rh!19sChIJ3dXQYABV0S0RnG4qfWLK7SM?entry=tts&g_ep=EgoyMDI2MDkyOS4wIPu8ASoASAFQAw%3D%3D&skid=bcb338d8-80e4-4717-8d0b-d02cbd09fb82"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0c3624] hover:text-[#DEAB3E] hover:underline whitespace-nowrap self-end sm:self-auto"
@@ -7233,8 +7237,8 @@ function ContactSection() {
                 <div className="relative w-full rounded-2xl overflow-hidden border border-neutral-200 shadow-inner">
                   <div className="w-full h-[180px] sm:h-[220px]">
                     <iframe
-                      title="Peta Lokasi RTQ Abdurrahman bin Auf"
-                      src="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
+                      title="Peta Lokasi RTQ Abdurrahman bin Auf - Majelis Ilmu, Rumah Dr Agung"
+                      src="https://maps.google.com/maps?q=-8.3698127,114.1738439&hl=id&z=17&output=embed"
                       className="w-full h-full border-0"
                       loading="lazy"
                       allowFullScreen
@@ -7242,10 +7246,10 @@ function ContactSection() {
                   </div>
                   <div className="p-2.5 bg-[#FAF8F4] border-t border-neutral-200/80 flex items-center justify-between text-xs">
                     <span className="text-[11px] text-neutral-600 line-clamp-1">
-                      Jl. Hasanudin No. 81, Kembiritan, Kec. Genteng
+                      Majelis Ilmu, Rumah Dr Agung • Jl. Hasanudin No. 81, Kembiritan, Kec. Genteng
                     </span>
                     <a
-                      href="https://maps.app.goo.gl/3b4Gs4uei9cdRtxs5"
+                      href="https://www.google.com/maps/place/Majelis+Ilmu,+Rumah+Dr+Agung/data=!4m7!3m6!1s0x2dd1550060d0d5dd:0x23edca627d2a6e9c!8m2!3d-8.3698127!4d114.1738439!16s%2Fg%2F11vx8qb6rh!19sChIJ3dXQYABV0S0RnG4qfWLK7SM?entry=tts&g_ep=EgoyMDI2MDkyOS4wIPu8ASoASAFQAw%3D%3D&skid=bcb338d8-80e4-4717-8d0b-d02cbd09fb82"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[11px] font-bold text-[#0c3624] hover:underline whitespace-nowrap ml-2"
