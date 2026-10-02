@@ -7233,28 +7233,46 @@ function ContactSection() {
                   </div>
                 </div>
               ) : (
-                /* Live Interactive Google Maps Embed (No Grayscale, High Zoom) */
-                <div className="relative w-full rounded-2xl overflow-hidden border border-neutral-200 shadow-inner">
-                  <div className="w-full h-[180px] sm:h-[220px]">
+                /* Live Interactive Map Embed (OpenStreetMap with Exact Pin Marker & Direct Google Maps Action) */
+                <div className="relative w-full rounded-2xl overflow-hidden border border-neutral-200 shadow-inner group">
+                  <div className="w-full h-[185px] sm:h-[230px] relative bg-neutral-100">
                     <iframe
                       title="Peta Lokasi RTQ Abdurrahman bin Auf - Majelis Ilmu, Rumah Dr Agung"
-                      src="https://maps.google.com/maps?q=-8.3698127,114.1738439&hl=id&z=17&output=embed"
+                      src="https://www.openstreetmap.org/export/embed.html?bbox=114.1688%2C-8.3725%2C114.1788%2C-8.3670&layer=mapnik&marker=-8.3698127%2C114.1738439"
                       className="w-full h-full border-0"
                       loading="lazy"
-                      allowFullScreen
                     />
+
+                    {/* Floating Info Badge on Top */}
+                    <div className="absolute top-2.5 left-2.5 right-2.5 pointer-events-none flex items-center justify-between">
+                      <div className="bg-[#0c3624]/90 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-md flex items-center gap-1.5 border border-white/20 pointer-events-auto">
+                        <span className="text-[#E8B54D]">📍</span>
+                        <span className="truncate max-w-[200px] sm:max-w-[280px]">Majelis Ilmu, Rumah Dr Agung</span>
+                      </div>
+
+                      <a
+                        href="https://www.google.com/maps/place/Majelis+Ilmu,+Rumah+Dr+Agung/data=!4m7!3m6!1s0x2dd1550060d0d5dd:0x23edca627d2a6e9c!8m2!3d-8.3698127!4d114.1738439!16s%2Fg%2F11vx8qb6rh!19sChIJ3dXQYABV0S0RnG4qfWLK7SM?entry=tts&g_ep=EgoyMDI2MDkyOS4wIPu8ASoASAFQAw%3D%3D&skid=bcb338d8-80e4-4717-8d0b-d02cbd09fb82"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#E8B54D] hover:bg-[#d9a338] text-[#0c3624] text-[11px] font-black px-3 py-1.5 rounded-xl shadow-md transition flex items-center gap-1 pointer-events-auto hover:scale-105"
+                      >
+                        <span>Buka Google Maps</span> ↗
+                      </a>
+                    </div>
                   </div>
-                  <div className="p-2.5 bg-[#FAF8F4] border-t border-neutral-200/80 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-neutral-600 line-clamp-1">
-                      Majelis Ilmu, Rumah Dr Agung • Jl. Hasanudin No. 81, Kembiritan, Kec. Genteng
+
+                  {/* Footer Address Info */}
+                  <div className="p-2.5 bg-[#FAF8F4] border-t border-neutral-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+                    <span className="text-[11px] text-neutral-700 font-medium line-clamp-1">
+                      📍 Jl. Hasanudin No. 81, Kembiritan, Kec. Genteng, Banyuwangi
                     </span>
                     <a
                       href="https://www.google.com/maps/place/Majelis+Ilmu,+Rumah+Dr+Agung/data=!4m7!3m6!1s0x2dd1550060d0d5dd:0x23edca627d2a6e9c!8m2!3d-8.3698127!4d114.1738439!16s%2Fg%2F11vx8qb6rh!19sChIJ3dXQYABV0S0RnG4qfWLK7SM?entry=tts&g_ep=EgoyMDI2MDkyOS4wIPu8ASoASAFQAw%3D%3D&skid=bcb338d8-80e4-4717-8d0b-d02cbd09fb82"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] font-bold text-[#0c3624] hover:underline whitespace-nowrap ml-2"
+                      className="text-[11px] font-bold text-[#0c3624] hover:text-[#DEAB3E] hover:underline whitespace-nowrap self-end sm:self-auto flex items-center gap-1"
                     >
-                      Navigasi Penuh ↗
+                      <span>Petunjuk Arah Rinci</span> ↗
                     </a>
                   </div>
                 </div>
